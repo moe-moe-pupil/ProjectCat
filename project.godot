@@ -11,9 +11,29 @@ config_version=5
 [application]
 
 config/name="ProjectCat"
-config/features=PackedStringArray("4.0", "Forward Plus")
+run/main_scene="res://src/map/main.tscn"
+config/features=PackedStringArray("4.0", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1536
+window/size/viewport_height=864
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
 
 [dotnet]
 
 project/assembly_name="ProjectCat"
+
+[rendering]
+
+textures/default_filters/use_nearest_mipmap_filter=true
+camera/depth_of_field/depth_of_field_bokeh_shape=2
+camera/depth_of_field/depth_of_field_bokeh_quality=3
+camera/depth_of_field/depth_of_field_use_jitter=true
+textures/decals/filter=0
+textures/light_projectors/filter=0
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
+textures/canvas_textures/default_texture_filter=0

@@ -7,30 +7,45 @@ using Newtonsoft.Json;
 /// <summary>
 ///   游戏中的主要单位，可以是角色、敌人，甚至是陷阱机关
 /// </summary>
-public class Unit
+public class Unit: Node3D
 {
     /// <summary>
     ///   单位的基础生命值
     /// </summary>
     public double RedHeart;
+    
     /// <summary>
     ///   单位的额外生命值
     /// </summary>
     public double SoulHeart;
+
     /// <summary>
     ///   单位的移动速度
     /// </summary>
     public int MoveSpeed;
+
     /// <summary>
     ///   单位的眩晕抗性
     /// </summary>
     private int StunResistance;
+
     /// <summary>
     ///   单位的击退抗性
     /// </summary>
     private int BounceResistance;
+
     /// <summary>
     ///   单位目前装备的卡牌的编号
     /// </summary>
     public List<int> EquipmentBar = new List<int>();
+
+    // Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
 }
