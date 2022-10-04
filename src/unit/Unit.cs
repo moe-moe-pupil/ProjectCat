@@ -17,6 +17,14 @@ public class Unit
     ///   单位的额外生命值
     /// </summary>
     public double SoulHeart;
+     /// <summary>
+    ///   单位对物理攻击的抗性
+    /// </summary>
+    public int PhysicalDefense;
+     /// <summary>
+    ///   单位对魔法攻击的抗性
+    /// </summary>
+    public int MagicDefense;
     /// <summary>
     ///   单位的移动速度
     /// </summary>
