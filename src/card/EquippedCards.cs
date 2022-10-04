@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using Newtonsoft.Json;
 
 /// <summary>
 ///   游戏中的主要单位，可以是角色、敌人，甚至是陷阱机关
@@ -38,8 +37,9 @@ public class EquippedCards
     ///   卡牌对单位造成的硬直效果的强度
     /// </summary>
     private int Stun;
+
     /// <summary>
     ///   当前卡牌的标签，包括武器、伤害类型等
     /// </summary>
-    public List<String> CardLabel = new List<int>();
+    public List<String> CardLabel = new List<String>();
 }

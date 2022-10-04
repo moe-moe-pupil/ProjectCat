@@ -8,19 +8,14 @@ public partial class Body : CharacterBody3D
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
-
+	private AnimatedSprite2D _animatedSprite;
+	public override void _Ready()
+	{
+		_animatedSprite = GetNode<AnimatedSprite2D>("Sprite2d");
+	}
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector3 velocity = Velocity;
-
-		// Add the gravity.
-		if (!IsOnFloor())
-			velocity.y -= gravity * (float)delta;
-
-		// Handle Jump.
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-			velocity.y = JumpVelocity;
-
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
@@ -35,9 +30,9 @@ public partial class Body : CharacterBody3D
 			velocity.x = Mathf.MoveToward(Velocity.x, 0, Speed);
 			velocity.z = Mathf.MoveToward(Velocity.z, 0, Speed);
 		}
-
+        _animatedSprite.Play("Run");
 		Velocity = velocity;
-		
+
 		MoveAndSlide();
 	}
 }

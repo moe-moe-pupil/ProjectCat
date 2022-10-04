@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1ygkxj83uoea"]
+[gd_scene load_steps=6 format=3 uid="uid://c1ygkxj83uoea"]
 
 [ext_resource type="PackedScene" uid="uid://c7w7v4jsqq4eo" path="res://src/unit/player.tscn" id="1_og325"]
 
@@ -9,6 +9,8 @@ albedo_color = Color(0, 0.886275, 0.831373, 1)
 material = SubResource("StandardMaterial3D_kg45i")
 
 [sub_resource type="QuadMesh" id="QuadMesh_l2n57"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hitby"]
 
 [node name="Node3d" type="Node3D"]
 
@@ -34,3 +36,9 @@ shadow_enabled = true
 [node name="MeshInstance3d" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.201822, 0, 0, 0, 1, 1.35803, 0.126668, 0)
 mesh = SubResource("QuadMesh_l2n57")
+
+[node name="MeshInstance3d3" type="MeshInstance3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 4.736, 0, 0, 0, 50, 0, -0.840432, 0)
+top_level = true
+mesh = SubResource("PlaneMesh_hitby")
+skeleton = NodePath("")

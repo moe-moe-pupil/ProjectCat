@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using Newtonsoft.Json;
 
 /// <summary>
 ///   游戏中的主要单位，可以是角色、敌人，甚至是陷阱机关
 /// </summary>
-public class Unit: Node3D
+public partial class Unit : Node3D
 {
     /// <summary>
     ///   单位的基础生命值
