@@ -32,5 +32,5 @@ public class Unit
     /// <summary>
     ///   单位目前装备的卡牌的编号
     /// </summary>
-    public int[] EquipmentBar = new double[6];
+    public List<int> EquipmentBar = new List<int>();
 }
