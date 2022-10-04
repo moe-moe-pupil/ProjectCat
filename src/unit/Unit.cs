@@ -20,6 +20,16 @@ public class Unit: Node3D
     public double SoulHeart;
 
     /// <summary>
+    ///   单位对物理攻击的抗性
+    /// </summary>
+    public int PhysicalDefense;
+
+    /// <summary>
+    ///   单位对魔法攻击的抗性
+    /// </summary>
+    public int MagicDefense;
+
+    /// <summary>
     ///   单位的移动速度
     /// </summary>
     public int MoveSpeed;
