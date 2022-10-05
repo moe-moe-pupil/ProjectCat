@@ -30,9 +30,25 @@ public partial class Body : CharacterBody3D
 			velocity.x = Mathf.MoveToward(Velocity.x, 0, Speed);
 			velocity.z = Mathf.MoveToward(Velocity.z, 0, Speed);
 		}
-        _animatedSprite.Play("Run");
+        
+		if(velocity.x < 0)
+        {
+			_animatedSprite.Play("Run");
+			_animatedSprite.FlipH = true;
+        } 
+		else
+        {
+			if(velocity.x != 0)
+            {
+				_animatedSprite.Play("Run");
+			} 
+			else
+            {
+				_animatedSprite.Play("Idle");
+            }
+			_animatedSprite.FlipH = false;
+		}
 		Velocity = velocity;
-
 		MoveAndSlide();
 	}
 }

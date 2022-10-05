@@ -1,93 +1,14 @@
-[gd_scene load_steps=21 format=3 uid="uid://c7w7v4jsqq4eo"]
+[gd_scene load_steps=4 format=3 uid="uid://c7w7v4jsqq4eo"]
 
 [ext_resource type="Script" path="res://src/unit/Body.cs" id="1_813ge"]
-[ext_resource type="Texture2D" uid="uid://bcrl3uetdsc2y" path="res://assets/sprite_sheet/Player-Idle.png" id="1_qwn7r"]
 [ext_resource type="SpriteFrames" uid="uid://cso4h1v80g1gw" path="res://src/unit/player.tres" id="3_0w7ia"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xdr8j"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(0, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7v7lm"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(256, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kiue7"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(512, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rb3eo"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(768, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ci81a"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(1024, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4bmgg"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(1280, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ss8wt"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(1536, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bpep7"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(1792, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1iqwh"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(2048, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_07j71"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(2304, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qvduh"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(2560, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q3uc4"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(2816, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_418mc"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(3072, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h3l6i"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(3328, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f7ygj"]
-atlas = ExtResource("1_qwn7r")
-region = Rect2(3584, 0, 256, 256)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ew5lx"]
-animations = [{
-"frames": [SubResource("AtlasTexture_xdr8j"), SubResource("AtlasTexture_7v7lm"), SubResource("AtlasTexture_kiue7"), SubResource("AtlasTexture_rb3eo"), SubResource("AtlasTexture_ci81a"), SubResource("AtlasTexture_4bmgg"), SubResource("AtlasTexture_ss8wt"), SubResource("AtlasTexture_bpep7"), SubResource("AtlasTexture_1iqwh"), SubResource("AtlasTexture_07j71"), SubResource("AtlasTexture_qvduh"), SubResource("AtlasTexture_q3uc4"), SubResource("AtlasTexture_418mc"), SubResource("AtlasTexture_h3l6i"), SubResource("AtlasTexture_f7ygj")],
-"loop": true,
-"name": &"Idle",
-"speed": 10.0
-}]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a0ep8"]
 
 [node name="Player" type="Node3D"]
 
 [node name="Body" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_813ge")
-
-[node name="Sprite" type="AnimatedSprite3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0329977, 1.1787, 0.0129709)
-visible = false
-shaded = true
-texture_filter = 0
-frames = SubResource("SpriteFrames_ew5lx")
-animation = &"Idle"
-playing = true
 
 [node name="Camera3d" type="Camera3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40558, 9.71629)
