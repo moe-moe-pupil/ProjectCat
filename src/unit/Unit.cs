@@ -12,7 +12,7 @@ public partial class Unit : CharacterBody3D
     ///   单位的基础生命值
     /// </summary>
     public double RedHeart;
-    
+
     /// <summary>
     ///   单位的额外生命值
     /// </summary>
@@ -47,74 +47,86 @@ public partial class Unit : CharacterBody3D
     ///   单位目前装备的卡牌的编号
     /// </summary>
     public List<int> EquipmentBar = new List<int>();
-
     private float JumpVelocity = 5;
-
-
-
     public float Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
-    private AnimatedSprite2D _animatedSprite;
+    private AnimatedSprite3D _animatedSprite;
+    private Label3D _name;
     public bool BodyDirection = false;
-
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
-	{
-        _animatedSprite = GetNode<AnimatedSprite2D>("Sprite2d");
+    {
+        _animatedSprite = GetNode<AnimatedSprite3D>("Sprite");
+        _name = GetNode<Label3D>("Name");
+        _name.Text = GetMultiplayerAuthority().ToString();
+        if(IsMultiplayerAuthority())
+        {
+            Camera3D camera = GetNode<Camera3D>("Camera3D");
+            camera.Current = true;
+        }
     }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _PhysicsProcess(double delta)
-	{
-        Vector3 velocity = Velocity;
-        if (!IsOnFloor())
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _PhysicsProcess(double delta)
+    {
+        if(IsMultiplayerAuthority())
         {
-            velocity.y -= Gravity * (float)delta;
-        }
+            Vector3 velocity = Velocity;
+            if (!IsOnFloor())
+            {
+                velocity.y -= Gravity * (float)delta;
+            }
 
-        if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-        {
-            velocity.y = JumpVelocity;
-        }
+            if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+            {
+                velocity.y = JumpVelocity;
+            }
 
 
-        Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+            Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 
-        if (inputDir.x > 0)
-        {
-            _animatedSprite.FlipH = false;
-            BodyDirection = false;
-        }
-        else if (inputDir.x < 0)
-        {
-            _animatedSprite.FlipH = true;
-            BodyDirection = true;
-        }
-        else
-        {
-            _animatedSprite.FlipH = BodyDirection;
+            if (inputDir.x > 0)
+            {
+                _animatedSprite.FlipH = false;
+                BodyDirection = false;
+            }
+            else if (inputDir.x < 0)
+            {
+                _animatedSprite.FlipH = true;
+                BodyDirection = true;
+            }
+            else
+            {
+                _animatedSprite.FlipH = BodyDirection;
+            }
 
-        }
+            Vector3 direction = (Transform.basis * new Vector3(inputDir.x, inputDir.y, 0)).Normalized();
+            if (direction != Vector3.Zero)
+            {
+                velocity.x = direction.x * MoveSpeed;
+            }
+            else
+            {
+                velocity.x = Mathf.MoveToward(Velocity.x, 0, MoveSpeed);
+            }
 
-        Vector3 direction = (Transform.basis * new Vector3(inputDir.x, inputDir.y, 0)).Normalized();
-        if (direction != Vector3.Zero)
-        {
-            velocity.x = direction.x * MoveSpeed;
-        }
-        else
-        {
-            velocity.x = Mathf.MoveToward(Velocity.x, 0, MoveSpeed);
-        }
+            if (velocity.x == 0)
+            {
+                _animatedSprite.Play("Idle");
 
-        if (velocity.x == 0)
-        {
-            _animatedSprite.Play("Idle");
+            }
+            else
+            {
+                _animatedSprite.Play("Run");
+            }
+            Velocity = velocity;
+            MoveAndSlide();
+            Rpc("RemoteSetPos", GlobalPosition);
+        }
+    }
 
-        }
-        else
-        {
-            _animatedSprite.Play("Run");
-        }
-        Velocity = velocity;
-        MoveAndSlide();
+    [RPC]
+    public void RemoteSetPos(Vector3 authP)
+    {
+         GlobalPosition = authP;
     }
 }
