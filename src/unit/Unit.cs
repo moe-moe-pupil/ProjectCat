@@ -6,7 +6,7 @@ using Godot;
 /// <summary>
 ///   游戏中的主要单位，可以是角色、敌人，甚至是陷阱机关
 /// </summary>
-public partial class Unit : Node3D
+public partial class Unit : CharacterBody3D
 {
     /// <summary>
     ///   单位的基础生命值
@@ -31,7 +31,7 @@ public partial class Unit : Node3D
     /// <summary>
     ///   单位的移动速度
     /// </summary>
-    public int MoveSpeed;
+    public int MoveSpeed = 5;
 
     /// <summary>
     ///   单位的眩晕抗性
@@ -48,13 +48,73 @@ public partial class Unit : Node3D
     /// </summary>
     public List<int> EquipmentBar = new List<int>();
 
+    private float JumpVelocity = 5;
+
+
+
+    public float Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
+    private AnimatedSprite2D _animatedSprite;
+    public bool BodyDirection = false;
+
     // Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+    public override void _Ready()
 	{
-	}
+        _animatedSprite = GetNode<AnimatedSprite2D>("Sprite2d");
+    }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
-	}
+        Vector3 velocity = Velocity;
+        if (!IsOnFloor())
+        {
+            velocity.y -= Gravity * (float)delta;
+        }
+
+        if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+        {
+            velocity.y = JumpVelocity;
+        }
+
+
+        Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+
+        if (inputDir.x > 0)
+        {
+            _animatedSprite.FlipH = false;
+            BodyDirection = false;
+        }
+        else if (inputDir.x < 0)
+        {
+            _animatedSprite.FlipH = true;
+            BodyDirection = true;
+        }
+        else
+        {
+            _animatedSprite.FlipH = BodyDirection;
+
+        }
+
+        Vector3 direction = (Transform.basis * new Vector3(inputDir.x, inputDir.y, 0)).Normalized();
+        if (direction != Vector3.Zero)
+        {
+            velocity.x = direction.x * MoveSpeed;
+        }
+        else
+        {
+            velocity.x = Mathf.MoveToward(Velocity.x, 0, MoveSpeed);
+        }
+
+        if (velocity.x == 0)
+        {
+            _animatedSprite.Play("Idle");
+
+        }
+        else
+        {
+            _animatedSprite.Play("Run");
+        }
+        Velocity = velocity;
+        MoveAndSlide();
+    }
 }

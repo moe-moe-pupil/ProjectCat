@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7w7v4jsqq4eo"]
 
-[ext_resource type="Script" path="res://src/unit/Body.cs" id="1_813ge"]
+[ext_resource type="Script" path="res://src/unit/Unit.cs" id="1_gssyq"]
 [ext_resource type="SpriteFrames" uid="uid://cso4h1v80g1gw" path="res://src/unit/player.tres" id="3_0w7ia"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a0ep8"]
@@ -8,7 +8,7 @@
 [node name="Player" type="Node3D"]
 
 [node name="Body" type="CharacterBody3D" parent="."]
-script = ExtResource("1_813ge")
+script = ExtResource("1_gssyq")
 
 [node name="Camera3d" type="Camera3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40558, 9.71629)
@@ -17,7 +17,7 @@ current = true
 size = 10.0
 
 [node name="CollisionShape3d" type="CollisionShape3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 1.15393, 0, 0, 0, 1, 0.00642222, 1.08415, 0.000123262)
+transform = Transform3D(1, 0, 0, 0, 1.15393, 0, 0, 0, 1, 0.00642222, 1.34203, 0.000123262)
 shape = SubResource("CapsuleShape3D_a0ep8")
 
 [node name="Sprite2d" type="AnimatedSprite2D" parent="Body"]
