@@ -51,6 +51,7 @@ public partial class Unit : CharacterBody3D
     public float Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
     private AnimatedSprite3D _animatedSprite;
     private Label3D _name;
+    private MultiplayerSynchronizer _mulSync;
     public bool BodyDirection = false;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -58,6 +59,7 @@ public partial class Unit : CharacterBody3D
         _animatedSprite = GetNode<AnimatedSprite3D>("Sprite");
         _name = GetNode<Label3D>("Name");
         _name.Text = GetMultiplayerAuthority().ToString();
+        _mulSync = GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer");
         if(IsMultiplayerAuthority())
         {
             Camera3D camera = GetNode<Camera3D>("Camera3D");
@@ -119,14 +121,9 @@ public partial class Unit : CharacterBody3D
                 _animatedSprite.Play("Run");
             }
             Velocity = velocity;
-            MoveAndSlide();
-            Rpc("RemoteSetPos", GlobalPosition);
+            MoveAndSlide();  
         }
     }
 
-    [RPC]
-    public void RemoteSetPos(Vector3 authP)
-    {
-         GlobalPosition = authP;
-    }
+
 }

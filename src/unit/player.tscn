@@ -1,9 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7w7v4jsqq4eo"]
+[gd_scene load_steps=5 format=3 uid="uid://c7w7v4jsqq4eo"]
 
 [ext_resource type="Script" path="res://src/unit/Unit.cs" id="1_gssyq"]
 [ext_resource type="SpriteFrames" uid="uid://cso4h1v80g1gw" path="res://src/unit/player.tres" id="3_0w7ia"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_b0ops"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3t4ka"]
+properties/0/path = NodePath("Body:position")
+properties/0/spawn = true
+properties/0/sync = true
 
 [node name="Player" type="Node3D"]
 
@@ -31,3 +36,7 @@ font_size = 80
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19067, 0)
 frames = ExtResource("3_0w7ia")
 animation = &"Idle"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Body"]
+root_path = NodePath("../..")
+replication_config = SubResource("SceneReplicationConfig_3t4ka")
