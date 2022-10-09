@@ -31,6 +31,11 @@ public partial class Main : Node3D
 		_peerID.Text = Multiplayer.GetUniqueId().ToString();
 	}
 
+	public void _on_restart_pressed()
+    {
+		GetTree().ReloadCurrentScene();
+    }
+
 	public void _on_host_pressed()
 	{
 		_isServerText.Text = "Server";

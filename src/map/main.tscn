@@ -52,6 +52,13 @@ offset_right = 108.0
 offset_bottom = 56.0
 text = "UniquePeerID"
 
+[node name="Restart" type="Button" parent="NetworkInfo"]
+layout_mode = 2
+offset_top = 60.0
+offset_right = 108.0
+offset_bottom = 91.0
+text = "restart"
+
 [node name="Menu" type="VBoxContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -94,5 +101,6 @@ transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, -6.59015, 233.186, -
 mesh = SubResource("QuadMesh_n8p8k")
 surface_material_override/0 = SubResource("StandardMaterial3D_4afr7")
 
+[connection signal="pressed" from="NetworkInfo/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Menu/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Menu/Join" to="." method="_on_join_pressed"]
