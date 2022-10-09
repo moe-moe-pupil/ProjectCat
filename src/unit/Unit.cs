@@ -127,7 +127,7 @@ public partial class Unit : CharacterBody3D
         }
     }
 
-    [RPC]
+    [RPC(TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
     public void RemoteSetStatus(Vector3 authP) // , string anim,bool playing, bool flipH)
     {
         GlobalPosition = authP;
