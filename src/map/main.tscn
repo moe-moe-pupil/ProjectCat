@@ -1,11 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1ygkxj83uoea"]
+[gd_scene load_steps=7 format=3 uid="uid://c1ygkxj83uoea"]
 
 [ext_resource type="Script" path="res://src/map/Main.cs" id="1_mqrg5"]
+[ext_resource type="Texture2D" uid="uid://3ogcik3vmilq" path="res://assets/png/castle.png" id="2_bxkff"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rkpm7"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8o24y"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_n8p8k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4afr7"]
+albedo_texture = ExtResource("2_bxkff")
 
 [node name="MainMap" type="Node3D"]
 script = ExtResource("1_mqrg5")
@@ -34,13 +40,11 @@ offset_bottom = 40.0
 grow_horizontal = 2
 
 [node name="NetworkSideDisplay" type="Label" parent="NetworkInfo"]
-layout_mode = 2
 offset_right = 108.0
 offset_bottom = 26.0
 text = "Network Side"
 
 [node name="UniquePeerID" type="Label" parent="NetworkInfo"]
-layout_mode = 2
 offset_top = 30.0
 offset_right = 108.0
 offset_bottom = 56.0
@@ -60,14 +64,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Host" type="Button" parent="Menu"]
-layout_mode = 2
 offset_right = 108.0
 offset_bottom = 31.0
 text = "Host
 "
 
 [node name="Join" type="Button" parent="Menu"]
-layout_mode = 2
 offset_top = 35.0
 offset_right = 108.0
 offset_bottom = 66.0
@@ -75,13 +77,17 @@ text = "Join
 "
 
 [node name="LineEdit" type="LineEdit" parent="Menu"]
-layout_mode = 2
 offset_top = 70.0
 offset_right = 108.0
 offset_bottom = 101.0
 text = "127.0.0.1"
 placeholder_text = "127.0.0.1"
 alignment = 1
+
+[node name="MeshInstance3d" type="MeshInstance3D" parent="."]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, -6.59015, 233.186, -947.261)
+mesh = SubResource("QuadMesh_n8p8k")
+surface_material_override/0 = SubResource("StandardMaterial3D_4afr7")
 
 [connection signal="pressed" from="Menu/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Menu/Join" to="." method="_on_join_pressed"]

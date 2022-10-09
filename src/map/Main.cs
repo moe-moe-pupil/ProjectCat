@@ -44,10 +44,11 @@ public partial class Main : Node3D
 
 	private async void BindFunc(int newPeerID)
 	{
-		 await ToSignal(GetTree().CreateTimer(1), "timeout");
-		 Rpc("AddNewPC", newPeerID);
-		 RpcId(newPeerID, "AddOldPC", _connectedPeerIDs);
-		 AddPlayer(newPeerID);
+		await ToSignal(GetTree().CreateTimer(1), "timeout");
+		Rpc("AddNewPC", newPeerID);
+		RpcId(newPeerID, "AddOldPC", _connectedPeerIDs);
+		AddPlayer(newPeerID);
+		GD.Print(newPeerID);
 	}
 
 	private void AddPlayer(int peerId)
