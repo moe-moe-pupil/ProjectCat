@@ -124,7 +124,7 @@ public partial class Unit : CharacterBody3D
             Velocity = velocity;
             MoveAndSlide();
             Rpc("RemoteSetPos", GlobalPosition);
-            Rpc("RemoteSetAnim", _animName, _animatedSprite.Playing, _animatedSprite.FlipH);
+            Rpc("RemoteSetAnim", _animName);
 
         }
     }
@@ -137,10 +137,10 @@ public partial class Unit : CharacterBody3D
     }
 
     [RPC(TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void RemoteSetAnim(string anim, bool playing, bool flipH)
+    public void RemoteSetAnim(string anim)
     {
         _animatedSprite.Play(anim);
-        _animatedSprite.Playing = playing;
-        _animatedSprite.FlipH = flipH;
+        // _animatedSprite.Playing = playing;
+        // _animatedSprite.FlipH = flipH;
     }
 }
