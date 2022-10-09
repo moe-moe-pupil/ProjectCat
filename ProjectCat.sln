@@ -1,12 +1,16 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectCat", "ProjectCat.csproj", "{5ADDBC0C-738D-4AB8-B966-DCA49AFE73B1}"
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32602.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectCat", "ProjectCat.csproj", "{5ADDBC0C-738D-4AB8-B966-DCA49AFE73B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-	Debug|Any CPU = Debug|Any CPU
-	ExportDebug|Any CPU = ExportDebug|Any CPU
-	ExportRelease|Any CPU = ExportRelease|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		ExportDebug|Any CPU = ExportDebug|Any CPU
+		ExportRelease|Any CPU = ExportRelease|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{5ADDBC0C-738D-4AB8-B966-DCA49AFE73B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -15,5 +19,13 @@ Global
 		{5ADDBC0C-738D-4AB8-B966-DCA49AFE73B1}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
 		{5ADDBC0C-738D-4AB8-B966-DCA49AFE73B1}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{5ADDBC0C-738D-4AB8-B966-DCA49AFE73B1}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{5ADDBC0C-738D-4AB8-B966-DCA49AFE73B1}.Release|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{5ADDBC0C-738D-4AB8-B966-DCA49AFE73B1}.Release|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D9F83703-83F6-4F8D-8A10-C74304831121}
 	EndGlobalSection
 EndGlobal

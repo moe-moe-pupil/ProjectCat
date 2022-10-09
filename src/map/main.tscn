@@ -74,9 +74,5 @@ offset_bottom = 66.0
 text = "Join
 "
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://src/unit/player.tscn")
-spawn_path = NodePath("..")
-
 [connection signal="pressed" from="Menu/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Menu/Join" to="." method="_on_join_pressed"]

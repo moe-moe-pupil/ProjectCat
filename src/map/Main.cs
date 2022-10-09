@@ -46,7 +46,7 @@ public partial class Main : Node3D
 	{
 		 await ToSignal(GetTree().CreateTimer(1), "timeout");
 		 Rpc("AddNewPC", newPeerID);
-		 // RpcId(newPeerID, "AddOldPC", _connectedPeerIDs);
+		 RpcId(newPeerID, "AddOldPC", _connectedPeerIDs);
 		 AddPlayer(newPeerID);
 	}
 
@@ -73,7 +73,6 @@ public partial class Main : Node3D
 	{
 		for (int i = 0; i < oldPeerIDs.Length; i++)
 		{
-			GD.Print(i,":=",oldPeerIDs[i]);
 			AddPlayer(oldPeerIDs[i]);
 		}
 	}
