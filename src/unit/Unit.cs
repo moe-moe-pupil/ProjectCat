@@ -123,12 +123,12 @@ public partial class Unit : CharacterBody3D
             }
             Velocity = velocity;
             MoveAndSlide();
-            Rpc("RemoteSetStatus", GlobalPosition, _animName, _animatedSprite.Playing, _animatedSprite.FlipH);
+            Rpc("RemoteSetStatus", GlobalPosition); //, _animName, _animatedSprite.Playing, _animatedSprite.FlipH);
         }
     }
 
     [RPC]
-    public void RemoteSetStatus(Vector3 authP, string anim,bool playing, bool flipH)
+    public void RemoteSetStatus(Vector3 authP) // , string anim,bool playing, bool flipH)
     {
         GlobalPosition = authP;
         // _animatedSprite.Play(anim);
