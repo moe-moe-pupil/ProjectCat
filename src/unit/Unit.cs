@@ -50,6 +50,7 @@ public partial class Unit : CharacterBody3D
     private float JumpVelocity = 5;
     public float Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
     private AnimatedSprite3D _animatedSprite;
+    private string _animName = "Idle";
     private Label3D _name;
     public bool BodyDirection = false;
     // Called when the node enters the scene tree for the first time.
@@ -113,24 +114,25 @@ public partial class Unit : CharacterBody3D
             if (velocity.x == 0)
             {
                 _animatedSprite.Play("Idle");
-
+                _animName = "Idle";
             }
             else
             {
                 _animatedSprite.Play("Run");
+                _animName = "Run";
             }
             Velocity = velocity;
             MoveAndSlide();
-            Rpc("RemoteSetStatus", GlobalPosition, _animatedSprite.Animation,_animatedSprite.Frame, _animatedSprite.FlipH);
+            Rpc("RemoteSetStatus", GlobalPosition, _animatedSprite.Animation,_animatedSprite.Playing, _animatedSprite.FlipH);
         }
     }
 
     [RPC]
-    public void RemoteSetStatus(Vector3 authP, StringName anim, int frame, bool flipH)
+    public void RemoteSetStatus(Vector3 authP, string anim,bool playing, bool flipH)
     {
         GlobalPosition = authP;
-        _animatedSprite.Animation = anim;
-        _animatedSprite.Frame = frame;
+        _animatedSprite.Play(anim);
+        _animatedSprite.Playing = playing;
         _animatedSprite.FlipH = flipH;
     }
 }

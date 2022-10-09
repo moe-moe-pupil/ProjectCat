@@ -51,6 +51,10 @@ region = Rect2(2560, 0, 256, 256)
 atlas = ExtResource("1_iel3t")
 region = Rect2(2816, 0, 256, 256)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nny73"]
+atlas = ExtResource("1_iel3t")
+region = Rect2(3584, 0, 256, 256)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_7xgym"]
 atlas = ExtResource("1_iel3t")
 region = Rect2(3072, 0, 256, 256)
@@ -58,10 +62,6 @@ region = Rect2(3072, 0, 256, 256)
 [sub_resource type="AtlasTexture" id="AtlasTexture_6b705"]
 atlas = ExtResource("1_iel3t")
 region = Rect2(3328, 0, 256, 256)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nny73"]
-atlas = ExtResource("1_iel3t")
-region = Rect2(3584, 0, 256, 256)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_st3yo"]
 atlas = ExtResource("2_4cv25")
@@ -146,7 +146,7 @@ region = Rect2(4864, 0, 256, 256)
 [resource]
 resource_local_to_scene = true
 animations = [{
-"frames": [SubResource("AtlasTexture_5xode"), SubResource("AtlasTexture_unw3l"), SubResource("AtlasTexture_flte4"), SubResource("AtlasTexture_o8n8u"), SubResource("AtlasTexture_7ttc0"), SubResource("AtlasTexture_163jx"), SubResource("AtlasTexture_kjbpb"), SubResource("AtlasTexture_shlfs"), SubResource("AtlasTexture_ct6ge"), SubResource("AtlasTexture_t0qvf"), SubResource("AtlasTexture_uilod"), SubResource("AtlasTexture_d6yev"), SubResource("AtlasTexture_7xgym"), SubResource("AtlasTexture_6b705"), SubResource("AtlasTexture_nny73")],
+"frames": [SubResource("AtlasTexture_5xode"), SubResource("AtlasTexture_unw3l"), SubResource("AtlasTexture_flte4"), SubResource("AtlasTexture_o8n8u"), SubResource("AtlasTexture_7ttc0"), SubResource("AtlasTexture_163jx"), SubResource("AtlasTexture_kjbpb"), SubResource("AtlasTexture_shlfs"), SubResource("AtlasTexture_ct6ge"), SubResource("AtlasTexture_t0qvf"), SubResource("AtlasTexture_uilod"), SubResource("AtlasTexture_d6yev"), SubResource("AtlasTexture_nny73"), SubResource("AtlasTexture_7xgym"), SubResource("AtlasTexture_6b705")],
 "loop": true,
 "name": &"Idle",
 "speed": 10.0

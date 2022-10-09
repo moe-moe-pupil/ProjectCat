@@ -29,3 +29,4 @@ font_size = 80
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19067, 0)
 frames = ExtResource("3_0w7ia")
 animation = &"Idle"
+playing = true
