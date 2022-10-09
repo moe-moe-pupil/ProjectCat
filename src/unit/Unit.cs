@@ -133,6 +133,6 @@ public partial class Unit : CharacterBody3D
         GlobalPosition = authP;
         // _animatedSprite.Play(anim);
         // _animatedSprite.Playing = playing;
-        _animatedSprite.FlipH = flipH;
+        // _animatedSprite.FlipH = flipH;
     }
 }
