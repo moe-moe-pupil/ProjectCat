@@ -123,7 +123,7 @@ public partial class Unit : CharacterBody3D
             }
             Velocity = velocity;
             MoveAndSlide();
-            Rpc("RemoteSetStatus", GlobalPosition, _animatedSprite.Animation,_animatedSprite.Playing, _animatedSprite.FlipH);
+            Rpc("RemoteSetStatus", GlobalPosition, _animName, _animatedSprite.Playing, _animatedSprite.FlipH);
         }
     }
 
