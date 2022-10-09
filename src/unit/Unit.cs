@@ -131,8 +131,8 @@ public partial class Unit : CharacterBody3D
     public void RemoteSetStatus(Vector3 authP, string anim,bool playing, bool flipH)
     {
         GlobalPosition = authP;
-        _animatedSprite.Play(anim);
-        _animatedSprite.Playing = playing;
-        _animatedSprite.FlipH = flipH;
+        // _animatedSprite.Play(anim);
+        // _animatedSprite.Playing = playing;
+        // _animatedSprite.FlipH = flipH;
     }
 }
