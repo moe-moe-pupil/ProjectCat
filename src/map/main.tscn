@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c1ygkxj83uoea"]
 
 [ext_resource type="Script" path="res://src/map/Main.cs" id="1_mqrg5"]
-[ext_resource type="Texture2D" uid="uid://3ogcik3vmilq" path="res://assets/png/castle.png" id="2_bxkff"]
+[ext_resource type="Texture2D" uid="uid://d4fevro84cwhw" path="res://assets/png/long.png" id="2_mk13n"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_rkpm7"]
 
@@ -11,18 +11,18 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 [sub_resource type="QuadMesh" id="QuadMesh_n8p8k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4afr7"]
-albedo_texture = ExtResource("2_bxkff")
+albedo_texture = ExtResource("2_mk13n")
 
 [node name="MainMap" type="Node3D"]
 script = ExtResource("1_mqrg5")
 
 [node name="DirectionalLight3d" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.0540789, 0.998537, 0, -0.998537, 0.0540789, -0.00394142, 5.87507, -0.0114186)
+transform = Transform3D(1, 0, 0, 0, 0.837395, 0.546599, 0, -0.546599, 0.837395, -0.00394142, 5.87507, -0.0114186)
 shadow_enabled = true
 directional_shadow_mode = 0
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1000, 0, 0, 0, 100, 0, 0, 0, 1000, 0, -90.4006, -477.618)
+transform = Transform3D(1000, 0, 0, 0, 0.5, 0, 0, 0, 1000, 0, -39.1392, -477.618)
 mesh = SubResource("BoxMesh_rkpm7")
 
 [node name="StaticBody3d" type="StaticBody3D" parent="Floor"]
@@ -97,7 +97,17 @@ placeholder_text = "127.0.0.1"
 alignment = 1
 
 [node name="MeshInstance3d" type="MeshInstance3D" parent="."]
-transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, -6.59015, 233.186, -947.261)
+transform = Transform3D(330.85, 0, 0, 0, 13.0836, 0, 0, 0, 1000, 3.47278, -34.208, -948.226)
+mesh = SubResource("QuadMesh_n8p8k")
+surface_material_override/0 = SubResource("StandardMaterial3D_4afr7")
+
+[node name="MeshInstance3d2" type="MeshInstance3D" parent="."]
+transform = Transform3D(330.85, 0, 0, 0, 13.0836, 0, 0, 0, 1000, 334.265, -35.0608, -948.003)
+mesh = SubResource("QuadMesh_n8p8k")
+surface_material_override/0 = SubResource("StandardMaterial3D_4afr7")
+
+[node name="MeshInstance3d3" type="MeshInstance3D" parent="."]
+transform = Transform3D(330.85, 0, 0, 0, 13.0836, 0, 0, 0, 1000, -327.014, -35.0608, -948.003)
 mesh = SubResource("QuadMesh_n8p8k")
 surface_material_override/0 = SubResource("StandardMaterial3D_4afr7")
 

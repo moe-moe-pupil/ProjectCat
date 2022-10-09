@@ -10,7 +10,7 @@ collision_layer = 2
 script = ExtResource("1_gssyq")
 
 [node name="Camera3d" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.406, 100)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.59895, 100)
 projection = 1
 size = 10.0
 
