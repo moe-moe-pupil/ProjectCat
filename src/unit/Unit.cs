@@ -123,16 +123,22 @@ public partial class Unit : CharacterBody3D
             }
             Velocity = velocity;
             MoveAndSlide();
-            Rpc("RemoteSetStatus", GlobalPosition, _animName,_animatedSprite.Playing, _animatedSprite.FlipH);
+            Rpc("RemoteSetStatus", GlobalPosition, _animName, BodyDirection);
         }
     }
 
     [RPC(TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void RemoteSetStatus(Vector3 authP, string anim,bool playing, bool flipH)
+    public void RemoteSetStatus(Vector3 authP, string anim, bool flipH)
     {
         GlobalPosition = authP;
-        // _animatedSprite.Play(anim);
-        // _animatedSprite.Playing = playing;
-        // _animatedSprite.FlipH = flipH;
+        if(_animatedSprite.Animation.ToString() != anim)
+        {
+            _animatedSprite.Play(anim);
+        }
+        if(_animatedSprite.FlipH != flipH)
+        {
+            _animatedSprite.FlipH = flipH;
+        }
+        
     }
 }
