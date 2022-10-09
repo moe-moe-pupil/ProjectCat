@@ -10,7 +10,6 @@ public partial class Main : Node3D
 	private Label _peerID;
 	private VBoxContainer _menu;
 	private int _port = 9999;
-	private string _address = "127.0.0.1";
 	private Node3D _localPC;
 
 
@@ -26,7 +25,8 @@ public partial class Main : Node3D
 	{
 		_isServerText.Text = "Client";
 		_menu.Hide();
-		_peer.CreateClient(_address, _port);
+		LineEdit _address = GetNode<LineEdit>("Menu/LineEdit");
+		_peer.CreateClient(_address.Text, _port);
 		Multiplayer.MultiplayerPeer = _peer;
 		_peerID.Text = Multiplayer.GetUniqueId().ToString();
 	}
