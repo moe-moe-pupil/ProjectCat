@@ -6,7 +6,7 @@ using Godot;
 /// <summary>
 ///   游戏中的主要单位，可以是角色、敌人，甚至是陷阱机关
 /// </summary>
-public class EquippedCards
+public class Card
 {
     /// <summary>
     ///   卡牌当前的物理攻击力
