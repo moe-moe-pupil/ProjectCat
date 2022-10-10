@@ -50,7 +50,7 @@ public partial class Unit : CharacterBody3D
     private float JumpVelocity = 5;
     public float Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
     private AnimatedSprite3D _animatedSprite;
-    private string _animName = "Idle";
+    private Godot.Variant _animName = Godot.Variant.CreateFrom<string>("Idle");
     private Label3D _name;
     public bool BodyDirection = false;
     // Called when the node enters the scene tree for the first time.
@@ -114,27 +114,28 @@ public partial class Unit : CharacterBody3D
             if (velocity.x == 0)
             {
                 _animatedSprite.Play("Idle");
+                _animName = "Idle";
             }
             else
             {
                 _animatedSprite.Play("Run");
+                _animName = "Run";
             }
             Velocity = velocity;
             MoveAndSlide();
-            Rpc("RemoteSetStatus", GlobalPosition);
+            Rpc("RemoteSetStatus", GlobalPosition, _animName, _animatedSprite.Playing, _animatedSprite.FlipH);
         }
     }
 
-    [RPC(TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void RemoteSetStatus(Vector3 authP)
+    [RPC]
+    public void RemoteSetStatus(Vector3 authP, Godot.Variant anim, Godot.Variant playing, Godot.Variant flipH)
     {
         GlobalPosition = authP;
-    }
-
-    [RPC(TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void RemoteSetAnim(StringName anim)
-    {
         _animatedSprite.Play(anim.ToString());
+        anim.Dispose();
+        _animatedSprite.Playing = playing.AsBool();
+        playing.Dispose();
+        _animatedSprite.FlipH = flipH.AsBool();
+        flipH.Dispose();
     }
-    
 }

@@ -144,6 +144,7 @@ atlas = ExtResource("2_4cv25")
 region = Rect2(4864, 0, 256, 256)
 
 [resource]
+resource_local_to_scene = true
 animations = [{
 "frames": [SubResource("AtlasTexture_5xode"), SubResource("AtlasTexture_unw3l"), SubResource("AtlasTexture_flte4"), SubResource("AtlasTexture_o8n8u"), SubResource("AtlasTexture_7ttc0"), SubResource("AtlasTexture_163jx"), SubResource("AtlasTexture_kjbpb"), SubResource("AtlasTexture_shlfs"), SubResource("AtlasTexture_ct6ge"), SubResource("AtlasTexture_t0qvf"), SubResource("AtlasTexture_uilod"), SubResource("AtlasTexture_d6yev"), SubResource("AtlasTexture_nny73"), SubResource("AtlasTexture_7xgym"), SubResource("AtlasTexture_6b705")],
 "loop": true,

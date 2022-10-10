@@ -46,20 +46,17 @@ offset_bottom = 40.0
 grow_horizontal = 2
 
 [node name="NetworkSideDisplay" type="Label" parent="NetworkInfo"]
-layout_mode = 2
 offset_right = 108.0
 offset_bottom = 26.0
 text = "Network Side"
 
 [node name="UniquePeerID" type="Label" parent="NetworkInfo"]
-layout_mode = 2
 offset_top = 30.0
 offset_right = 108.0
 offset_bottom = 56.0
 text = "UniquePeerID"
 
 [node name="Restart" type="Button" parent="NetworkInfo"]
-layout_mode = 2
 offset_top = 60.0
 offset_right = 108.0
 offset_bottom = 91.0
@@ -79,14 +76,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Host" type="Button" parent="Menu"]
-layout_mode = 2
 offset_right = 108.0
 offset_bottom = 31.0
 text = "Host
 "
 
 [node name="Join" type="Button" parent="Menu"]
-layout_mode = 2
 offset_top = 35.0
 offset_right = 108.0
 offset_bottom = 66.0
@@ -94,7 +89,6 @@ text = "Join
 "
 
 [node name="LineEdit" type="LineEdit" parent="Menu"]
-layout_mode = 2
 offset_top = 70.0
 offset_right = 108.0
 offset_bottom = 101.0
