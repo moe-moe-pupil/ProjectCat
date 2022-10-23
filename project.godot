@@ -15,6 +15,10 @@ run/main_scene="res://src/map/main.tscn"
 config/features=PackedStringArray("4.0", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalScene="*res://src/map/GlobalScene.tscn"
+
 [display]
 
 window/size/viewport_width=1536

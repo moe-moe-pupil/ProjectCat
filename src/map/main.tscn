@@ -22,6 +22,152 @@ albedo_texture = ExtResource("3_c5se5")
 [node name="MainMap" type="Node3D"]
 script = ExtResource("1_mqrg5")
 
+[node name="TabContainer" type="TabContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.516
+anchor_top = 0.501
+anchor_right = 0.516
+anchor_bottom = 0.501
+offset_left = -130.576
+offset_top = -76.864
+offset_right = 131.424
+offset_bottom = 76.136
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+
+[node name="Register" type="TabBar" parent="TabContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="VBoxContainer" parent="TabContainer/Register"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 136.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="UserName" type="LineEdit" parent="TabContainer/Register/Menu"]
+offset_top = 35.0
+offset_right = 262.0
+offset_bottom = 66.0
+placeholder_text = "Your Name"
+alignment = 1
+
+[node name="ReigisterButton" type="Button" parent="TabContainer/Register/Menu"]
+offset_top = 70.0
+offset_right = 262.0
+offset_bottom = 101.0
+text = "Register
+"
+
+[node name="Login" type="TabBar" parent="TabContainer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="VBoxContainer" parent="TabContainer/Login"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 136.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Host" type="Button" parent="TabContainer/Login/Menu"]
+offset_top = 17.0
+offset_right = 262.0
+offset_bottom = 48.0
+text = "Host
+"
+
+[node name="Join" type="Button" parent="TabContainer/Login/Menu"]
+offset_top = 52.0
+offset_right = 262.0
+offset_bottom = 83.0
+text = "Join
+"
+
+[node name="UserName" type="LineEdit" parent="TabContainer/Login/Menu"]
+offset_top = 87.0
+offset_right = 262.0
+offset_bottom = 118.0
+text = "dj is cool"
+placeholder_text = "Your Name"
+alignment = 1
+
+[node name="Net" type="TabBar" parent="TabContainer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="VBoxContainer" parent="TabContainer/Net"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 136.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="Host" type="Button" parent="TabContainer/Net/Menu"]
+offset_top = 17.0
+offset_right = 212.0
+offset_bottom = 48.0
+text = "Host
+"
+
+[node name="Join" type="Button" parent="TabContainer/Net/Menu"]
+offset_top = 52.0
+offset_right = 212.0
+offset_bottom = 83.0
+text = "Join
+"
+
+[node name="UserName" type="LineEdit" parent="TabContainer/Net/Menu"]
+offset_top = 87.0
+offset_right = 212.0
+offset_bottom = 118.0
+text = "dj is cool"
+placeholder_text = "Your Name"
+alignment = 1
+
+[node name="Room" type="TabBar" parent="TabContainer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" type="VBoxContainer" parent="TabContainer/Room"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 136.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Room/Menu"]
+offset_top = 22.0
+offset_right = 262.0
+offset_bottom = 114.0
+text = "	You are not in a room.
+	
+	please host one or join one in
+	Net tab.
+"
+fit_content_height = true
+
 [node name="DirectionalLight3d" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.837395, 0.546599, 0, -0.546599, 0.837395, -0.00394142, 5.87507, -0.0114186)
 shadow_enabled = true
@@ -46,61 +192,21 @@ offset_bottom = 40.0
 grow_horizontal = 2
 
 [node name="NetworkSideDisplay" type="Label" parent="NetworkInfo"]
-layout_mode = 2
 offset_right = 108.0
 offset_bottom = 26.0
 text = "Network Side"
 
 [node name="UniquePeerID" type="Label" parent="NetworkInfo"]
-layout_mode = 2
 offset_top = 30.0
 offset_right = 108.0
 offset_bottom = 56.0
 text = "UniquePeerID"
 
 [node name="Restart" type="Button" parent="NetworkInfo"]
-layout_mode = 2
 offset_top = 60.0
 offset_right = 108.0
 offset_bottom = 91.0
 text = "restart"
-
-[node name="Menu" type="VBoxContainer" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -54.0
-offset_top = -28.0
-offset_right = 54.0
-offset_bottom = 28.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Host" type="Button" parent="Menu"]
-layout_mode = 2
-offset_right = 108.0
-offset_bottom = 31.0
-text = "Host
-"
-
-[node name="Join" type="Button" parent="Menu"]
-layout_mode = 2
-offset_top = 35.0
-offset_right = 108.0
-offset_bottom = 66.0
-text = "Join
-"
-
-[node name="LineEdit" type="LineEdit" parent="Menu"]
-layout_mode = 2
-offset_top = 70.0
-offset_right = 108.0
-offset_bottom = 101.0
-text = "127.0.0.1"
-placeholder_text = "127.0.0.1"
-alignment = 1
 
 [node name="MeshInstance3d" type="MeshInstance3D" parent="."]
 transform = Transform3D(330.85, 0, 0, 0, 13.0836, 0, 0, 0, 1000, 3.47278, -34.208, -948.226)
@@ -122,6 +228,9 @@ transform = Transform3D(34.9491, 0, 0, 0, 213.648, 0, 0, 0, 1, 0, 0, -975.334)
 mesh = SubResource("QuadMesh_ayas6")
 surface_material_override/0 = SubResource("StandardMaterial3D_haa52")
 
+[connection signal="pressed" from="TabContainer/Register/Menu/ReigisterButton" to="." method="_on_reigister_button_pressed"]
+[connection signal="pressed" from="TabContainer/Login/Menu/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="TabContainer/Login/Menu/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="TabContainer/Net/Menu/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="TabContainer/Net/Menu/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="NetworkInfo/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="Menu/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="Menu/Join" to="." method="_on_join_pressed"]
