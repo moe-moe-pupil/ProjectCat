@@ -1,54 +1,118 @@
 using Godot;
 using System;
 using Nakama;
+using System.Collections.Generic;
+using Newtonsoft;
 
 public partial class Main : Node3D
 {
-    private Godot.Collections.Array<int> _connectedPeerIDs = new();
+    static readonly string ConfigAddress = "user://uuid.cfg";
+    private List<IUserPresence> _connectedOpponents = new(2);
     private Label _isServerText;
     private Label _peerID;
-    private VBoxContainer _menu;
+    private TabContainer _menu;
     private GlobalScene _global;
     private ConfigFile _uuidConfig = new();
+    private LineEdit _roomName;
     private string _uuid;
-    private ISession _session;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        var isOK = _uuidConfig.Load("user://uuid.cfg");
+        var isOK = _uuidConfig.Load(ConfigAddress);
         if (isOK != Error.Ok)
         {
             _uuid = System.Guid.NewGuid().ToString();
             _uuidConfig.SetValue("Player", "uuid", _uuid);
+            _uuidConfig.Save(ConfigAddress);
         }
         else
         {
             _uuid = _uuidConfig.GetValue("Player", "uuid").ToString();
+            LineEdit name = GetNode<LineEdit>("TabContainer/Login/Menu/UserName");
+            name.Text = _uuidConfig.GetValue("Player", "name").ToString();
         }
         _isServerText = GetNode<Label>("NetworkInfo/NetworkSideDisplay");
         _peerID = GetNode<Label>("NetworkInfo/UniquePeerID");
-        _menu = GetNode<VBoxContainer>("Menu");
         _global = GetNode<GlobalScene>("/root/GlobalScene");
+        _menu = GetNode<TabContainer>("TabContainer");
+        _roomName = GetNode<LineEdit>("TabContainer/Net/Menu/RoomName");
     }
 
-    public async void _on_reigister_button_pressed()
+    public async void _on_login_button_pressed()
     {
-        LineEdit name = GetNode<LineEdit>("TabContainer/Register/Menu/UserName");
+        LineEdit name = GetNode<LineEdit>("TabContainer/Login/Menu/UserName");
         try
         {
-            _session = await _global.NakamaClient.AuthenticateDeviceAsync(_uuid, name.Text);
+            _global.Session = await _global.NakamaClient.AuthenticateDeviceAsync(_uuid, name.Text);
+            _global.Socket = Socket.From(_global.NakamaClient);
+            await _global.Socket.ConnectAsync(_global.Session, true);
+            _global.Socket.ReceivedMatchPresence += presenceEvent =>
+            {
+                foreach (var presence in presenceEvent.Leaves)
+                {
+                    _connectedOpponents.Remove(presence);
+                    RemovePlayer(presence.Username);
+                }
+                foreach (var presence in presenceEvent.Joins)
+                {
+                    _connectedOpponents.Add(presence);
+                    AddPlayer(presence.Username);
+                }
+
+            };
+            var enc = System.Text.Encoding.UTF8;
+            _global.Socket.ReceivedMatchState += newState =>
+            {
+                var content = enc.GetString(newState.State);
+
+                switch (newState.OpCode)
+                {
+                    case 1:
+                        HandlePosAndAnim(newState.UserPresence.Username, content);
+                        break;
+                    default:
+                        break;
+                }
+            };
+            _peerID.Text = _global.Session.Username;
+            _uuidConfig.SetValue("Player", "name", _global.Session.Username);
+            _uuidConfig.Save(ConfigAddress);
+
         }
         catch (Nakama.ApiResponseException ex)
         {
             GD.Print(ex);
         }
     }
-
-    public void _on_join_pressed()
+    public void HandlePosAndAnim(string name, string content)
     {
-        _isServerText.Text = "Client";
-        _menu.Hide();
-        _peerID.Text = "";
+        Node3D pc = GetNode<CharacterBody3D>(name);
+        var basicState = Newtonsoft.Json.JsonConvert.DeserializeObject<GlobalScene.BasicState>(content);
+        pc.Position = basicState.pos;
+        var sprite = pc.GetNode<AnimatedSprite3D>("Sprite");
+        sprite.Animation = basicState.Anim;
+        sprite.FlipH = basicState.Flip;
+    }
+
+    public async void _on_join_pressed()
+    {
+        try
+        {
+            _global.Match = await _global.Socket.JoinMatchAsync(_roomName.Text);
+            _isServerText.Text = "Client";
+            _menu.Hide();
+            await ToSignal(GetTree().CreateTimer(1), "timeout");
+            GD.Print(_global.Match.Presences.ToString());
+            foreach (var presence in _global.Match.Presences)
+            {
+                
+                AddPlayer(presence.Username);
+            }
+        }
+        catch (Exception ex)
+        {
+            GD.Print(ex);
+        }
     }
 
     public void _on_restart_pressed()
@@ -56,43 +120,37 @@ public partial class Main : Node3D
         GetTree().ReloadCurrentScene();
     }
 
-    public void _on_host_pressed()
+    public async void _on_host_pressed()
     {
-        _isServerText.Text = "Server";
-        _menu.Hide();
-        _peerID.Text = Multiplayer.GetUniqueId().ToString();
-        AddPlayer(1);
+        try
+        {
+            _global.Match = await _global.Socket.CreateMatchAsync(_roomName.Text);
+            _isServerText.Text = _global.Match.Id;
+            _menu.Hide();
+            await ToSignal(GetTree().CreateTimer(1), "timeout");
+            GD.Print(_global.Match.Presences);
+            foreach (var presence in _global.Match.Presences)
+            {
+                AddPlayer(presence.Username);
+            }
+        }
+        catch (Exception ex)
+        {
+            GD.Print(ex);
+        }
     }
 
-    private async void BindFunc(int newPeerID)
+    private void AddPlayer(string name)
     {
-        await ToSignal(GetTree().CreateTimer(1), "timeout");
-        Rpc("AddNewPC", newPeerID);
-        RpcId(newPeerID, "AddOldPC", _connectedPeerIDs);
-        AddPlayer(newPeerID);
-        GD.Print(newPeerID);
-    }
-
-    private void AddPlayer(int peerId)
-    {
-        _connectedPeerIDs.Add(peerId);
         Node3D pc = GD.Load<PackedScene>("res://src/unit/player.tscn").Instantiate() as Node3D;
-        pc.SetMultiplayerAuthority(peerId);
+        pc.Name = name;
         AddChild(pc);
     }
 
-    [RPC]
-    public void AddNewPC(int newPeerID)
+    private void RemovePlayer(string name)
     {
-        AddPlayer(newPeerID);
+        Node3D pc = GetNode<CharacterBody3D>(name);
+        RemoveChild(pc);
     }
 
-    [RPC]
-    public void AddOldPC(int[] oldPeerIDs)
-    {
-        for (int i = 0; i < oldPeerIDs.Length; i++)
-        {
-            AddPlayer(oldPeerIDs[i]);
-        }
-    }
 }

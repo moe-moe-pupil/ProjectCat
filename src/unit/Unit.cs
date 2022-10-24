@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Newtonsoft;
 
 /// <summary>
 ///   游戏中的主要单位，可以是角色、敌人，甚至是陷阱机关
@@ -50,27 +51,28 @@ public partial class Unit : CharacterBody3D
     private float JumpVelocity = 5;
     public float Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
     private AnimatedSprite3D _animatedSprite;
-    private string _animName = "Idle";
     private Label3D _name;
+    private GlobalScene _global;
+    private Camera3D _camera;
     public bool BodyDirection = false;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        Name = GetMultiplayerAuthority().ToString();
+        _global = GetNode<GlobalScene>("/root/GlobalScene");
         _animatedSprite = GetNode<AnimatedSprite3D>("Sprite");
         _name = GetNode<Label3D>("Name");
-        _name.Text = GetMultiplayerAuthority().ToString();
-        if(IsMultiplayerAuthority())
+        _name.Text = Name;
+        if(Name == _global.Session.Username)
         {
-            Camera3D camera = GetNode<Camera3D>("Camera3D");
-            camera.Current = true;
+            _camera = GetNode<Camera3D>("Camera3D");
+            _camera.Current = true;
         }
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
     {
-        if(IsMultiplayerAuthority())
+        if(Name == _global.Session.Username)
         {
             Vector3 velocity = Velocity;
             if (!IsOnFloor())
@@ -121,20 +123,11 @@ public partial class Unit : CharacterBody3D
             }
             Velocity = velocity;
             MoveAndSlide();
-            Rpc("RemoteSetStatus", GlobalPosition);
+            var basicState = new GlobalScene.BasicState();
+            basicState.pos = Position;
+            basicState.Anim = _animatedSprite.Animation;
+            basicState.Flip = _animatedSprite.FlipH;
+            _global.Socket.SendMatchStateAsync(_global.Match.Id, 1, Newtonsoft.Json.JsonConvert.SerializeObject(basicState));
         }
-    }
-
-    [RPC(TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void RemoteSetStatus(Vector3 authP)
-    {
-        GlobalPosition = authP;
-    }
-
-    [RPC(TransferMode = MultiplayerPeer.TransferModeEnum.Unreliable)]
-    public void RemoteSetAnim(StringName anim)
-    {
-        _animatedSprite.Play(anim.ToString());
-    }
-    
+    }    
 }

@@ -21,52 +21,24 @@ albedo_texture = ExtResource("3_c5se5")
 
 [node name="MainMap" type="Node3D"]
 script = ExtResource("1_mqrg5")
+metadata/_edit_horizontal_guides_ = [-72.0]
 
 [node name="TabContainer" type="TabContainer" parent="."]
-anchors_preset = -1
-anchor_left = 0.516
-anchor_top = 0.501
-anchor_right = 0.516
-anchor_bottom = 0.501
-offset_left = -130.576
-offset_top = -76.864
-offset_right = 131.424
-offset_bottom = 76.136
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -131.0
+offset_top = -159.5
+offset_right = 131.0
+offset_bottom = 159.5
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
 
-[node name="Register" type="TabBar" parent="TabContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 31.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Menu" type="VBoxContainer" parent="TabContainer/Register"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 136.0
-grow_horizontal = 2
-alignment = 1
-
-[node name="UserName" type="LineEdit" parent="TabContainer/Register/Menu"]
-offset_top = 35.0
-offset_right = 262.0
-offset_bottom = 66.0
-placeholder_text = "Your Name"
-alignment = 1
-
-[node name="ReigisterButton" type="Button" parent="TabContainer/Register/Menu"]
-offset_top = 70.0
-offset_right = 262.0
-offset_bottom = 101.0
-text = "Register
-"
-
 [node name="Login" type="TabBar" parent="TabContainer"]
-visible = false
+layout_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -75,36 +47,31 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Menu" type="VBoxContainer" parent="TabContainer/Login"]
+layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 136.0
 grow_horizontal = 2
 alignment = 1
 
-[node name="Host" type="Button" parent="TabContainer/Login/Menu"]
-offset_top = 17.0
-offset_right = 262.0
-offset_bottom = 48.0
-text = "Host
-"
-
-[node name="Join" type="Button" parent="TabContainer/Login/Menu"]
-offset_top = 52.0
-offset_right = 262.0
-offset_bottom = 83.0
-text = "Join
-"
-
 [node name="UserName" type="LineEdit" parent="TabContainer/Login/Menu"]
-offset_top = 87.0
+layout_mode = 2
+offset_top = 35.0
 offset_right = 262.0
-offset_bottom = 118.0
-text = "dj is cool"
+offset_bottom = 66.0
 placeholder_text = "Your Name"
 alignment = 1
 
+[node name="LoginButton" type="Button" parent="TabContainer/Login/Menu"]
+layout_mode = 2
+offset_top = 70.0
+offset_right = 262.0
+offset_bottom = 101.0
+text = "Login"
+
 [node name="Net" type="TabBar" parent="TabContainer"]
 visible = false
+layout_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -113,36 +80,43 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Menu" type="VBoxContainer" parent="TabContainer/Net"]
+layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 136.0
+offset_bottom = 287.0
 grow_horizontal = 2
 alignment = 1
 
+[node name="RoomName" type="LineEdit" parent="TabContainer/Net/Menu"]
+layout_mode = 2
+offset_top = 93.0
+offset_right = 262.0
+offset_bottom = 124.0
+size_flags_vertical = 0
+placeholder_text = "Room Name"
+alignment = 1
+
 [node name="Host" type="Button" parent="TabContainer/Net/Menu"]
-offset_top = 17.0
-offset_right = 212.0
-offset_bottom = 48.0
+layout_mode = 2
+offset_top = 128.0
+offset_right = 262.0
+offset_bottom = 159.0
+size_flags_vertical = 0
 text = "Host
 "
 
 [node name="Join" type="Button" parent="TabContainer/Net/Menu"]
-offset_top = 52.0
-offset_right = 212.0
-offset_bottom = 83.0
+layout_mode = 2
+offset_top = 163.0
+offset_right = 262.0
+offset_bottom = 194.0
+size_flags_vertical = 0
 text = "Join
 "
 
-[node name="UserName" type="LineEdit" parent="TabContainer/Net/Menu"]
-offset_top = 87.0
-offset_right = 212.0
-offset_bottom = 118.0
-text = "dj is cool"
-placeholder_text = "Your Name"
-alignment = 1
-
 [node name="Room" type="TabBar" parent="TabContainer"]
 visible = false
+layout_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -151,6 +125,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Menu" type="VBoxContainer" parent="TabContainer/Room"]
+layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 136.0
@@ -158,6 +133,7 @@ grow_horizontal = 2
 alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Room/Menu"]
+layout_mode = 2
 offset_top = 22.0
 offset_right = 262.0
 offset_bottom = 114.0
@@ -192,19 +168,22 @@ offset_bottom = 40.0
 grow_horizontal = 2
 
 [node name="NetworkSideDisplay" type="Label" parent="NetworkInfo"]
-offset_right = 108.0
+layout_mode = 2
+offset_right = 104.0
 offset_bottom = 26.0
 text = "Network Side"
 
 [node name="UniquePeerID" type="Label" parent="NetworkInfo"]
+layout_mode = 2
 offset_top = 30.0
-offset_right = 108.0
+offset_right = 104.0
 offset_bottom = 56.0
-text = "UniquePeerID"
+text = "not logged in"
 
 [node name="Restart" type="Button" parent="NetworkInfo"]
+layout_mode = 2
 offset_top = 60.0
-offset_right = 108.0
+offset_right = 104.0
 offset_bottom = 91.0
 text = "restart"
 
@@ -228,9 +207,7 @@ transform = Transform3D(34.9491, 0, 0, 0, 213.648, 0, 0, 0, 1, 0, 0, -975.334)
 mesh = SubResource("QuadMesh_ayas6")
 surface_material_override/0 = SubResource("StandardMaterial3D_haa52")
 
-[connection signal="pressed" from="TabContainer/Register/Menu/ReigisterButton" to="." method="_on_reigister_button_pressed"]
-[connection signal="pressed" from="TabContainer/Login/Menu/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="TabContainer/Login/Menu/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="TabContainer/Login/Menu/LoginButton" to="." method="_on_login_button_pressed"]
 [connection signal="pressed" from="TabContainer/Net/Menu/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="TabContainer/Net/Menu/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="NetworkInfo/Restart" to="." method="_on_restart_pressed"]
