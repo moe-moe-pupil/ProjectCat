@@ -4,130 +4,76 @@ using System.Linq;
 using Godot;
 using Newtonsoft;
 
-/// <summary>
-///   游戏中的主要单位，可以是角色、敌人，甚至是陷阱机关
+/// <summary lang='zh-CN'>
+///     游戏中的主要单位，可以是角色、敌人，甚至是陷阱机关
 /// </summary>
-public partial class Unit : CharacterBody3D
+public partial class Unit : CharacterBody2D
 {
-    /// <summary>
-    ///   单位的基础生命值
+    /// <summary lang='zh-CN'>
+    ///     基础生命值
     /// </summary>
     public double RedHeart;
 
-    /// <summary>
-    ///   单位的额外生命值
+    /// <summary lang='zh-CN'>
+    ///     额外生命值
     /// </summary>
     public double SoulHeart;
 
-    /// <summary>
-    ///   单位对物理攻击的抗性
+    /// <summary lang='zh-CN'>
+    ///     物理抗性
     /// </summary>
     public int PhysicalDefense;
 
-    /// <summary>
-    ///   单位对魔法攻击的抗性
+    /// <summary lang='zh-CN'>
+    ///     魔法抗性
     /// </summary>
     public int MagicDefense;
 
-    /// <summary>
-    ///   单位的移动速度
+    /// <summary lang='zh-CN'>
+    ///     移动速度
     /// </summary>
     public int MoveSpeed = 5;
 
-    /// <summary>
-    ///   单位的眩晕抗性
+    /// <summary lang='zh-CN'>
+    ///     眩晕抗性
     /// </summary>
-    private int StunResistance;
+    public int StunResistance;
 
-    /// <summary>
-    ///   单位的击退抗性
+    /// <summary lang='zh-CN'>
+    ///     击退抗性
     /// </summary>
-    private int BounceResistance;
+    public int BounceResistance;
 
-    /// <summary>
-    ///   单位目前装备的卡牌的编号
+    /// <summary lang='zh-CN'>
+    ///     目前装备的卡牌编号
     /// </summary>
     public List<int> EquipmentBar = new List<int>();
-    private float JumpVelocity = 5;
+    public float JumpVelocity = 5;
     public float Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
-    private AnimatedSprite3D _animatedSprite;
-    private Label3D _name;
-    private GlobalScene _global;
-    private Camera3D _camera;
-    public bool BodyDirection = false;
+    public GlobalScene Global;
+    
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        _global = GetNode<GlobalScene>("/root/GlobalScene");
-        _animatedSprite = GetNode<AnimatedSprite3D>("Sprite");
-        _name = GetNode<Label3D>("Name");
-        _name.Text = Name;
-        if(Name == _global.Session.Username)
-        {
-            _camera = GetNode<Camera3D>("Camera3D");
-            _camera.Current = true;
-        }
+        Global = GetNode<GlobalScene>("/root/GlobalScene");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
     {
-        if(Name == _global.Session.Username)
+        if (Name == Global.Session.Username)
         {
-            Vector3 velocity = Velocity;
+            Vector2 velocity = Velocity;
             if (!IsOnFloor())
             {
                 velocity.y -= Gravity * (float)delta;
             }
-
             if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
             {
                 velocity.y = JumpVelocity;
             }
-
-
-            Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-
-            if (inputDir.x > 0)
-            {
-                _animatedSprite.FlipH = false;
-                BodyDirection = false;
-            }
-            else if (inputDir.x < 0)
-            {
-                _animatedSprite.FlipH = true;
-                BodyDirection = true;
-            }
-            else
-            {
-                _animatedSprite.FlipH = BodyDirection;
-            }
-
-            Vector3 direction = (Transform.basis * new Vector3(inputDir.x, inputDir.y, 0)).Normalized();
-            if (direction != Vector3.Zero)
-            {
-                velocity.x = direction.x * MoveSpeed;
-            }
-            else
-            {
-                velocity.x = Mathf.MoveToward(Velocity.x, 0, MoveSpeed);
-            }
-
-            if (velocity.x == 0)
-            {
-                _animatedSprite.Play("Idle");
-            }
-            else
-            {
-                _animatedSprite.Play("Run");
-            }
             Velocity = velocity;
             MoveAndSlide();
-            var basicState = new GlobalScene.BasicState();
-            basicState.pos = Position;
-            basicState.Anim = _animatedSprite.Animation;
-            basicState.Flip = _animatedSprite.FlipH;
-            _global.Socket.SendMatchStateAsync(_global.Match.Id, 1, Newtonsoft.Json.JsonConvert.SerializeObject(basicState));
         }
-    }    
+    }
 }

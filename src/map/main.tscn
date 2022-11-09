@@ -1,29 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://c1ygkxj83uoea"]
+[gd_scene load_steps=2 format=3 uid="uid://c1ygkxj83uoea"]
 
-[ext_resource type="Script" path="res://src/map/Main.cs" id="1_mqrg5"]
-[ext_resource type="Texture2D" uid="uid://d4fevro84cwhw" path="res://assets/png/long.png" id="2_mk13n"]
-[ext_resource type="Texture2D" uid="uid://dv5p0lxp4hmod" path="res://assets/png/TIAO WEN.png" id="3_c5se5"]
+[ext_resource type="Script" path="res://src/map/MainUI.cs" id="1_k422s"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_rkpm7"]
+[node name="Main" type="Node2D"]
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8o24y"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+[node name="MainUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k422s")
 
-[sub_resource type="QuadMesh" id="QuadMesh_n8p8k"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4afr7"]
-albedo_texture = ExtResource("2_mk13n")
-
-[sub_resource type="QuadMesh" id="QuadMesh_ayas6"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_haa52"]
-albedo_texture = ExtResource("3_c5se5")
-
-[node name="MainMap" type="Node3D"]
-script = ExtResource("1_mqrg5")
-metadata/_edit_horizontal_guides_ = [-72.0]
-
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="MainUI"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -37,8 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
 
-[node name="Login" type="TabBar" parent="TabContainer"]
-layout_mode = 2
+[node name="Login" type="TabBar" parent="MainUI/TabContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -46,32 +37,28 @@ offset_top = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Menu" type="VBoxContainer" parent="TabContainer/Login"]
-layout_mode = 1
+[node name="Menu" type="VBoxContainer" parent="MainUI/TabContainer/Login"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 136.0
 grow_horizontal = 2
 alignment = 1
 
-[node name="UserName" type="LineEdit" parent="TabContainer/Login/Menu"]
-layout_mode = 2
+[node name="UserName" type="LineEdit" parent="MainUI/TabContainer/Login/Menu"]
 offset_top = 35.0
 offset_right = 262.0
 offset_bottom = 66.0
 placeholder_text = "Your Name"
 alignment = 1
 
-[node name="LoginButton" type="Button" parent="TabContainer/Login/Menu"]
-layout_mode = 2
+[node name="LoginButton" type="Button" parent="MainUI/TabContainer/Login/Menu"]
 offset_top = 70.0
 offset_right = 262.0
 offset_bottom = 101.0
 text = "Login"
 
-[node name="Net" type="TabBar" parent="TabContainer"]
+[node name="Net" type="TabBar" parent="MainUI/TabContainer"]
 visible = false
-layout_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -79,16 +66,14 @@ offset_top = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Menu" type="VBoxContainer" parent="TabContainer/Net"]
-layout_mode = 1
+[node name="Menu" type="VBoxContainer" parent="MainUI/TabContainer/Net"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 287.0
 grow_horizontal = 2
 alignment = 1
 
-[node name="RoomName" type="LineEdit" parent="TabContainer/Net/Menu"]
-layout_mode = 2
+[node name="RoomName" type="LineEdit" parent="MainUI/TabContainer/Net/Menu"]
 offset_top = 93.0
 offset_right = 262.0
 offset_bottom = 124.0
@@ -96,27 +81,23 @@ size_flags_vertical = 0
 placeholder_text = "Room Name"
 alignment = 1
 
-[node name="Host" type="Button" parent="TabContainer/Net/Menu"]
-layout_mode = 2
+[node name="Host" type="Button" parent="MainUI/TabContainer/Net/Menu"]
 offset_top = 128.0
 offset_right = 262.0
 offset_bottom = 159.0
 size_flags_vertical = 0
-text = "Host
-"
+text = "By name"
 
-[node name="Join" type="Button" parent="TabContainer/Net/Menu"]
-layout_mode = 2
+[node name="Join" type="Button" parent="MainUI/TabContainer/Net/Menu"]
 offset_top = 163.0
 offset_right = 262.0
 offset_bottom = 194.0
 size_flags_vertical = 0
-text = "Join
+text = "By Id
 "
 
-[node name="Room" type="TabBar" parent="TabContainer"]
+[node name="Room" type="TabBar" parent="MainUI/TabContainer"]
 visible = false
-layout_mode = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -124,16 +105,14 @@ offset_top = 31.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Menu" type="VBoxContainer" parent="TabContainer/Room"]
-layout_mode = 1
+[node name="Menu" type="VBoxContainer" parent="MainUI/TabContainer/Room"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 136.0
 grow_horizontal = 2
 alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Room/Menu"]
-layout_mode = 2
+[node name="RichTextLabel" type="RichTextLabel" parent="MainUI/TabContainer/Room/Menu"]
 offset_top = 22.0
 offset_right = 262.0
 offset_bottom = 114.0
@@ -144,70 +123,33 @@ text = "	You are not in a room.
 "
 fit_content_height = true
 
-[node name="DirectionalLight3d" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.837395, 0.546599, 0, -0.546599, 0.837395, -0.00394142, 5.87507, -0.0114186)
-shadow_enabled = true
-directional_shadow_mode = 0
-
-[node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1000, 0, 0, 0, 0.5, 0, 0, 0, 1000, 0, -39.1392, -477.618)
-mesh = SubResource("BoxMesh_rkpm7")
-
-[node name="StaticBody3d" type="StaticBody3D" parent="Floor"]
-
-[node name="CollisionShape3d" type="CollisionShape3D" parent="Floor/StaticBody3d"]
-shape = SubResource("ConcavePolygonShape3D_8o24y")
-
-[node name="NetworkInfo" type="VBoxContainer" parent="."]
+[node name="NetworkInfo" type="VBoxContainer" parent="MainUI"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
+offset_left = -52.0
+offset_right = 52.0
+offset_bottom = 91.0
 grow_horizontal = 2
 
-[node name="NetworkSideDisplay" type="Label" parent="NetworkInfo"]
-layout_mode = 2
+[node name="NetworkSideDisplay" type="Label" parent="MainUI/NetworkInfo"]
 offset_right = 104.0
 offset_bottom = 26.0
 text = "Network Side"
 
-[node name="UniquePeerID" type="Label" parent="NetworkInfo"]
-layout_mode = 2
+[node name="UniquePeerID" type="Label" parent="MainUI/NetworkInfo"]
 offset_top = 30.0
 offset_right = 104.0
 offset_bottom = 56.0
 text = "not logged in"
 
-[node name="Restart" type="Button" parent="NetworkInfo"]
-layout_mode = 2
+[node name="Restart" type="Button" parent="MainUI/NetworkInfo"]
 offset_top = 60.0
 offset_right = 104.0
 offset_bottom = 91.0
 text = "restart"
 
-[node name="MeshInstance3d" type="MeshInstance3D" parent="."]
-transform = Transform3D(330.85, 0, 0, 0, 13.0836, 0, 0, 0, 1000, 3.47278, -34.208, -948.226)
-mesh = SubResource("QuadMesh_n8p8k")
-surface_material_override/0 = SubResource("StandardMaterial3D_4afr7")
-
-[node name="MeshInstance3d2" type="MeshInstance3D" parent="."]
-transform = Transform3D(330.85, 0, 0, 0, 13.0836, 0, 0, 0, 1000, 334.265, -35.0608, -948.003)
-mesh = SubResource("QuadMesh_n8p8k")
-surface_material_override/0 = SubResource("StandardMaterial3D_4afr7")
-
-[node name="MeshInstance3d3" type="MeshInstance3D" parent="."]
-transform = Transform3D(330.85, 0, 0, 0, 13.0836, 0, 0, 0, 1000, -327.014, -35.0608, -948.003)
-mesh = SubResource("QuadMesh_n8p8k")
-surface_material_override/0 = SubResource("StandardMaterial3D_4afr7")
-
-[node name="MeshInstance3d4" type="MeshInstance3D" parent="."]
-transform = Transform3D(34.9491, 0, 0, 0, 213.648, 0, 0, 0, 1, 0, 0, -975.334)
-mesh = SubResource("QuadMesh_ayas6")
-surface_material_override/0 = SubResource("StandardMaterial3D_haa52")
-
-[connection signal="pressed" from="TabContainer/Login/Menu/LoginButton" to="." method="_on_login_button_pressed"]
-[connection signal="pressed" from="TabContainer/Net/Menu/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="TabContainer/Net/Menu/Join" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="NetworkInfo/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="MainUI/TabContainer/Login/Menu/LoginButton" to="MainUI" method="_on_login_button_pressed"]
+[connection signal="pressed" from="MainUI/TabContainer/Net/Menu/Host" to="MainUI" method="_on_host_pressed"]
+[connection signal="pressed" from="MainUI/TabContainer/Net/Menu/Join" to="MainUI" method="_on_join_pressed"]
+[connection signal="pressed" from="MainUI/NetworkInfo/Restart" to="MainUI" method="_on_restart_pressed"]

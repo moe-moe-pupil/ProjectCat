@@ -4,7 +4,7 @@ using Nakama;
 using System.Collections.Generic;
 using Newtonsoft;
 
-public partial class Main : Node3D
+public partial class MainUI : Control
 {
     static readonly string ConfigAddress = "user://uuid.cfg";
     private List<IUserPresence> _connectedOpponents = new(2);
@@ -40,6 +40,7 @@ public partial class Main : Node3D
 
     public async void _on_login_button_pressed()
     {
+        GD.Print('A');
         LineEdit name = GetNode<LineEdit>("TabContainer/Login/Menu/UserName");
         try
         {
@@ -51,12 +52,12 @@ public partial class Main : Node3D
                 foreach (var presence in presenceEvent.Leaves)
                 {
                     _connectedOpponents.Remove(presence);
-                    RemovePlayer(presence.Username);
+                    _global.RemovePlayer(presence.Username);
                 }
                 foreach (var presence in presenceEvent.Joins)
                 {
                     _connectedOpponents.Add(presence);
-                    AddPlayer(presence.Username);
+                    _global.AddPlayer(presence.Username);
                 }
 
             };
@@ -86,9 +87,9 @@ public partial class Main : Node3D
     }
     public void HandlePosAndAnim(string name, string content)
     {
-        Node3D pc = GetNode<CharacterBody3D>(name);
+        Node2D pc = GetNode<CharacterBody2D>(name);
         var basicState = Newtonsoft.Json.JsonConvert.DeserializeObject<GlobalScene.BasicState>(content);
-        pc.Position = basicState.pos;
+        pc.Position = basicState.Pos;
         var sprite = pc.GetNode<AnimatedSprite3D>("Sprite");
         sprite.Animation = basicState.Anim;
         sprite.FlipH = basicState.Flip;
@@ -106,7 +107,7 @@ public partial class Main : Node3D
             foreach (var presence in _global.Match.Presences)
             {
                 
-                AddPlayer(presence.Username);
+                _global.AddPlayer(presence.Username);
             }
         }
         catch (Exception ex)
@@ -131,7 +132,7 @@ public partial class Main : Node3D
             GD.Print(_global.Match.Presences);
             foreach (var presence in _global.Match.Presences)
             {
-                AddPlayer(presence.Username);
+                _global.AddPlayer(presence.Username);
             }
         }
         catch (Exception ex)
@@ -139,18 +140,4 @@ public partial class Main : Node3D
             GD.Print(ex);
         }
     }
-
-    private void AddPlayer(string name)
-    {
-        Node3D pc = GD.Load<PackedScene>("res://src/unit/player.tscn").Instantiate() as Node3D;
-        pc.Name = name;
-        AddChild(pc);
-    }
-
-    private void RemovePlayer(string name)
-    {
-        Node3D pc = GetNode<CharacterBody3D>(name);
-        RemoveChild(pc);
-    }
-
 }

@@ -1,27 +1,40 @@
 using Godot;
-using System;
 using Nakama;
 
 public partial class GlobalScene : Node
 {
-	static readonly string Address = "moemoepupil.com";
-	public Client NakamaClient = new("http", Address, 7350, "duckIsCat");
-	public ISession Session;
-	public ISocket Socket;
-	public IMatch Match;
-	public struct BasicState
+    static readonly string Address = "124.220.70.235";
+    static readonly string pcAddress = "res://src/unit/player.tscn";
+    public Client NakamaClient = new("http", Address, 7350, "duckIsCat");
+    public ISession Session;
+    public ISocket Socket;
+    public IMatch Match;
+    public struct BasicState
     {
-		public string Anim;
-		public Vector3 pos;
-		public bool Flip;
+        public string Anim;
+        public Vector2 Pos;
+        public bool Flip;
     }
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
+    {
+    }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(double delta)
+    {
+    }
+
+    public void AddPlayer(string name)
+    {
+        CharacterBody2D pc = GD.Load<PackedScene>(pcAddress).Instantiate() as CharacterBody2D;
+        pc.Name = name;
+        AddChild(pc);
+    }
+
+    public void RemovePlayer(string name)
+    {
+        CharacterBody2D pc = GetNode<CharacterBody2D>(name);
+        RemoveChild(pc);
+    }
 }

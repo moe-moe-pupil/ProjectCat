@@ -1,32 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7w7v4jsqq4eo"]
+[gd_scene load_steps=2 format=3 uid="uid://c7w7v4jsqq4eo"]
 
-[ext_resource type="Script" path="res://src/unit/Unit.cs" id="1_gssyq"]
-[ext_resource type="SpriteFrames" uid="uid://cso4h1v80g1gw" path="res://src/unit/player.tres" id="3_0w7ia"]
+[ext_resource type="Script" path="res://src/unit/player.cs" id="1_8ecu0"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rjncb"]
+[node name="Body" type="CharacterBody2D"]
+script = ExtResource("1_8ecu0")
 
-[node name="Body" type="CharacterBody3D"]
-collision_layer = 2
-script = ExtResource("1_gssyq")
+[node name="Name" type="Label" parent="."]
+offset_left = -24.0
+offset_top = -81.0
+offset_right = 23.0
+offset_bottom = -55.0
+text = "Name"
 
-[node name="Camera3d" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.59895, 100)
-projection = 1
-size = 10.0
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(7, -26)
+polygon = PackedVector2Array(-43, 2, -48, 24, -33, 49, 11, 44, 35, 33, 17, -9)
 
-[node name="CollisionShape3d" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1.15393, 0, 0, 0, 1, 0.00642222, 1.09659, 0.000123262)
-shape = SubResource("CapsuleShape3D_rjncb")
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(7, -26)
+polygon = PackedVector2Array(-43, 2, -48, 24, -33, 49, 11, 44, 35, 33, 17, -9)
 
-[node name="Name" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.03656, 0)
-billboard = 1
-text = "Name
-"
-font_size = 80
-
-[node name="Sprite" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19067, 0)
-frames = ExtResource("3_0w7ia")
-animation = &"Idle"
-playing = true
+[node name="Camera2D" type="Camera2D" parent="."]
