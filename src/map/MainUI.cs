@@ -3,19 +3,26 @@ using System;
 using Nakama;
 using System.Collections.Generic;
 using Newtonsoft;
+using GodotUtilities;
 
 public partial class MainUI : Control
 {
     static readonly string ConfigAddress = "user://uuid.cfg";
     private List<IUserPresence> _connectedOpponents = new(2);
+    [Node("NetworkInfo/NetworkSideDisplay")]
     private Label _isServerText;
+    [Node("NetworkInfo/UniquePeerID")]
     private Label _peerID;
+    [Node("TabContainer")]
     private TabContainer _menu;
+    [Node("/root/GlobalScene")]
     private GlobalScene _global;
     private ConfigFile _uuidConfig = new();
+    [Node("TabContainer/Net/Menu/RoomName")]
     private LineEdit _roomName;
     private string _uuid;
     // Called when the node enters the scene tree for the first time.
+   
     public override void _Ready()
     {
         var isOK = _uuidConfig.Load(ConfigAddress);
@@ -31,16 +38,11 @@ public partial class MainUI : Control
             LineEdit name = GetNode<LineEdit>("TabContainer/Login/Menu/UserName");
             name.Text = _uuidConfig.GetValue("Player", "name").ToString();
         }
-        _isServerText = GetNode<Label>("NetworkInfo/NetworkSideDisplay");
-        _peerID = GetNode<Label>("NetworkInfo/UniquePeerID");
-        _global = GetNode<GlobalScene>("/root/GlobalScene");
-        _menu = GetNode<TabContainer>("TabContainer");
-        _roomName = GetNode<LineEdit>("TabContainer/Net/Menu/RoomName");
+        this.WireNodes();
     }
 
     public async void _on_login_button_pressed()
     {
-        GD.Print('A');
         LineEdit name = GetNode<LineEdit>("TabContainer/Login/Menu/UserName");
         try
         {

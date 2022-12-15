@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Newtonsoft;
+using GodotUtilities;
 
 /// <summary lang='zh-CN'>
 ///     游戏中的主要单位，可以是角色、敌人，甚至是陷阱机关

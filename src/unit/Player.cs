@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Newtonsoft;
-
+using GodotUtilities;
 /// <summary lang='zh-CN'>
 ///     玩家单位
 /// </summary>
 public partial class Player : Unit
 {
 	private AnimatedSprite3D _animatedSprite;
+    [Node]
 	private Label _name;
 	private Camera2D _camera;
 	public bool BodyDirection = false;
@@ -17,7 +18,7 @@ public partial class Player : Unit
 	public override void _Ready()
 	{
 		//_animatedSprite = GetNode<AnimatedSprite3D>("Sprite");
-		_name = GetNode<Label>("Name");
+		this.WireNodes();
 		_name.Text = Name;
 		if (Name == Global.Session.Username)
 		{
@@ -80,10 +81,8 @@ public partial class Player : Unit
 			//}
 			Velocity = velocity;
 			MoveAndSlide();
-			var basicState = new GlobalScene.BasicState();
-			basicState.Pos = Position;
-			basicState.Anim = _animatedSprite.Animation;
-			basicState.Flip = _animatedSprite.FlipH;
+			var basicState = new BasicState();
+			basicState.setValues(Position, _animatedSprite.Animation, _animatedSprite.FlipH);
 			Global.Socket.SendMatchStateAsync(Global.Match.Id, 1, Newtonsoft.Json.JsonConvert.SerializeObject(basicState));
 		}
 	}
