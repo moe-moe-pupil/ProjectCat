@@ -90,7 +90,7 @@ public partial class MainUI : Control
     public void HandlePosAndAnim(string name, string content)
     {
         Node2D pc = GetNode<CharacterBody2D>(name);
-        var basicState = Newtonsoft.Json.JsonConvert.DeserializeObject<GlobalScene.BasicState>(content);
+        var basicState = Newtonsoft.Json.JsonConvert.DeserializeObject<BasicState>(content);
         pc.Position = basicState.Pos;
         var sprite = pc.GetNode<AnimatedSprite3D>("Sprite");
         sprite.Animation = basicState.Anim;
