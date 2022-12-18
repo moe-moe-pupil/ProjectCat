@@ -9,11 +9,13 @@ public partial class GlobalScene : Node
     public ISocket Socket;
     public IMatch Match;
     // Called when the node enters the scene tree for the first time.
+    /// <inheritdoc/>
     public override void _Ready()
     {
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
+    /// <inheritdoc/>
     public override void _Process(double delta)
     {
     }

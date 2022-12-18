@@ -22,7 +22,8 @@ public partial class MainUI : Control
     private LineEdit _roomName;
     private string _uuid;
     // Called when the node enters the scene tree for the first time.
-   
+
+    /// <inheritdoc/>
     public override void _Ready()
     {
         var isOK = _uuidConfig.Load(ConfigAddress);
@@ -90,7 +91,7 @@ public partial class MainUI : Control
     public void HandlePosAndAnim(string name, string content)
     {
         Node2D pc = GetNode<CharacterBody2D>(name);
-        var basicState = Newtonsoft.Json.JsonConvert.DeserializeObject<BasicState>(content);
+        var basicState = Newtonsoft.Json.JsonConvert.DeserializeObject<PlayerState.BasicState>(content);
         pc.Position = basicState.Pos;
         var sprite = pc.GetNode<AnimatedSprite3D>("Sprite");
         sprite.Animation = basicState.Anim;
@@ -108,7 +109,7 @@ public partial class MainUI : Control
             GD.Print(_global.Match.Presences.ToString());
             foreach (var presence in _global.Match.Presences)
             {
-                
+
                 _global.AddPlayer(presence.Username);
             }
         }
