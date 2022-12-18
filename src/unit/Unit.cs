@@ -52,14 +52,16 @@ public partial class Unit : CharacterBody2D
     public float JumpVelocity = 5;
     public float Gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
     public GlobalScene Global;
-    
+
     // Called when the node enters the scene tree for the first time.
+    /// <inheritdoc/>
     public override void _Ready()
     {
         Global = GetNode<GlobalScene>("/root/GlobalScene");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
+    /// <inheritdoc/>
     public override void _PhysicsProcess(double delta)
     {
         if (Name == Global.Session.Username)
