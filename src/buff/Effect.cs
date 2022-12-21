@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
-
-public partial class Effect
+/// <summary lang='Zh-CN'>
+/// 基础效果类，技能效果的最小单元.
+/// </summary>
+public class Effect
 {
     /// <summary lang='zh-CN'>
-    /// Gets or sets 物理攻击加成.
+    /// Gets or sets 物理攻击调整.
     /// </summary>
-    public double PhysicalAttackPlus { get; set; }
+    public double PhysicalDmgModify { get; set; }
+
+    /// <summary lang='zh-CN'>
+    /// Gets or sets 物理攻击调整.
+    /// </summary>
     public double PhysicalAttackMultiply;
     public double MagicAttackPlus;
     public double MagicAttackMultiply;
