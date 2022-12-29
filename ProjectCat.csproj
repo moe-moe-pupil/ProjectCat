@@ -4,6 +4,9 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Firebelley.GodotUtilities" Version="3.0.0" />
     <PackageReference Include="NakamaClient" Version="3.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

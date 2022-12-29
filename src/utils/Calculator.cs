@@ -25,9 +25,31 @@ namespace Modify
         /// <returns>计算结果.</returns>
         public static double Calc(params string[] rawParams)
         {
-            double result = 0;
+            var results = Modify.Interpreter.RawInterpreter(rawParams);
+            double addResult = 0;
+            double multiplyResult = 1;
+            foreach (Modify.Interpreter.InterpreterResult res in results)
+            {
+                switch (res.Sign)
+                {
+                    case Interpreter.InterpreterSign.Add:
+                        if (res.Mulitiply)
+                        {
+                            multiplyResult += res.Value;
+                        }
+                        else
+                        {
+                            addResult += res.Value;
+                        }
 
-            // todo
+                        break;
+                    case Interpreter.InterpreterSign.Set:
+                        addResult = res.Value;
+                        break;
+                }
+            }
+
+            double result = addResult * multiplyResult;
             return result;
         }
     }
