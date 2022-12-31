@@ -1,0 +1,12 @@
+F:\ProjectCat\RDKitTools\bin\Debug\net6.0\RDKitTools.deps.json
+F:\ProjectCat\RDKitTools\bin\Debug\net6.0\RDKitTools.dll
+F:\ProjectCat\RDKitTools\bin\Debug\net6.0\RDKitTools.pdb
+F:\ProjectCat\RDKitTools\obj\Debug\net6.0\RDKitTools.csproj.AssemblyReference.cache
+F:\ProjectCat\RDKitTools\obj\Debug\net6.0\RDKitTools.GeneratedMSBuildEditorConfig.editorconfig
+F:\ProjectCat\RDKitTools\obj\Debug\net6.0\RDKitTools.AssemblyInfoInputs.cache
+F:\ProjectCat\RDKitTools\obj\Debug\net6.0\RDKitTools.AssemblyInfo.cs
+F:\ProjectCat\RDKitTools\obj\Debug\net6.0\RDKitTools.csproj.CoreCompileInputs.cache
+F:\ProjectCat\RDKitTools\obj\Debug\net6.0\RDKitTools.dll
+F:\ProjectCat\RDKitTools\obj\Debug\net6.0\refint\RDKitTools.dll
+F:\ProjectCat\RDKitTools\obj\Debug\net6.0\RDKitTools.pdb
+F:\ProjectCat\RDKitTools\obj\Debug\net6.0\ref\RDKitTools.dll

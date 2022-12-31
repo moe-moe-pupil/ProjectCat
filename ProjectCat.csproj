@@ -4,9 +4,9 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Modify\**" />
+    <Compile Remove="RDKitTools\**" />
     <Compile Remove="Tests\**" />
-    <EmbeddedResource Remove="Modify\**" />
+    <EmbeddedResource Remove="RDKitTools\**" />
     <EmbeddedResource Remove="Tests\**" />
   </ItemGroup>
   <ItemGroup>

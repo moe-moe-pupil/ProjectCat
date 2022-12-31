@@ -35,6 +35,8 @@ namespace Tests
             Assert.That(Calculator.Calc(rawString2), Is.EqualTo(3.0));
             string[] rawString3 = { "2", "3", "100%", "1" };
             Assert.That(Calculator.Calc(rawString3), Is.EqualTo(12.0));
+            string[] rawString4 = { "2", "-3", "100%", "=1" };
+            Assert.That(Calculator.Calc(rawString4), Is.EqualTo(2.0));
         }
     }
 }

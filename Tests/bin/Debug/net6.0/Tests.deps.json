@@ -9,13 +9,12 @@
       "Tests/1.0.0": {
         "dependencies": {
           "Microsoft.NET.Test.Sdk": "17.4.1",
-          "Modify": "1.0.0",
           "NUnit": "3.13.3",
           "NUnit.Analyzers": "3.5.0",
           "NUnit3TestAdapter": "4.3.1",
+          "RDKitTools": "1.0.0",
           "StyleCop.Analyzers": "1.1.118",
-          "coverlet.collector": "3.2.0",
-          "Modify.Reference": "1.0.0.0"
+          "coverlet.collector": "3.2.0"
         },
         "runtime": {
           "Tests.dll": {}
@@ -320,12 +319,9 @@
       "NUnit3TestAdapter/4.3.1": {},
       "StyleCop.Analyzers/1.1.118": {},
       "System.Reflection.Metadata/1.6.0": {},
-      "Modify.Reference/1.0.0.0": {
+      "RDKitTools/1.0.0": {
         "runtime": {
-          "Modify.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "RDKitTools.dll": {}
         }
       }
     }
@@ -434,8 +430,8 @@
       "path": "system.reflection.metadata/1.6.0",
       "hashPath": "system.reflection.metadata.1.6.0.nupkg.sha512"
     },
-    "Modify.Reference/1.0.0.0": {
-      "type": "reference",
+    "RDKitTools/1.0.0": {
+      "type": "project",
       "serviceable": false,
       "sha512": ""
     }

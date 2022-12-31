@@ -36,13 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Modify\Modify.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Modify">
-      <HintPath>..\Modify\bin\Debug\net6.0\Modify.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\RDKitTools\RDKitTools.csproj" />
   </ItemGroup>
 
 </Project>

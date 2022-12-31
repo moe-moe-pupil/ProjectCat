@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectCat", "ProjectCat.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{D9161351-E528-479B-B1FF-DC55231EE74E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modify", "Modify\Modify.csproj", "{A0A1A501-E1FF-456D-9310-5DE0E95A4431}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDKitTools", "RDKitTools\RDKitTools.csproj", "{A0A1A501-E1FF-456D-9310-5DE0E95A4431}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

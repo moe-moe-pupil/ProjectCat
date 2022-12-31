@@ -96,5 +96,5 @@ F:\ProjectCat\Tests\obj\Debug\net6.0\Tests.pdb
 F:\ProjectCat\Tests\obj\Debug\net6.0\Tests.genruntimeconfig.cache
 F:\ProjectCat\Tests\obj\Debug\net6.0\ref\Tests.dll
 F:\ProjectCat\Tests\bin\Debug\net6.0\CoverletSourceRootsMapping
-F:\ProjectCat\Tests\bin\Debug\net6.0\Modify.dll
-F:\ProjectCat\Tests\bin\Debug\net6.0\Modify.pdb
+F:\ProjectCat\Tests\bin\Debug\net6.0\RDKitTools.dll
+F:\ProjectCat\Tests\bin\Debug\net6.0\RDKitTools.pdb

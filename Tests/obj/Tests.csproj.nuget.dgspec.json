@@ -4,14 +4,14 @@
     "F:\\ProjectCat\\Tests\\Tests.csproj": {}
   },
   "projects": {
-    "F:\\ProjectCat\\Modify\\Modify.csproj": {
+    "F:\\ProjectCat\\RDKitTools\\RDKitTools.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\ProjectCat\\Modify\\Modify.csproj",
-        "projectName": "Modify",
-        "projectPath": "F:\\ProjectCat\\Modify\\Modify.csproj",
+        "projectUniqueName": "F:\\ProjectCat\\RDKitTools\\RDKitTools.csproj",
+        "projectName": "RDKitTools",
+        "projectPath": "F:\\ProjectCat\\RDKitTools\\RDKitTools.csproj",
         "packagesPath": "C:\\Users\\16704\\.nuget\\packages\\",
-        "outputPath": "F:\\ProjectCat\\Modify\\obj\\",
+        "outputPath": "F:\\ProjectCat\\RDKitTools\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Users\\16704\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder",
@@ -97,8 +97,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "F:\\ProjectCat\\Modify\\Modify.csproj": {
-                "projectPath": "F:\\ProjectCat\\Modify\\Modify.csproj"
+              "F:\\ProjectCat\\RDKitTools\\RDKitTools.csproj": {
+                "projectPath": "F:\\ProjectCat\\RDKitTools\\RDKitTools.csproj"
               }
             }
           }
