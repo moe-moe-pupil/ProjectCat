@@ -11,7 +11,7 @@ namespace Modify
     /// <summary lang='Zh-CN'>
     /// 基础数值计算器，用于处理所有数值计算.
     /// </summary>
-    internal class Calculator
+    public class Calculator
     {
         /// <summary lang='Zh-CN'>
         /// 数值计算

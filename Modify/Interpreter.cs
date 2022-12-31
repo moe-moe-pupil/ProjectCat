@@ -15,7 +15,7 @@ namespace Modify
     /// <summary lang='Zh-CN'>
     /// 释义器，用于翻译原始字符串参数.
     /// </summary>
-    internal class Interpreter
+    public class Interpreter
     {
         /// <summary lang='Zh-CN'>
         /// 翻译结果符号位枚举.
@@ -26,11 +26,6 @@ namespace Modify
             /// 直接累加数值.
             /// </summary>
             Add = '+',
-
-            /// <summary lang='Zh-CN'>
-            /// 直接减少数值.
-            /// </summary>
-            Subtract = '-',
 
             /// <summary lang='Zh-CN'>
             /// 直接设置数值.
@@ -70,7 +65,7 @@ namespace Modify
                     case >= '0' and <= '9':
                         break;
                     case '-':
-                        result.Sign = InterpreterSign.Subtract;
+                        result.Value = -1;
                         break;
                     case '=':
                         result.Sign = InterpreterSign.Set;
@@ -99,7 +94,7 @@ namespace Modify
         /// <summary lang='Zh-CN'>
         /// 翻译结果结构体.
         /// </summary>
-        internal struct InterpreterResult
+        public struct InterpreterResult
         {
             /// <summary lang='Zh-CN'>
             /// 符号位.

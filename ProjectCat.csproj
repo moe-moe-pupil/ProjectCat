@@ -4,6 +4,12 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Modify\**" />
+    <Compile Remove="Tests\**" />
+    <EmbeddedResource Remove="Modify\**" />
+    <EmbeddedResource Remove="Tests\**" />
+  </ItemGroup>
+  <ItemGroup>
     <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
@@ -17,5 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\interface\" />
+    <Folder Include="src\utils\" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,12 @@
+F:\ProjectCat\Modify\bin\Debug\net6.0\Modify.deps.json
+F:\ProjectCat\Modify\bin\Debug\net6.0\Modify.dll
+F:\ProjectCat\Modify\bin\Debug\net6.0\Modify.pdb
+F:\ProjectCat\Modify\obj\Debug\net6.0\Modify.csproj.AssemblyReference.cache
+F:\ProjectCat\Modify\obj\Debug\net6.0\Modify.GeneratedMSBuildEditorConfig.editorconfig
+F:\ProjectCat\Modify\obj\Debug\net6.0\Modify.AssemblyInfoInputs.cache
+F:\ProjectCat\Modify\obj\Debug\net6.0\Modify.AssemblyInfo.cs
+F:\ProjectCat\Modify\obj\Debug\net6.0\Modify.csproj.CoreCompileInputs.cache
+F:\ProjectCat\Modify\obj\Debug\net6.0\Modify.dll
+F:\ProjectCat\Modify\obj\Debug\net6.0\refint\Modify.dll
+F:\ProjectCat\Modify\obj\Debug\net6.0\Modify.pdb
+F:\ProjectCat\Modify\obj\Debug\net6.0\ref\Modify.dll
