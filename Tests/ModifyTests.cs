@@ -29,8 +29,8 @@ namespace Tests
         [Test]
         public void BasicModifyCalc()
         {
-            string[] rawString = { "2", "3", "=999", "1" };
-            Assert.That(Calculator.Calc(rawString), Is.EqualTo(1000.0));
+            string[] rawString = { "2", "3", "=999", "1.1" };
+            Assert.That(Calculator.Calc(rawString), Is.EqualTo(1000.1));
             string[] rawString2 = { "2", "3", "-3", "1" };
             Assert.That(Calculator.Calc(rawString2), Is.EqualTo(3.0));
             string[] rawString3 = { "2", "3", "100%", "1" };

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "QEftqTkhf9rIx1jMmjo6o4R4e2QdgE0oZtW3mlhNLgZq+hBSRJPGzge6byjVroufuxyJWzMyMOh23vNl1/VMWQ==",
+  "dgSpecHash": "XivyllWJNg/144JwuNSuEJDb6bgoKX++LSBXsXA+gKEzBuYQOV1X7PfUCCm1jpVMfVrEn53s3uClbDu/vlj/Yg==",
   "success": true,
   "projectFilePath": "F:\\ProjectCat\\RDKitTools\\RDKitTools.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\16704\\.nuget\\packages\\stylecop.analyzers\\1.1.118\\stylecop.analyzers.1.1.118.nupkg.sha512"
+  ],
   "logs": []
 }

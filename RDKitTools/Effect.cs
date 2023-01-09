@@ -5,13 +5,13 @@
 // https://github.com/moe-moe-pupil/ProjectCat/blob/main/LICENSE
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------
-
-namespace Modify
+using RDKitTools;
+namespace Skill
 {
     /// <summary lang='Zh-CN'>
-    /// 基础数值计算器，用于处理所有数值计算.
+    /// 基础Effect类，技能效果的最小单元.
     /// </summary>
-    public class Calculator
+    public class Effect: SmartEnum<Effect>
     {
         /// <summary lang='Zh-CN'>
         /// 数值计算
@@ -23,34 +23,5 @@ namespace Modify
         /// </summary>
         /// <param name="rawParams">原始字符串参数 [- | + | = | ''][1-9].+[%] (e.g. 234 意味着 +234, =45% 意味着修改为 45%).</param>
         /// <returns>计算结果.</returns>
-        public static double Calc(params string[] rawParams)
-        {
-            var results = Interpreter.RawInterpreter(rawParams);
-            double addResult = 0;
-            double multiplyResult = 1;
-            foreach (Interpreter.InterpreterResult res in results)
-            {
-                switch (res.Sign)
-                {
-                    case Interpreter.InterpreterSign.Add:
-                        if (res.Mulitiply)
-                        {
-                            multiplyResult += res.Value;
-                        }
-                        else
-                        {
-                            addResult += res.Value;
-                        }
-
-                        break;
-                    case Interpreter.InterpreterSign.Set:
-                        addResult = res.Value;
-                        break;
-                }
-            }
-
-            double result = addResult * multiplyResult;
-            return result;
-        }
     }
 }
