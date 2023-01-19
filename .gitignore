@@ -4,4 +4,5 @@
 ProjectCat/.vs
 *.v2
 *.v1
+*.csproj.old
 Properties/launchSettings.json
