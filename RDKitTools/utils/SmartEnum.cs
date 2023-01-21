@@ -6,7 +6,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------
 
-namespace RDKitTools
+namespace RDKitTools.Utils
 {
     /// <summary lang="Zh-CN">
     /// 智能枚举类.
@@ -41,7 +41,7 @@ namespace RDKitTools
         /// 用Value生成一个实例.
         /// </summary>
         /// <param name="value">enum's value.</param>
-        /// <returns></returns>
+        /// <returns>智能枚举.</returns>
         public static TEnum? FromValue(int value)
         {
             return default;
@@ -51,7 +51,7 @@ namespace RDKitTools
         /// 用Name生成一个实例.
         /// </summary>
         /// <param name="name">enum's Name.</param>
-        /// <returns></returns>
+        /// <returns>智能枚举.</returns>
         public static TEnum? FromName(string name)
         {
             return default;

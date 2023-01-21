@@ -5,23 +5,29 @@
 // https://github.com/moe-moe-pupil/ProjectCat/blob/main/LICENSE
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------
-using RDKitTools;
+using RDKitTools.Utils;
+
 namespace Skill
 {
     /// <summary lang='Zh-CN'>
     /// 基础Effect类，技能效果的最小单元.
     /// </summary>
-    public class Effect: SmartEnum<Effect>
+    public class Effect : SmartEnum<Effect>
     {
-        /// <summary lang='Zh-CN'>
-        /// 数值计算
-        /// 规则1：所有数值严格按照层级排序后再计算数值
-        /// 规则1-1：顺序为，加法(加法叠加) -> 非全能乘法(加法叠加) -> 全能乘法(乘法叠加)
-        /// 示例1-1:
-        /// (((待计算值N + 加法参数a1 + a2) * (非全能乘法参数m1 + m2)) * 全能乘法参数gm1) * 全能乘法参数gm2 = 输出
-        /// 规则1-2: 如果相同层级则先按照优先级计算顺序，若相同则按照时间印记计算顺序,先进先触发.
+        /// <summary lang='Zh-CN>
+        /// 伤害效果.
         /// </summary>
-        /// <param name="rawParams">原始字符串参数 [- | + | = | ''][1-9].+[%] (e.g. 234 意味着 +234, =45% 意味着修改为 45%).</param>
-        /// <returns>计算结果.</returns>
+        public static readonly Effect Damage = new (1, nameof(Damage));
+
+        /// <summary lang='Zh-CN>
+        /// 治疗效果.
+        /// </summary>
+        public static readonly Effect Heal = new (2, nameof(Heal));
+
+        private Effect(int value, string name)
+            : base(value, name)
+        {
+            // todo
+        }
     }
 }
