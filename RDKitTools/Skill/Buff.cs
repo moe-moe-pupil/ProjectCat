@@ -5,29 +5,20 @@
 // https://github.com/moe-moe-pupil/ProjectCat/blob/main/LICENSE
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------
-using RDKitTools.Utils;
 
-namespace Skill
+namespace RDKitTools.skill
 {
     /// <summary lang='Zh-CN'>
-    /// 基础Effect类，技能效果的最小单元.
+    /// Buff类，Effect类的聚合，负责分类和触发Effect.
+    /// 规则1：_active、_passive分别为技能释放，被动的List<Effect>数组.
     /// </summary>
-    public class Effect : SmartEnum<Effect>
+    public class Buff
     {
-        /// <summary lang='Zh-CN>
-        /// 伤害效果.
+        /// <summary lang='Zh-CN'>
+        /// Buff
+        /// 规则1：_active、_passive分别为技能释放，被动的List<Effect>数组.
         /// </summary>
-        public static readonly Effect Damage = new (1, nameof(Damage));
-
-        /// <summary lang='Zh-CN>
-        /// 治疗效果.
-        /// </summary>
-        public static readonly Effect Heal = new (2, nameof(Heal));
-
-        private Effect(int value, string name)
-            : base(value, name)
-        {
-            // todo
-        }
+        /// <param name="rawParams">原始字符串参数 [- | + | = | ''][1-9].+[%] (e.g. 234 意味着 +234, =45% 意味着修改为 45%).</param>
+        /// <returns>计算结果.</returns>
     }
 }

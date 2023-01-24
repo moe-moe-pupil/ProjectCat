@@ -6,7 +6,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------
 
-namespace RDKitTools.Utils
+namespace RDKitTools
 {
     /// <summary lang="Zh-CN">
     /// 智能枚举类.
@@ -23,8 +23,8 @@ namespace RDKitTools.Utils
         /// <param name="name">枚举名称.</param>
         protected SmartEnum(int value, string name)
         {
-            this.Value = value;
-            this.Name = name;
+            Value = value;
+            Name = name;
         }
 
         /// <summary>
@@ -69,8 +69,8 @@ namespace RDKitTools.Utils
                 return false;
             }
 
-            return this.GetType() == other.GetType() &&
-                this.Value == other.Value;
+            return GetType() == other.GetType() &&
+                Value == other.Value;
         }
 
         /// <summary lang="Zh-CN">
@@ -81,7 +81,7 @@ namespace RDKitTools.Utils
         public override bool Equals(object? obj)
         {
             return obj is SmartEnum<TEnum> other &&
-                this.Equals(other);
+                Equals(other);
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace RDKitTools.Utils
         /// <returns>value's hash code</returns>
         public override int GetHashCode()
         {
-            return this.Value.GetHashCode();
+            return Value.GetHashCode();
         }
     }
 }
