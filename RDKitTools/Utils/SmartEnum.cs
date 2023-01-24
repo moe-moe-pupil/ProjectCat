@@ -6,7 +6,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------
 
-namespace RDKitTools
+namespace RDKitTools.Utils
 {
     /// <summary lang="Zh-CN">
     /// 智能枚举类.
