@@ -6,5 +6,5 @@ ProjectCat/.vs
 *.v1
 *.csproj.old
 Properties/launchSettings.json
-Tests/bin
-Tests/obj
+**/bin/*
+**/obj/*
