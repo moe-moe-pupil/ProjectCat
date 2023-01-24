@@ -6,7 +6,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------
 
-namespace RDKitTools.skill
+namespace RDKitTools.Skill
 {
     using System;
     using System.Collections.Generic;
@@ -57,7 +57,7 @@ namespace RDKitTools.skill
             List<InterpreterResult> results = new List<InterpreterResult>();
             foreach (string str in rawParams)
             {
-                InterpreterResult result = new() { Sign = InterpreterSign.Add, Mulitiply = false, Value = 1 };
+                InterpreterResult result = new () { Sign = InterpreterSign.Add, Mulitiply = false, Value = 1 };
                 switch (str[0])
                 {
                     case '+':
@@ -118,8 +118,8 @@ namespace RDKitTools.skill
             /// <param name="value">数值.</param>
             public void SetValues(InterpreterSign sign, double value)
             {
-                Sign = sign;
-                Value = value;
+                this.Sign = sign;
+                this.Value = value;
             }
         }
     }

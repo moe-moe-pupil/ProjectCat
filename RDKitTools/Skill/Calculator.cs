@@ -6,7 +6,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------
 
-namespace RDKitTools.skill
+namespace RDKitTools.Skill
 {
     /// <summary lang='Zh-CN'>
     /// 基础数值计算器，用于处理所有数值计算.

@@ -5,29 +5,47 @@
 // https://github.com/moe-moe-pupil/ProjectCat/blob/main/LICENSE
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------
-namespace RDKitTools.skill
+namespace RDKitTools.Skill
 {
     using RDKitTools.Utils;
 
     /// <summary lang='Zh-CN'>
     /// 基础Effect类，技能效果的最小单元.
     /// </summary>
-    public class Effect : SmartEnum<Effect>
+    public abstract class Effect : SmartEnum<Effect>
     {
         /// <summary lang='Zh-CN>
         /// 伤害效果.
         /// </summary>
-        public static readonly Effect Damage = new(1, nameof(Damage));
+        public static readonly Effect Damage = new DamageEffect();
 
         /// <summary lang='Zh-CN>
         /// 治疗效果.
         /// </summary>
-        public static readonly Effect Heal = new(2, nameof(Heal));
+        public static readonly Effect Heal = new HealEffect();
 
         private Effect(int value, string name)
             : base(value, name)
         {
             // todo
+        }
+
+        private sealed class DamageEffect : Effect
+        {
+            public DamageEffect()
+                : base(1, nameof(DamageEffect))
+            {
+                // todo
+            }
+        }
+
+        private sealed class HealEffect: Effect
+        {
+            public HealEffect()
+                : base(2, nameof(HealEffect))
+            {
+                // todo
+            }
         }
     }
 }
