@@ -14,12 +14,12 @@ namespace RDKitTools.Skill
     /// </summary>
     public abstract class Effect : SmartEnum<Effect>
     {
-        /// <summary lang='Zh-CN>
+        /// <summary lang='Zh-CN'>
         /// 伤害效果.
         /// </summary>
         public static readonly Effect Damage = new DamageEffect();
 
-        /// <summary lang='Zh-CN>
+        /// <summary lang='Zh-CN'>
         /// 治疗效果.
         /// </summary>
         public static readonly Effect Heal = new HealEffect();
@@ -30,21 +30,34 @@ namespace RDKitTools.Skill
             // todo
         }
 
+        /// <summary lang='Zh-CN'>
+        /// 效果触发.
+        /// </summary>
+        public abstract void Trigger();
+
         private sealed class DamageEffect : Effect
         {
             public DamageEffect()
                 : base(1, nameof(DamageEffect))
             {
-                // todo
+            }
+
+            public override void Trigger()
+            {
+                throw new NotImplementedException();
             }
         }
 
-        private sealed class HealEffect: Effect
+        private sealed class HealEffect : Effect
         {
             public HealEffect()
                 : base(2, nameof(HealEffect))
             {
-                // todo
+            }
+
+            public override void Trigger()
+            {
+                throw new NotImplementedException();
             }
         }
     }

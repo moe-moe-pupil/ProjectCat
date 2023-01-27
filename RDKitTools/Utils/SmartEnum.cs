@@ -23,11 +23,7 @@ namespace RDKitTools.Utils
         /// </summary>
         /// <param name="value">枚举值.</param>
         /// <param name="name">枚举名称.</param>
-        protected SmartEnum(int value, string name)
-        {
-            this.Value = value;
-            this.Name = name;
-        }
+        protected SmartEnum(int value, string name) => (this.Value, this.Name) = (value, name);
 
         /// <summary>
         /// Gets enum's value.
