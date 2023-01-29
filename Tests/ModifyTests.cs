@@ -7,7 +7,7 @@
 // --------------------------------------------------------------------------------------------------------------
 namespace Tests
 {
-    using RDKitTools.skill;
+    using RDKitTools.Skill;
 
     /// <summary lang='Zh-CN'>
     /// ≤‚ ‘¿‡.
