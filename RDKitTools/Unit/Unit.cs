@@ -13,6 +13,6 @@ namespace RDKitTools.Unit
     /// </summary>
     public class Unit
     {
-        public ref List<RDKitTools.Skill.Buff> Buff;
+        public List<RDKitTools.Skill.Buff> Buff;
     }
 }
