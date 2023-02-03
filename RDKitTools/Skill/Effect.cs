@@ -38,7 +38,7 @@ namespace RDKitTools.Skill
         private sealed class DamageEffect : Effect
         {
             public DamageEffect()
-                : base(1, nameof(DamageEffect))
+                : base(1, nameof(Damage))
             {
             }
 
@@ -51,7 +51,7 @@ namespace RDKitTools.Skill
         private sealed class HealEffect : Effect
         {
             public HealEffect()
-                : base(2, nameof(HealEffect))
+                : base(2, nameof(Heal))
             {
             }
 
