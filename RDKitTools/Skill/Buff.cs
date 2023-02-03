@@ -25,6 +25,5 @@ namespace RDKitTools.Skill
         /// 效果类聚合.
         /// </summary>
         public List<Effect> Effects => _effects;
-        
     }
 }
