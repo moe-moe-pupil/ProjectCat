@@ -9,22 +9,19 @@ using GodotUtilities;
 /// </summary>
 public partial class Player : Unit
 {
+    [Node]
     private AnimatedSprite2D _animatedSprite;
     [Node]
     private Label _name;
     private bool _isJump = false;
     private Camera2D _camera;
-    private Timer _timer,_timer2,_timer3; //_timer = EdgeJump;_timer2 = HoldJump;_timer3 = BufferingJump.
+    [Node]
+    private Timer _edgeJump,_holdJump,_bufferingJump;
     public bool BodyDirection = false;
     public float time_sec;
-    // Called when the node enters the scene tree for the first time.
-    /// <inheritdoc/>
+
     public override void _Ready()
     {
-        _animatedSprite = GetNode<AnimatedSprite2D>("Sprite");
-        _timer = GetNode<Timer>("EdgeJump");
-        _timer2 = GetNode<Timer>("HoldJump");
-        _timer3 = GetNode<Timer>("BufferingJump");
 
         this.WireNodes();
         _name.Text = Name;
@@ -36,8 +33,6 @@ public partial class Player : Unit
         }
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    /// <inheritdoc/>
     public override void _PhysicsProcess(double delta)
     {
       //   if (Name == Global.Session.Username)
@@ -45,57 +40,56 @@ public partial class Player : Unit
             Vector2 velocity = Velocity;
             if (IsOnFloor() && !Input.IsActionPressed("ui_accept"))
             {
-                _timer.Start(time_sec = -1);
-                _timer.Paused = true;
+                _edgeJump.Start(time_sec = -1);
+                _edgeJump.Paused = true;
 
-                _timer2.Start(time_sec = -1);
-                _timer2.Paused = true;
+                _holdJump.Start(time_sec = -1);
+                _holdJump.Paused = true;
 
-                _timer3.Start(time_sec = -1);
-                _timer3.Paused = true;
-
+                _bufferingJump.Start(time_sec = -1);
+                _bufferingJump.Paused = true;
 
             }
 
             if (Input.IsActionJustReleased("ui_accept"))
             {
-                _timer3.Start(time_sec = -1);
-                _timer3.Paused = true;
+                _bufferingJump.Start(time_sec = -1);
+                _bufferingJump.Paused = true;
             }
 
             if (IsOnFloor())
             {
                 _isJump = false;
             }
-
-
-            if (!IsOnFloor())
+            else
             {
-                _timer.Paused = false;
+                _edgeJump.Paused = false;
                 velocity.y += Gravity * (float)delta * 130;
             }
 
-            if (Input.IsActionJustPressed("ui_accept") && (IsOnFloor() || !_timer.IsStopped()))
+            //处理边缘跳跃和长按跳跃 成功触发跳跃
+            if (Input.IsActionJustPressed("ui_accept") && (IsOnFloor() || !_edgeJump.IsStopped()))
             {
-                _timer2.Paused = false;
+                _holdJump.Paused = false;
                 _isJump = true;
             }
 
-            if (Input.IsActionJustPressed("ui_accept"))
+            if (Input.IsActionJustPressed("ui_accept") && !IsOnFloor() && _edgeJump.IsStopped())
             {
-                _timer3.Paused = false;
+                _bufferingJump.Paused = false;
             }
 
-            if (Input.IsActionPressed("ui_accept") && IsOnFloor() && !_timer3.IsStopped())
+            if (Input.IsActionPressed("ui_accept") && IsOnFloor() && !_bufferingJump.IsStopped())
             {
                 _isJump = true;
-                //_timer2.Start(time_sec = -1);
-               
-
+                _holdJump.Start(time_sec = -1);
+                _holdJump.Paused = false;
             }
 
-            if (Input.IsActionPressed("ui_accept") && (IsOnFloor() || !_timer2.IsStopped() ) && _isJump)
+            //删除IsOnFloor()
+            if (Input.IsActionPressed("ui_accept") && !_holdJump.IsStopped()  && _isJump)
             {
+                
                 velocity.y -= 14 * JumpVelocity;
             }
 
