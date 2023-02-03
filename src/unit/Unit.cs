@@ -71,10 +71,12 @@ public partial class Unit : CharacterBody2D
             {
                 velocity.y -= Gravity * (float)delta;
             }
+
             if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
             {
                 velocity.y = JumpVelocity;
             }
+
             Velocity = velocity;
             MoveAndSlide();
         }
