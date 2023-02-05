@@ -121,7 +121,7 @@ public partial class Player : Unit
             }
             else
             {
-                velocity.x = Mathf.MoveToward(Velocity.x, 0, MoveSpeed * 3);
+                velocity.x = Mathf.MoveToward(Velocity.x, 0, MoveSpeed * 10);
             }
 
             if (velocity.x == 0)
