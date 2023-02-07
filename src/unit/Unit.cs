@@ -57,28 +57,28 @@ public partial class Unit : CharacterBody2D
     /// <inheritdoc/>
     public override void _Ready()
     {
-        Global = GetNode<GlobalScene>("/root/GlobalScene");
+        this.Global = this.GetNode<GlobalScene>("/root/GlobalScene");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     /// <inheritdoc/>
     public override void _PhysicsProcess(double delta)
     {
-        if (Name == Global.Session.Username)
+        if (this.Name == this.Global.Session.Username)
         {
-            Vector2 velocity = Velocity;
-            if (!IsOnFloor())
+            Vector2 velocity = this.Velocity;
+            if (!this.IsOnFloor())
             {
-                velocity.y -= Gravity * (float)delta;
+                velocity.y -= this.Gravity * (float)delta;
             }
 
-            if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+            if (Input.IsActionJustPressed("ui_accept") && this.IsOnFloor())
             {
-                velocity.y = JumpVelocity;
+                velocity.y = this.JumpVelocity;
             }
 
-            Velocity = velocity;
-            MoveAndSlide();
+            this.Velocity = velocity;
+            this.MoveAndSlide();
         }
     }
 }

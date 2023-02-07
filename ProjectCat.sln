@@ -5,9 +5,14 @@ VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectCat", "ProjectCat.csproj", "{5ADDBC0C-738D-4AB8-B966-DCA49AFE73B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{D9161351-E528-479B-B1FF-DC55231EE74E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{D9161351-E528-479B-B1FF-DC55231EE74E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDKitTools", "RDKitTools\RDKitTools.csproj", "{A0A1A501-E1FF-456D-9310-5DE0E95A4431}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RDKitTools", "RDKitTools\RDKitTools.csproj", "{A0A1A501-E1FF-456D-9310-5DE0E95A4431}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6364FED6-D163-4970-9655-6C070B229CA6}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

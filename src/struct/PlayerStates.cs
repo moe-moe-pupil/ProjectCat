@@ -9,9 +9,9 @@ namespace PlayerState
         public bool Flip;
         public void setValues(Vector2 pos, string anim, bool flip)
         {
-            Anim = anim;
-            Pos = pos;
-            Flip = flip;
+            this.Anim = anim;
+            this.Pos = pos;
+            this.Flip = flip;
         }
     }
 }

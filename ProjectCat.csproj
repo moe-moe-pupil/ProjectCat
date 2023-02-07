@@ -25,4 +25,7 @@
     <Folder Include="src\interface\" />
     <Folder Include="src\utils\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
+  </ItemGroup>
 </Project>
