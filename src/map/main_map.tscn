@@ -41,12 +41,30 @@ size = Vector2(46, 94)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ucfl7"]
 animations = [{
-"frames": [ExtResource("4_5kfh2"), ExtResource("5_1k38g")],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_5kfh2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1k38g")
+}],
 "loop": true,
 "name": &"Idle",
 "speed": 2.0
 }, {
-"frames": [ExtResource("6_mgekp"), ExtResource("7_kqtj8"), ExtResource("8_xnbjq"), ExtResource("9_3fdaj")],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_mgekp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kqtj8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xnbjq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3fdaj")
+}],
 "loop": true,
 "name": &"Run",
 "speed": 10.0
@@ -82,14 +100,12 @@ shape = SubResource("RectangleShape2D_tiyia")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 position = Vector2(525, 267)
-current = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="CharacterBody2D"]
 position = Vector2(-256, 1)
 scale = Vector2(0.913815, 0.892615)
-frames = SubResource("SpriteFrames_ucfl7")
+sprite_frames = SubResource("SpriteFrames_ucfl7")
 animation = &"Idle"
-playing = true
 centered = false
 offset = Vector2(-108.521, -180)
 

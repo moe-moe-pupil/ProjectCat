@@ -16,7 +16,7 @@ grow_vertical = 2
 script = ExtResource("1_k422s")
 
 [node name="TabContainer" type="TabContainer" parent="MainUI"]
-anchors_preset = 8
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -30,101 +30,73 @@ grow_vertical = 2
 tab_alignment = 1
 
 [node name="Login" type="TabBar" parent="MainUI/TabContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 31.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="Menu" type="VBoxContainer" parent="MainUI/TabContainer/Login"]
-anchors_preset = 10
+layout_mode = 0
 anchor_right = 1.0
 offset_bottom = 136.0
 grow_horizontal = 2
 alignment = 1
 
 [node name="UserName" type="LineEdit" parent="MainUI/TabContainer/Login/Menu"]
-offset_top = 35.0
-offset_right = 262.0
-offset_bottom = 66.0
+layout_mode = 2
 placeholder_text = "Your Name"
 alignment = 1
 
 [node name="LoginButton" type="Button" parent="MainUI/TabContainer/Login/Menu"]
-offset_top = 70.0
-offset_right = 262.0
-offset_bottom = 101.0
+layout_mode = 2
 text = "Login"
 
 [node name="Net" type="TabBar" parent="MainUI/TabContainer"]
 visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 31.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="Menu" type="VBoxContainer" parent="MainUI/TabContainer/Net"]
-anchors_preset = 10
+layout_mode = 0
 anchor_right = 1.0
 offset_bottom = 287.0
 grow_horizontal = 2
 alignment = 1
 
 [node name="RoomName" type="LineEdit" parent="MainUI/TabContainer/Net/Menu"]
-offset_top = 93.0
-offset_right = 262.0
-offset_bottom = 124.0
+layout_mode = 2
 size_flags_vertical = 0
 placeholder_text = "Room Name"
 alignment = 1
 
 [node name="Host" type="Button" parent="MainUI/TabContainer/Net/Menu"]
-offset_top = 128.0
-offset_right = 262.0
-offset_bottom = 159.0
+layout_mode = 2
 size_flags_vertical = 0
 text = "By name"
 
 [node name="Join" type="Button" parent="MainUI/TabContainer/Net/Menu"]
-offset_top = 163.0
-offset_right = 262.0
-offset_bottom = 194.0
+layout_mode = 2
 size_flags_vertical = 0
 text = "By Id
 "
 
 [node name="Room" type="TabBar" parent="MainUI/TabContainer"]
 visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 31.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 
 [node name="Menu" type="VBoxContainer" parent="MainUI/TabContainer/Room"]
-anchors_preset = 10
+layout_mode = 0
 anchor_right = 1.0
 offset_bottom = 136.0
 grow_horizontal = 2
 alignment = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MainUI/TabContainer/Room/Menu"]
-offset_top = 22.0
-offset_right = 262.0
-offset_bottom = 114.0
+layout_mode = 2
 text = "	You are not in a room.
 	
 	please host one or join one in
 	Net tab.
 "
-fit_content_height = true
 
 [node name="NetworkInfo" type="VBoxContainer" parent="MainUI"]
-anchors_preset = 5
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -52.0
@@ -133,20 +105,15 @@ offset_bottom = 91.0
 grow_horizontal = 2
 
 [node name="NetworkSideDisplay" type="Label" parent="MainUI/NetworkInfo"]
-offset_right = 104.0
-offset_bottom = 26.0
+layout_mode = 2
 text = "Network Side"
 
 [node name="UniquePeerID" type="Label" parent="MainUI/NetworkInfo"]
-offset_top = 30.0
-offset_right = 104.0
-offset_bottom = 56.0
+layout_mode = 2
 text = "not logged in"
 
 [node name="Restart" type="Button" parent="MainUI/NetworkInfo"]
-offset_top = 60.0
-offset_right = 104.0
-offset_bottom = 91.0
+layout_mode = 2
 text = "restart"
 
 [connection signal="pressed" from="MainUI/TabContainer/Login/Menu/LoginButton" to="MainUI" method="_on_login_button_pressed"]

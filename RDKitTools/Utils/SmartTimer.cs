@@ -28,51 +28,63 @@ namespace RDKitTools.Utils
             s_actions.Add(new T { StartTime = startTime, Name = name });
         }
 
-        public static void RemAction(string actionName) //Removes all actions with <actionName> from the list
+        public void RemoveAction(string actionName)
         {
-            foreach (Action action in new List<Action>(actions))
+            foreach (T action in new List<T>(s_actions))
             {
-                if (action.name.Equals(actionName)) actions.Remove(action);
+                if (action.Name.Equals(actionName))
+                {
+                    s_actions.Remove(action);
+                }
             }
         }
 
-        public static void ClearActions() //Clears all actions
+        public void ClearActions()
         {
-            actions.Clear();
+            s_actions.Clear();
         }
 
-        public static bool ContainsAction(string actionName) //Checks if list contains action with <actionName>
+        public bool ContainsAction(string actionName)
         {
-            foreach (Action action in new List<Action>(actions))
+            foreach (T action in new List<T>(s_actions))
             {
-                if (action.name.Equals(actionName)) return true;
+                if (action.Name.Equals(actionName))
+                {
+                    return true;
+                }
             }
 
             return false;
         }
 
-        public static void ResetAction(string actionName) //Resets the time of all actions with <actionName>
+        public void ResetAction(string actionName)
         {
-            foreach (Action action in new List<Action>(actions))
+            foreach (T action in new List<T>(s_actions))
             {
-                if (action.name.Equals(actionName)) action.time = action.startTime;
+                if (action.Name.Equals(actionName))
+                {
+                    action.CurrentTime = action.StartTime;
+                }
             }
         }
 
-        public static void ResetAllActions() //Resets the time of all actions
+        public void ResetAllActions()
         {
-            foreach (Action action in new List<Action>(actions))
+            foreach (T action in new List<T>(s_actions))
             {
-                action.time = action.startTime;
+                action.CurrentTime = action.StartTime;
             }
         }
 
-        public static void Update(float delta, bool removeTimeout = true) //Updates the timer, removes timeout actions if <removeTimeout> is true
+        public void Update(float delta, bool removeTimeout = true)
         {
-            foreach (Action action in new List<Action>(actions))
+            foreach (T action in new List<T>(s_actions))
             {
-                action.time -= delta;
-                if (removeTimeout && action.time <= 0) actions.Remove(action);
+                action.CurrentTime -= delta;
+                if (removeTimeout && action.CurrentTime <= 0)
+                {
+                    s_actions.Remove(action);
+                }
             }
         }
     }
