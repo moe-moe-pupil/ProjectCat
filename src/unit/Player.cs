@@ -51,7 +51,6 @@ public partial class Player : Unit
 
                 this._bufferingJump.Start(-1);
                 this._bufferingJump.Paused = true;
-
             }
 
             if (Input.IsActionJustReleased("ui_accept"))
@@ -90,7 +89,7 @@ public partial class Player : Unit
             }
 
             // 删除IsOnFloor()
-            if (Input.IsActionPressed("ui_accept") && !this._holdJump.IsStopped()  && this._isJump)
+            if (Input.IsActionPressed("ui_accept") && !this._holdJump.IsStopped() && this._isJump)
             {
                 velocity.y -= 14 * this.JumpVelocity;
             }
@@ -117,7 +116,7 @@ public partial class Player : Unit
             {
                 velocity.x = direction.x * this.MoveSpeed * 100;
             }
-            else if(this.IsOnFloor())
+            else if (this.IsOnFloor())
             {
                 velocity.x = Mathf.MoveToward(this.Velocity.x, 0, this.MoveSpeed * 20);
             }
@@ -134,6 +133,7 @@ public partial class Player : Unit
             {
                 this._animatedSprite.Play("Run");
             }
+
             this.Velocity = velocity;
             this.MoveAndSlide();
             var basicState = default(PlayerState.BasicState);
