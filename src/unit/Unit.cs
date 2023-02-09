@@ -69,12 +69,12 @@ public partial class Unit : CharacterBody2D
             Vector2 velocity = this.Velocity;
             if (!this.IsOnFloor())
             {
-                velocity.y -= this.Gravity * (float)delta;
+                velocity.Y -= this.Gravity * (float)delta;
             }
 
             if (Input.IsActionJustPressed("ui_accept") && this.IsOnFloor())
             {
-                velocity.y = this.JumpVelocity;
+                velocity.Y = this.JumpVelocity;
             }
 
             this.Velocity = velocity;

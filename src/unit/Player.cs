@@ -18,8 +18,6 @@ public partial class Player : Unit
     private float _timeSec;
     [Node]
     private AnimatedSprite2D _animatedSprite;
-    [Node]
-    private Label _name;
     private bool _isJump = false;
     private Camera2D _camera;
     [Node]
@@ -28,34 +26,32 @@ public partial class Player : Unit
     public override void _Ready()
     {
         this.WireNodes();
-        this._name.Text = this.Name;
-        if (this.Name == this.Global.Session.Username)
-        {
-            this._camera = this.GetNode<Camera2D>("Camera2D");
-            this._camera.Current = true;
-        }
+        //if (this.Name == this.Global.Session.Username)
+        //{
+        //    this._camera = this.GetNode<Camera2D>("Camera2D");
+        //}
     }
 
     public override void _PhysicsProcess(double delta)
     {
-      if (this.Name == this.Global.Session.Username)
-        {
+      //if (this.Name == this.Global.Session.Username)
+      //  {
             Vector2 velocity = this.Velocity;
             if (this.IsOnFloor() && !Input.IsActionPressed("ui_accept"))
             {
-                this._edgeJump.Start(-1);
+                this._edgeJump.Start(timeSec: -1);
                 this._edgeJump.Paused = true;
 
-                this._holdJump.Start(-1);
+                this._holdJump.Start(timeSec: -1);
                 this._holdJump.Paused = true;
 
-                this._bufferingJump.Start(-1);
+                this._bufferingJump.Start(timeSec: -1);
                 this._bufferingJump.Paused = true;
             }
 
             if (Input.IsActionJustReleased("ui_accept"))
             {
-                this._bufferingJump.Start(-1);
+                this._bufferingJump.Start(timeSec: -1);
                 this._bufferingJump.Paused = true;
             }
 
@@ -66,7 +62,7 @@ public partial class Player : Unit
             else
             {
                 this._edgeJump.Paused = false;
-                velocity.y += this.Gravity * (float)delta * 130;
+                velocity.Y += this.Gravity * (float)delta * 130;
             }
 
             // 处理边缘跳跃和长按跳跃 成功触发跳跃
@@ -84,24 +80,24 @@ public partial class Player : Unit
             if (Input.IsActionPressed("ui_accept") && this.IsOnFloor() && !this._bufferingJump.IsStopped())
             {
                 this._isJump = true;
-                this._holdJump.Start(-1);
+                this._holdJump.Start(timeSec: -1);
                 this._holdJump.Paused = false;
             }
 
             // 删除IsOnFloor()
             if (Input.IsActionPressed("ui_accept") && !this._holdJump.IsStopped() && this._isJump)
             {
-                velocity.y -= 14 * this.JumpVelocity;
+                velocity.Y -= 14 * this.JumpVelocity;
             }
 
             Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 
-            if (inputDir.x > 0)
+            if (inputDir.X > 0)
             {
                 this._animatedSprite.FlipH = false;
                 this._bodyDirection = false;
             }
-            else if (inputDir.x < 0)
+            else if (inputDir.X < 0)
             {
                 this._animatedSprite.FlipH = true;
                 this._bodyDirection = true;
@@ -114,18 +110,18 @@ public partial class Player : Unit
             Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
             if (direction != Vector2.Zero)
             {
-                velocity.x = direction.x * this.MoveSpeed * 100;
+                velocity.X = direction.X * this.MoveSpeed * 100;
             }
             else if (this.IsOnFloor())
             {
-                velocity.x = Mathf.MoveToward(this.Velocity.x, 0, this.MoveSpeed * 20);
+                velocity.X = Mathf.MoveToward(this.Velocity.X, 0, this.MoveSpeed * 20);
             }
             else
             {
-                velocity.x = Mathf.MoveToward(this.Velocity.x, 0, this.MoveSpeed * 10);
+                velocity.X = Mathf.MoveToward(this.Velocity.X, 0, this.MoveSpeed * 10);
             }
 
-            if (velocity.x == 0)
+            if (velocity.X == 0)
             {
                 this._animatedSprite.Play("Idle");
             }
@@ -138,7 +134,7 @@ public partial class Player : Unit
             this.MoveAndSlide();
             var basicState = default(PlayerState.BasicState);
             basicState.setValues(this.Position, this._animatedSprite.Animation, this._animatedSprite.FlipH);
-            this.Global.Socket.SendMatchStateAsync(this.Global.Match.Id, 1, Newtonsoft.Json.JsonConvert.SerializeObject(basicState));
-      }
+            // this.Global.Socket.SendMatchStateAsync(this.Global.Match.Id, 1, Newtonsoft.Json.JsonConvert.SerializeObject(basicState));
+      // }
     }
 }
