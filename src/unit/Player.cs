@@ -15,7 +15,6 @@ using GodotUtilities;
 public partial class Player : Unit
 {
     private bool _bodyDirection = false;
-    private float _timeSec;
     [Node]
     private AnimatedSprite2D _animatedSprite;
     private bool _isJump = false;

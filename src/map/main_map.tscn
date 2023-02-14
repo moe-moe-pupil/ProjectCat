@@ -115,7 +115,7 @@ one_shot = true
 
 [node name="HoldJump" type="Timer" parent="CharacterBody2D"]
 process_callback = 0
-wait_time = 0.15
+wait_time = 0.2
 one_shot = true
 
 [node name="BufferingJump" type="Timer" parent="CharacterBody2D"]
