@@ -109,17 +109,3 @@ sprite_frames = SubResource("SpriteFrames_ucfl7")
 animation = &"Idle"
 centered = false
 offset = Vector2(-108.521, -180)
-
-[node name="EdgeJump" type="Timer" parent="CharacterBody2D"]
-wait_time = 0.07
-one_shot = true
-
-[node name="HoldJump" type="Timer" parent="CharacterBody2D"]
-process_callback = 0
-wait_time = 0.15
-one_shot = true
-
-[node name="BufferingJump" type="Timer" parent="CharacterBody2D"]
-process_callback = 0
-wait_time = 0.2
-one_shot = true

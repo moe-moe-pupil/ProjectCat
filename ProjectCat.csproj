@@ -29,4 +29,7 @@
   <ItemGroup>
     <None Include=".editorconfig" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="RDKitTools\RDKitTools.csproj" />
+  </ItemGroup>
 </Project>

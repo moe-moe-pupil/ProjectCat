@@ -10,11 +10,15 @@ namespace RDKitTools.Utils
 {
     public interface ITimerAction
     {
-        public float StartTime { get; set; }
+        public double StartTime { get; set; }
 
-        public float CurrentTime { get; set; }
+        public double CurrentTime { get; set; }
 
         public string Name { get; set; }
+
+        public bool Active { get; set; }
+
+        public bool DefaultActive { get; set; }
     }
 
     /// <summary lang='Zh-CN'>
@@ -22,20 +26,42 @@ namespace RDKitTools.Utils
     /// </summary>
     public class TimerAction : ITimerAction
     {
-        public TimerAction(float startTime, string name)
+        public TimerAction()
         {
-            this.StartTime = startTime;
-            this.CurrentTime = startTime;
-            this.Name = name;
         }
 
         /// <summary lang='Zh-CN'>
         /// Gets or sets 生成时间.
         /// </summary>
-        public float StartTime { get; set; }
+        public double StartTime { get; set; }
 
-        public float CurrentTime { get; set; }
+        public double CurrentTime { get; set; }
 
         public string Name { get; set; }
+
+        public bool Active { get; set; }
+
+        public bool DefaultActive { get; set; }
+
+        public void Reset()
+        {
+            this.CurrentTime = this.StartTime;
+            this.Active = this.DefaultActive;
+        }
+
+        public void Start()
+        {
+            this.Active = true;
+        }
+
+        public void Stop()
+        {
+            this.Active = false;
+        }
+
+        public void Toggle()
+        {
+            this.Active = !this.Active;
+        }
     }
 }
