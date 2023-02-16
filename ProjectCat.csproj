@@ -13,6 +13,7 @@
     <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectCapability Include="package\offline\" />
     <PackageReference Include="Firebelley.GodotUtilities" Version="3.0.2" />
     <PackageReference Include="NakamaClient" Version="3.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

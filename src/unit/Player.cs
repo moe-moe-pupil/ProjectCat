@@ -25,10 +25,6 @@ public partial class Player : Unit
     public override void _Ready()
     {
         this.WireNodes();
-        //if (this.Name == this.Global.Session.Username)
-        //{
-        //    this._camera = this.GetNode<Camera2D>("Camera2D");
-        //}
     }
 
     public override void _PhysicsProcess(double delta)

@@ -6,12 +6,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace RDKitTools.Utils
 {
     /// <summary lang='Zh-CN'>
@@ -25,7 +19,7 @@ namespace RDKitTools.Utils
 
         public void AddAction(float startTime, string name)
         {
-            s_actions.Add(new T { StartTime = startTime, Name = name });
+            s_actions.Add(new T { StartTime = startTime, CurrentTime = startTime, Name = name });
         }
 
         public void RemoveAction(string actionName)

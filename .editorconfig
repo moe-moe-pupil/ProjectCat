@@ -53,6 +53,9 @@ dotnet_diagnostic.SA1600.severity = suggestion
 dotnet_diagnostic.SA1311.severity = suggestion
 dotnet_diagnostic.SA1308.severity = suggestion
 
+# SA1649: File name should match first type name
+dotnet_diagnostic.SA1649.severity = suggestion
+
 [*.{cs,vb}]
 #### Naming styles ####
 

@@ -1,8 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------
+// <copyright file="TimerAction.cs" company="ProjectCat Technologies and contributors.">
+// 此源代码的使用受 GNU AFFERO GENERAL PUBLIC LICENSE version 3 许可证的约束, 可以在以下链接找到该许可证.
+// Use of this source code is governed by the GNU AGPLv3 license that can be found through the following link.
+// https://github.com/moe-moe-pupil/ProjectCat/blob/main/LICENSE
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------
 
 namespace RDKitTools.Utils
 {
@@ -28,14 +30,12 @@ namespace RDKitTools.Utils
         }
 
         /// <summary lang='Zh-CN'>
-        /// 生成时间.
+        /// Gets or sets 生成时间.
         /// </summary>
-        public float StartTime { get ; set; }
+        public float StartTime { get; set; }
 
-        public float CurrentTime { get ; set; }
+        public float CurrentTime { get; set; }
 
         public string Name { get; set; }
-
-
     }
 }
