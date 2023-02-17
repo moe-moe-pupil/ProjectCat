@@ -18,7 +18,8 @@ public partial class Player : Unit
 	[Node]
 	private AnimatedSprite2D _animatedSprite;
 	private bool _isJump = false;
-	private Camera2D _camera;
+    private bool _isHoldJump = false;
+    private Camera2D _camera;
 	[Node]
 	private Timer _edgeJump, _holdJump, _bufferingJump;
 
@@ -52,6 +53,7 @@ public partial class Player : Unit
 			{
 				this._bufferingJump.Start(timeSec: -1);
 				this._bufferingJump.Paused = true;
+				_isHoldJump= false;
 			}
 
 			if (this.IsOnFloor())
@@ -76,11 +78,12 @@ public partial class Player : Unit
 				this._bufferingJump.Paused = false;
 			}
 
-			if (Input.IsActionPressed("ui_accept") && this.IsOnFloor() && !this._bufferingJump.IsStopped())
+			if (Input.IsActionPressed("ui_accept") && this.IsOnFloor() && !this._bufferingJump.IsStopped() && !_isHoldJump)
 			{
 				this._isJump = true;
 				this._holdJump.Start(timeSec: -1);
 				this._holdJump.Paused = false;
+				_isHoldJump= true;
 			}
 
 			// 删除IsOnFloor()
