@@ -21,6 +21,7 @@ public partial class Player : Unit
     private bool _isJump = false;
     private bool _isHoldJump = false;
     private Camera2D _camera;
+    public bool CouldTrans = false;
     [Node]
     private Timer _edgeJump, _holdJump, _bufferingJump;
     [Export]
@@ -31,9 +32,13 @@ public partial class Player : Unit
         this.WireNodes();
     }
 
+    public async void OnEnter()
+    {
+        GD.Print("OK");
+    }
+
     public override void _PhysicsProcess(double delta)
     {
-        bool droped = false;
         var collision = this.MoveAndCollide(this.Velocity * new Vector2((float)delta, (float)delta) * _power, true, 0.08f, true);
         Vector2 velocity = this.Velocity;
         if (this.IsOnFloor() && !Input.IsActionPressed("ui_accept"))
@@ -77,6 +82,11 @@ public partial class Player : Unit
             this._bufferingJump.Paused = false;
         }
 
+        if (Input.IsActionJustPressed("restart") && !this.IsOnFloor() && this._edgeJump.IsStopped())
+        {
+            this.GetTree().ReloadCurrentScene();
+        }
+
         if (Input.IsActionPressed("ui_accept") && this.IsOnFloor() && !this._bufferingJump.IsStopped() && !_isHoldJump)
         {
             this._isJump = true;
@@ -89,7 +99,6 @@ public partial class Player : Unit
         if (Input.IsActionPressed("ui_accept") && !this._holdJump.IsStopped() && this._isJump)
         {
             velocity.Y -= 14 * this.JumpVelocity;
-
         }
 
         Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
@@ -142,7 +151,6 @@ public partial class Player : Unit
                     TileMap terrain = (TileMap)collision.GetCollider();
                     Vector2I cell = terrain.LocalToMap(collision.GetPosition() - collision.GetNormal());
                     terrain.SetCell(0, cell, 0);
-                    droped = true;
                     velocity.Y += this.Gravity * (float)delta * 130;
                 }
             }
