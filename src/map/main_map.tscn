@@ -86,7 +86,7 @@ layer_0/tile_data = PackedInt32Array(1245174, 65536, 0, 1310710, 65536, 0, 13762
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 position = Vector2(1820, -3411)
 script = ExtResource("2_u34b4")
-_power = 1.5
+_power = 5.0
 
 [node name="Player" type="Sprite2D" parent="CharacterBody2D"]
 visible = false

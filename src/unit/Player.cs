@@ -62,15 +62,7 @@ public partial class Player : Unit
         else
         {
             this._edgeJump.Paused = false;
-
-            if (droped)
-            {
-                velocity.Y -= this.Gravity / (_power * 100);
-            }
-            else
-            {
-                velocity.Y += this.Gravity * (float)delta * 130;
-            }
+            velocity.Y += this.Gravity * (float)delta * 130;
         }
 
         // 处理边缘跳跃和长按跳跃 成功触发跳跃
@@ -145,12 +137,13 @@ public partial class Player : Unit
             if (((Node)collision.GetCollider()).Name == "Terrian")
             {
                 float dirVec = collision.GetNormal().Dot(new Vector2(0, -1));
-                if (dirVec > 0.8f && velocity.Y > 10)
+                if (dirVec > 0.8f && velocity.Y > 500)
                 {
                     TileMap terrain = (TileMap)collision.GetCollider();
                     Vector2I cell = terrain.LocalToMap(collision.GetPosition() - collision.GetNormal());
                     terrain.SetCell(0, cell, 0);
                     droped = true;
+                    velocity.Y += this.Gravity * (float)delta * 130;
                 }
             }
         }
