@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cudjqjev2cstg"]
+[gd_scene load_steps=15 format=3 uid="uid://cudjqjev2cstg"]
 
 [ext_resource type="Texture2D" uid="uid://t44shlvigu8r" path="res://assets/png/demo color.png" id="1_5rj4x"]
 [ext_resource type="Script" path="res://src/unit/Player.cs" id="2_u34b4"]
@@ -35,10 +35,6 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_v8qpd")
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6gk4k"]
-radius = 23.0
-height = 92.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ucfl7"]
 animations = [{
@@ -97,11 +93,6 @@ visible = false
 position = Vector2(518, 322)
 texture = ExtResource("3_qj656")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(526, 323)
-shape = SubResource("CapsuleShape2D_6gk4k")
-one_way_collision = true
-
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 position = Vector2(525, 267)
 
@@ -126,3 +117,8 @@ one_shot = true
 process_callback = 0
 wait_time = 0.2
 one_shot = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
+position = Vector2(459, 292.293)
+scale = Vector2(1, 1.19808)
+polygon = PackedVector2Array(59, 38.5271, 47, 61.8499, 52, 68.1985, 82, 68.1985, 88, 60.8359, 73, 39.5413, 88, 14.1902, 65, -12.1746, 45, 14.1902)
