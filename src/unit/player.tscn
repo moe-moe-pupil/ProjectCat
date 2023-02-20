@@ -69,4 +69,5 @@ one_shot = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-14, 0)
-polygon = PackedVector2Array(-2.5, -12.5, -4.5, -44.5, 4.5, -51, 33.5, -51.5, 41, -45.5, 39, -13, 40, -2.5, 39, 25, 37.5, 53.5, -3, 53.5, -1.5, 25, -4, -3)
+
+polygon = PackedVector2Array(-2.5, -12.5, -4.5, -44.5, 4.5, -51, 33.5, -51.5, 41, -45.5, 39, -13, 40, -2.5, 39, 25, 37.5, 53.5, -0.5, 53.5, -1.5, 25, -4, -3)
