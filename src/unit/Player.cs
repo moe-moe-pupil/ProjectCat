@@ -32,7 +32,7 @@ public partial class Player : Unit
         this.WireNodes();
     }
 
-    public async void OnEnter(Node node)
+    public async void OnEnter(Node2D node)
     {
         GD.Print("OK");
     }
