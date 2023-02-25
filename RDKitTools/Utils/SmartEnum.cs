@@ -23,7 +23,7 @@ namespace RDKitTools.Utils
         /// </summary>
         /// <param name="value">枚举值.</param>
         /// <param name="name">枚举名称.</param>
-        protected SmartEnum(int value, string name) => (this.Value, this.Name) = (value, name);
+        protected SmartEnum(int value, string name) => (Value, Name) = (value, name);
 
         /// <summary>
         /// Gets enum's value.
@@ -71,8 +71,8 @@ namespace RDKitTools.Utils
                 return false;
             }
 
-            return this.GetType() == other.GetType() &&
-                this.Value == other.Value;
+            return GetType() == other.GetType() &&
+                Value == other.Value;
         }
 
         /// <summary lang="Zh-CN">
@@ -83,7 +83,7 @@ namespace RDKitTools.Utils
         public override bool Equals(object? obj)
         {
             return obj is SmartEnum<TEnum> other &&
-                this.Equals(other);
+                Equals(other);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace RDKitTools.Utils
         /// <returns>value's hash code.</returns>
         public override int GetHashCode()
         {
-            return this.Value.GetHashCode();
+            return Value.GetHashCode();
         }
 
         /// <summary lang="Zh-CN">
@@ -101,7 +101,7 @@ namespace RDKitTools.Utils
         /// <returns>效果名称.</returns>
         public override string ToString()
         {
-            return this.Name;
+            return Name;
         }
 
         private static Dictionary<int, TEnum> CreateEnumerations()

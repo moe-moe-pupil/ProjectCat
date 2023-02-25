@@ -39,106 +39,106 @@ public partial class Player : Unit
 
     public override void _PhysicsProcess(double delta)
     {
-        var collision = this.MoveAndCollide(this.Velocity * new Vector2((float)delta, (float)delta) * _power, true, 0.08f, true);
-        Vector2 velocity = this.Velocity;
-        if (this.IsOnFloor() && !Input.IsActionPressed("ui_accept"))
+        var collision = MoveAndCollide(Velocity * new Vector2((float)delta, (float)delta) * _power, true, 0.08f, true);
+        Vector2 velocity = Velocity;
+        if (IsOnFloor() && !Input.IsActionPressed("ui_accept"))
         {
-            this._edgeJump.Start(timeSec: -1);
-            this._edgeJump.Paused = true;
+            _edgeJump.Start(timeSec: -1);
+            _edgeJump.Paused = true;
 
-            this._holdJump.Start(timeSec: -1);
-            this._holdJump.Paused = true;
+            _holdJump.Start(timeSec: -1);
+            _holdJump.Paused = true;
 
-            this._bufferingJump.Start(timeSec: -1);
-            this._bufferingJump.Paused = true;
+            _bufferingJump.Start(timeSec: -1);
+            _bufferingJump.Paused = true;
         }
 
         if (Input.IsActionJustReleased("ui_accept"))
         {
-            this._bufferingJump.Start(timeSec: -1);
-            this._bufferingJump.Paused = true;
-            this._isHoldJump = false;
+            _bufferingJump.Start(timeSec: -1);
+            _bufferingJump.Paused = true;
+            _isHoldJump = false;
         }
 
-        if (this.IsOnFloor())
+        if (IsOnFloor())
         {
-            this._isJump = false;
+            _isJump = false;
         }
         else
         {
-            this._edgeJump.Paused = false;
-            velocity.Y += this.Gravity * (float)delta * 130;
+            _edgeJump.Paused = false;
+            velocity.Y += Gravity * (float)delta * 130;
         }
 
         // 处理边缘跳跃和长按跳跃 成功触发跳跃
-        if (Input.IsActionJustPressed("ui_accept") && (this.IsOnFloor() || !this._edgeJump.IsStopped()))
+        if (Input.IsActionJustPressed("ui_accept") && (IsOnFloor() || !_edgeJump.IsStopped()))
         {
-            this._holdJump.Paused = false;
-            this._isJump = true;
+            _holdJump.Paused = false;
+            _isJump = true;
         }
 
-        if (Input.IsActionJustPressed("ui_accept") && !this.IsOnFloor() && this._edgeJump.IsStopped())
+        if (Input.IsActionJustPressed("ui_accept") && !IsOnFloor() && _edgeJump.IsStopped())
         {
-            this._bufferingJump.Paused = false;
+            _bufferingJump.Paused = false;
         }
 
-        if (Input.IsActionJustPressed("restart") && !this.IsOnFloor() && this._edgeJump.IsStopped())
+        if (Input.IsActionJustPressed("restart") && !IsOnFloor() && _edgeJump.IsStopped())
         {
-            this.GetTree().ReloadCurrentScene();
+            GetTree().ReloadCurrentScene();
         }
 
-        if (Input.IsActionPressed("ui_accept") && this.IsOnFloor() && !this._bufferingJump.IsStopped() && !_isHoldJump)
+        if (Input.IsActionPressed("ui_accept") && IsOnFloor() && !_bufferingJump.IsStopped() && !_isHoldJump)
         {
-            this._isJump = true;
-            this._holdJump.Start(timeSec: -1);
-            this._holdJump.Paused = false;
-            this._isHoldJump = true;
+            _isJump = true;
+            _holdJump.Start(timeSec: -1);
+            _holdJump.Paused = false;
+            _isHoldJump = true;
         }
 
         // 删除IsOnFloor()
-        if (Input.IsActionPressed("ui_accept") && !this._holdJump.IsStopped() && this._isJump)
+        if (Input.IsActionPressed("ui_accept") && !_holdJump.IsStopped() && _isJump)
         {
-            velocity.Y -= 14 * this.JumpVelocity;
+            velocity.Y -= 14 * JumpVelocity;
         }
 
         Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 
         if (inputDir.X > 0)
         {
-            this._animatedSprite.FlipH = false;
-            this._bodyDirection = false;
+            _animatedSprite.FlipH = false;
+            _bodyDirection = false;
         }
         else if (inputDir.X < 0)
         {
-            this._animatedSprite.FlipH = true;
-            this._bodyDirection = true;
+            _animatedSprite.FlipH = true;
+            _bodyDirection = true;
         }
         else
         {
-            this._animatedSprite.FlipH = this._bodyDirection;
+            _animatedSprite.FlipH = _bodyDirection;
         }
 
         Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
         if (direction != Vector2.Zero)
         {
-            velocity.X = direction.X * this.MoveSpeed * 100;
+            velocity.X = direction.X * MoveSpeed * 100;
         }
-        else if (this.IsOnFloor())
+        else if (IsOnFloor())
         {
-            velocity.X = Mathf.MoveToward(this.Velocity.X, 0, this.MoveSpeed * 20);
+            velocity.X = Mathf.MoveToward(Velocity.X, 0, MoveSpeed * 20);
         }
         else
         {
-            velocity.X = Mathf.MoveToward(this.Velocity.X, 0, this.MoveSpeed * 10);
+            velocity.X = Mathf.MoveToward(Velocity.X, 0, MoveSpeed * 10);
         }
 
         if (velocity.X == 0)
         {
-            this._animatedSprite.Play("Idle");
+            _animatedSprite.Play("Idle");
         }
         else
         {
-            this._animatedSprite.Play("Run");
+            _animatedSprite.Play("Run");
         }
 
         if (collision != null)
@@ -151,12 +151,12 @@ public partial class Player : Unit
                     TileMap terrain = (TileMap)collision.GetCollider();
                     Vector2I cell = terrain.LocalToMap(collision.GetPosition() - collision.GetNormal());
                     terrain.SetCell(0, cell, 0);
-                    velocity.Y += this.Gravity * (float)delta * 130;
+                    velocity.Y += Gravity * (float)delta * 130;
                 }
             }
         }
 
-        this.Velocity = velocity;
-        this.MoveAndSlide();
+        Velocity = velocity;
+        MoveAndSlide();
     }
 }

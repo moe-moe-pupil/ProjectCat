@@ -24,12 +24,12 @@ public partial class GlobalScene : Node
     {
         CharacterBody2D pc = GD.Load<PackedScene>(pcAddress).Instantiate() as CharacterBody2D;
         pc.Name = name;
-        this.AddChild(pc);
+        AddChild(pc);
     }
 
     public void RemovePlayer(string name)
     {
-        CharacterBody2D pc = this.GetNode<CharacterBody2D>(name);
-        this.RemoveChild(pc);
+        CharacterBody2D pc = GetNode<CharacterBody2D>(name);
+        RemoveChild(pc);
     }
 }

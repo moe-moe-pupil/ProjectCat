@@ -118,8 +118,8 @@ namespace RDKitTools.Skill
             /// <param name="value">数值.</param>
             public void SetValues(InterpreterSign sign, double value)
             {
-                this.Sign = sign;
-                this.Value = value;
+                Sign = sign;
+                Value = value;
             }
         }
     }

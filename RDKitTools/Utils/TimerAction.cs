@@ -22,9 +22,9 @@ namespace RDKitTools.Utils
     {
         public TimerAction(float startTime, string name)
         {
-            this.StartTime = startTime;
-            this.CurrentTime = startTime;
-            this.Name = name;
+            StartTime = startTime;
+            CurrentTime = startTime;
+            Name = name;
         }
 
         /// <summary lang='Zh-CN'>

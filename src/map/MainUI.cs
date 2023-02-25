@@ -26,61 +26,61 @@ public partial class MainUI : Control
     /// <inheritdoc/>
     public override void _Ready()
     {
-        var isOK = this._uuidConfig.Load(ConfigAddress);
+        var isOK = _uuidConfig.Load(ConfigAddress);
         if (isOK != Error.Ok)
         {
-            this._uuid = System.Guid.NewGuid().ToString();
-            this._uuidConfig.SetValue("Player", "uuid", this._uuid);
-            this._uuidConfig.Save(ConfigAddress);
+            _uuid = System.Guid.NewGuid().ToString();
+            _uuidConfig.SetValue("Player", "uuid", _uuid);
+            _uuidConfig.Save(ConfigAddress);
         }
         else
         {
-            this._uuid = this._uuidConfig.GetValue("Player", "uuid").ToString();
-            LineEdit name = this.GetNode<LineEdit>("TabContainer/Login/Menu/UserName");
-            name.Text = this._uuidConfig.GetValue("Player", "name").ToString();
+            _uuid = _uuidConfig.GetValue("Player", "uuid").ToString();
+            LineEdit name = GetNode<LineEdit>("TabContainer/Login/Menu/UserName");
+            name.Text = _uuidConfig.GetValue("Player", "name").ToString();
         }
         this.WireNodes();
     }
 
     public async void _on_login_button_pressed()
     {
-        LineEdit name = this.GetNode<LineEdit>("TabContainer/Login/Menu/UserName");
+        LineEdit name = GetNode<LineEdit>("TabContainer/Login/Menu/UserName");
         try
         {
-            this._global.Session = await this._global.NakamaClient.AuthenticateDeviceAsync(this._uuid, name.Text);
-            this._global.Socket = Socket.From(this._global.NakamaClient);
-            await this._global.Socket.ConnectAsync(this._global.Session, true);
-            this._global.Socket.ReceivedMatchPresence += presenceEvent =>
+            _global.Session = await _global.NakamaClient.AuthenticateDeviceAsync(_uuid, name.Text);
+            _global.Socket = Socket.From(_global.NakamaClient);
+            await _global.Socket.ConnectAsync(_global.Session, true);
+            _global.Socket.ReceivedMatchPresence += presenceEvent =>
             {
                 foreach (var presence in presenceEvent.Leaves)
                 {
-                    this._connectedOpponents.Remove(presence);
-                    this._global.RemovePlayer(presence.Username);
+                    _connectedOpponents.Remove(presence);
+                    _global.RemovePlayer(presence.Username);
                 }
                 foreach (var presence in presenceEvent.Joins)
                 {
-                    this._connectedOpponents.Add(presence);
-                    this._global.AddPlayer(presence.Username);
+                    _connectedOpponents.Add(presence);
+                    _global.AddPlayer(presence.Username);
                 }
 
             };
             var enc = System.Text.Encoding.UTF8;
-            this._global.Socket.ReceivedMatchState += newState =>
+            _global.Socket.ReceivedMatchState += newState =>
             {
                 var content = enc.GetString(newState.State);
 
                 switch (newState.OpCode)
                 {
                     case 1:
-                        this.HandlePosAndAnim(newState.UserPresence.Username, content);
+                        HandlePosAndAnim(newState.UserPresence.Username, content);
                         break;
                     default:
                         break;
                 }
             };
-            this._peerID.Text = this._global.Session.Username;
-            this._uuidConfig.SetValue("Player", "name", this._global.Session.Username);
-            this._uuidConfig.Save(ConfigAddress);
+            _peerID.Text = _global.Session.Username;
+            _uuidConfig.SetValue("Player", "name", _global.Session.Username);
+            _uuidConfig.Save(ConfigAddress);
 
         }
         catch (Nakama.ApiResponseException ex)
@@ -90,7 +90,7 @@ public partial class MainUI : Control
     }
     public void HandlePosAndAnim(string name, string content)
     {
-        Node2D pc = this.GetNode<CharacterBody2D>(name);
+        Node2D pc = GetNode<CharacterBody2D>(name);
         var basicState = Newtonsoft.Json.JsonConvert.DeserializeObject<PlayerState.BasicState>(content);
         pc.Position = basicState.Pos;
         var sprite = pc.GetNode<AnimatedSprite3D>("Sprite");
@@ -102,15 +102,15 @@ public partial class MainUI : Control
     {
         try
         {
-            this._global.Match = await this._global.Socket.JoinMatchAsync(this._roomName.Text);
-            this._isServerText.Text = "Client";
-            this._menu.Hide();
-            await this.ToSignal(this.GetTree().CreateTimer(1), "timeout");
-            GD.Print(this._global.Match.Presences.ToString());
-            foreach (var presence in this._global.Match.Presences)
+            _global.Match = await _global.Socket.JoinMatchAsync(_roomName.Text);
+            _isServerText.Text = "Client";
+            _menu.Hide();
+            await ToSignal(GetTree().CreateTimer(1), "timeout");
+            GD.Print(_global.Match.Presences.ToString());
+            foreach (var presence in _global.Match.Presences)
             {
 
-                this._global.AddPlayer(presence.Username);
+                _global.AddPlayer(presence.Username);
             }
         }
         catch (Exception ex)
@@ -121,21 +121,21 @@ public partial class MainUI : Control
 
     public void _on_restart_pressed()
     {
-        this.GetTree().ReloadCurrentScene();
+        GetTree().ReloadCurrentScene();
     }
 
     public async void _on_host_pressed()
     {
         try
         {
-            this._global.Match = await this._global.Socket.CreateMatchAsync(this._roomName.Text);
-            this._isServerText.Text = this._global.Match.Id;
-            this._menu.Hide();
-            await this.ToSignal(this.GetTree().CreateTimer(1), "timeout");
-            GD.Print(this._global.Match.Presences);
-            foreach (var presence in this._global.Match.Presences)
+            _global.Match = await _global.Socket.CreateMatchAsync(_roomName.Text);
+            _isServerText.Text = _global.Match.Id;
+            _menu.Hide();
+            await ToSignal(GetTree().CreateTimer(1), "timeout");
+            GD.Print(_global.Match.Presences);
+            foreach (var presence in _global.Match.Presences)
             {
-                this._global.AddPlayer(presence.Username);
+                _global.AddPlayer(presence.Username);
             }
         }
         catch (Exception ex)
