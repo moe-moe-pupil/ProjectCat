@@ -52,6 +52,7 @@ layer_0/tile_data = PackedInt32Array(1179655, 65536, 0, 1245191, 65536, 0, 13107
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_j4e8u")]
 position = Vector2(3931, 8596)
 scale = Vector2(2.5, 2.5)
+_bufferingJumpTime = 2.0
 
 [node name="Label" type="Label" parent="."]
 offset_left = 2107.0
@@ -96,5 +97,3 @@ label_settings = ExtResource("3_5cqpd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(2584, 7694)
 shape = SubResource("RectangleShape2D_ucng1")
-
-[connection signal="body_entered" from="Area2D" to="CharacterBody2D" method="OnEnter"]

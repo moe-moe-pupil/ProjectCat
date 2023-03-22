@@ -15,7 +15,6 @@ using RDKitTools.Utils;
 /// </summary>
 public partial class Player : Unit
 {
-    private bool _bodyDirection = false;
     [Node]
     private AnimatedSprite2D _animatedSprite;
     private Camera2D _camera;
@@ -23,28 +22,36 @@ public partial class Player : Unit
     private double _coyoteJumpTime = 0.07, _holdJumpTime = 0.15, _bufferingJumpTime = 0.2;
     [Export]
     private float _moveSpeed = 5f;
-    private SmartTimer<TimerAction> _jumpTimer = new SmartTimer<TimerAction>();
+    private SmartTimer<TimerAction> _jumpTimers = new SmartTimer<TimerAction>();
     private bool _hasJumped = false;
 
-    public void HandleHoldJump(ref Vector2 velocity)
+    public void HandleHoldJump(ref Vector2 velocity, double delta)
     {
-        if (_hasJumped && Input.IsActionPressed("jump") && !_jumpTimer.IsActionTimeGone(nameof(_holdJumpTime)))
+        if (!_jumpTimers.IsActionTimeGone(nameof(_holdJumpTime))
+        && _jumpTimers.IsActionActive(nameof(_holdJumpTime)))
         {
-            velocity.Y -= 14 * JumpVelocity;
+            if (_hasJumped && Input.IsActionPressed("jump"))
+            {
+                velocity.Y -= 110 * JumpVelocity * (float)delta;
+            }
+        }
+        else
+        {
+            velocity.Y += Gravity * (float)delta * 130;
         }
 
         if (Input.IsActionJustReleased("jump"))
         {
-            _jumpTimer.Stop(nameof(_holdJumpTime));
+            _jumpTimers.Stop(nameof(_holdJumpTime));
         }
     }
 
     public override void _Ready()
     {
         this.WireNodes();
-        _jumpTimer.AddAction(_coyoteJumpTime, nameof(_coyoteJumpTime), true);
-        _jumpTimer.AddAction(_holdJumpTime, nameof(_holdJumpTime), false);
-        _jumpTimer.AddAction(_bufferingJumpTime, nameof(_bufferingJumpTime), true);
+        _jumpTimers.AddAction(_coyoteJumpTime, nameof(_coyoteJumpTime), true);
+        _jumpTimers.AddAction(_holdJumpTime, nameof(_holdJumpTime), true);
+        _jumpTimers.AddAction(_bufferingJumpTime, nameof(_bufferingJumpTime), false);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -52,48 +59,53 @@ public partial class Player : Unit
         Vector2 velocity = Velocity;
         if (IsOnFloor())
         {
-            _jumpTimer.ResetAllActions();
             _hasJumped = false;
-            if (Input.IsActionJustPressed("jump"))
+            _jumpTimers.ResetAction(nameof(_holdJumpTime));
+            _jumpTimers.ResetAction(nameof(_coyoteJumpTime));
+            if (Input.IsActionJustPressed("jump") || (_jumpTimers.IsActionActive(nameof(_bufferingJumpTime))
+                && !_jumpTimers.IsActionTimeGone(nameof(_bufferingJumpTime))))
             {
+                _jumpTimers.ResetAction(nameof(_bufferingJumpTime));
                 _hasJumped = true;
-                _jumpTimer.Start(nameof(_holdJumpTime));
+                _jumpTimers.Start(nameof(_holdJumpTime));
+                velocity.Y = -200 * JumpVelocity * (float)delta;
             }
         }
         else
         {
-            _jumpTimer.Update(delta, false);
-            velocity.Y += Gravity * (float)delta * 130;
-            if (Input.IsActionJustPressed("jump") && !_jumpTimer.IsActionTimeGone(nameof(_coyoteJumpTime)))
+            // only update timers after player leaving the floor.
+            _jumpTimers.Update(delta, false);
+            if (Input.IsActionJustPressed("jump"))
             {
-                _hasJumped = true;
-                _jumpTimer.Start(nameof(_holdJumpTime));
+                if (!_jumpTimers.IsActionTimeGone(nameof(_coyoteJumpTime)))
+                {
+                    _hasJumped = true;
+                    velocity.Y = -200 * JumpVelocity * (float)delta;
+                    _jumpTimers.Start(nameof(_holdJumpTime));
+                }
+                else if (!_jumpTimers.IsActionActive(nameof(_holdJumpTime)) || _jumpTimers.IsActionTimeGone(nameof(_holdJumpTime)))
+                {
+                    _jumpTimers.ResetAction(nameof(_bufferingJumpTime));
+                    _jumpTimers.Start(nameof(_bufferingJumpTime));
+                }
             }
         }
 
-        HandleHoldJump(ref velocity);
+        HandleHoldJump(ref velocity, delta);
 
         Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 
-        if (inputDir.X > 0)
+        if (inputDir != Vector2.Zero)
         {
-            _animatedSprite.FlipH = false;
-            _bodyDirection = false;
-        }
-        else if (inputDir.X < 0)
-        {
-            _animatedSprite.FlipH = true;
-            _bodyDirection = true;
-        }
-        else
-        {
-            _animatedSprite.FlipH = _bodyDirection;
-        }
-
-        Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-        if (direction != Vector2.Zero)
-        {
-            velocity.X = direction.X * _moveSpeed * 100;
+            velocity.X = inputDir.X * _moveSpeed * 100;
+            if (inputDir.X > 0)
+            {
+                _animatedSprite.FlipH = false;
+            }
+            else if (inputDir.X < 0)
+            {
+                _animatedSprite.FlipH = true;
+            }
         }
         else if (IsOnFloor())
         {
@@ -103,6 +115,7 @@ public partial class Player : Unit
         {
             velocity.X = Mathf.MoveToward(Velocity.X, 0, _moveSpeed * 10);
         }
+
 
         if (velocity.X == 0)
         {

@@ -7,7 +7,7 @@ public partial class Unit : CharacterBody2D
 {
     public RDKitTools.Unit.Unit Status { get; private set; }
 
-    public float JumpVelocity { get; private set; } = 5;
+    public float JumpVelocity { get; private set; } = 30;
 
     public float Gravity { get; private set; } = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
@@ -33,7 +33,7 @@ public partial class Unit : CharacterBody2D
                 velocity.Y = JumpVelocity;
             }
 
-            Velocity = velocity;            
+            Velocity = velocity;
             MoveAndSlide();
         }
     }
