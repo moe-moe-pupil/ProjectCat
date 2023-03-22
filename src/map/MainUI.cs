@@ -1,9 +1,17 @@
-using Godot;
+// --------------------------------------------------------------------------------------------------------------
+// <copyright file="MainUI.cs" company="ProjectCat Technologies and contributors.">
+// 此源代码的使用受 GNU AFFERO GENERAL PUBLIC LICENSE version 3 许可证的约束, 可以在以下链接找到该许可证.
+// Use of this source code is governed by the GNU AGPLv3 license that can be found through the following link.
+// https://github.com/moe-moe-pupil/ProjectCat/blob/main/LICENSE
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------
+
 using System;
-using Nakama;
 using System.Collections.Generic;
-using Newtonsoft;
+using Godot;
 using GodotUtilities;
+using Nakama;
+using PlayerStates;
 
 public partial class MainUI : Control
 {
@@ -88,10 +96,11 @@ public partial class MainUI : Control
             GD.Print(ex);
         }
     }
+
     public void HandlePosAndAnim(string name, string content)
     {
         Node2D pc = GetNode<CharacterBody2D>(name);
-        var basicState = Newtonsoft.Json.JsonConvert.DeserializeObject<PlayerState.BasicState>(content);
+        var basicState = Newtonsoft.Json.JsonConvert.DeserializeObject<SPlayerState>(content);
         pc.Position = basicState.Pos;
         var sprite = pc.GetNode<AnimatedSprite3D>("Sprite");
         sprite.Animation = basicState.Anim;

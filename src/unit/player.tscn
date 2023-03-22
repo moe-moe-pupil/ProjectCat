@@ -44,7 +44,6 @@ position = Vector2(2888, 4544)
 scale = Vector2(2, 2)
 floor_max_angle = 0.0
 script = ExtResource("1_hu8ke")
-_power = 4.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)

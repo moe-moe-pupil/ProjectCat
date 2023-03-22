@@ -52,7 +52,6 @@ layer_0/tile_data = PackedInt32Array(1179655, 65536, 0, 1245191, 65536, 0, 13107
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_j4e8u")]
 position = Vector2(3931, 8596)
 scale = Vector2(2.5, 2.5)
-_power = 5.0
 
 [node name="Label" type="Label" parent="."]
 offset_left = 2107.0

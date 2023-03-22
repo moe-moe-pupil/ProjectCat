@@ -13,87 +13,107 @@ using RDKitTools.Utils;
 /// <summary lang='zh-CN'>
 ///     玩家单位.
 /// </summary>
-public partial class Player : Unit {
+public partial class Player : Unit
+{
     private bool _bodyDirection = false;
     [Node]
     private AnimatedSprite2D _animatedSprite;
     private Camera2D _camera;
     [Export]
     private double _coyoteJumpTime = 0.07, _holdJumpTime = 0.15, _bufferingJumpTime = 0.2;
+    [Export]
+    private float _moveSpeed = 5f;
     private SmartTimer<TimerAction> _jumpTimer = new SmartTimer<TimerAction>();
     private bool _hasJumped = false;
 
-    public void HandleHoldJump(ref Vector2 velocity) {
-        if (this._hasJumped && Input.IsActionPressed("jump") && !this._jumpTimer.IsActionTimeGone(nameof(this._holdJumpTime))) {
-            velocity.Y -= 14 * this.JumpVelocity;
+    public void HandleHoldJump(ref Vector2 velocity)
+    {
+        if (_hasJumped && Input.IsActionPressed("jump") && !_jumpTimer.IsActionTimeGone(nameof(_holdJumpTime)))
+        {
+            velocity.Y -= 14 * JumpVelocity;
         }
 
-        if (Input.IsActionJustReleased("jump")) {
-            this._jumpTimer.Stop(nameof(this._holdJumpTime));
+        if (Input.IsActionJustReleased("jump"))
+        {
+            _jumpTimer.Stop(nameof(_holdJumpTime));
         }
     }
 
-    public override void _Ready() {
+    public override void _Ready()
+    {
         this.WireNodes();
-        this._jumpTimer.AddAction(this._coyoteJumpTime, nameof(this._coyoteJumpTime), true);
-        this._jumpTimer.AddAction(this._holdJumpTime, nameof(this._holdJumpTime), false);
-        this._jumpTimer.AddAction(this._bufferingJumpTime, nameof(this._bufferingJumpTime), true);
+        _jumpTimer.AddAction(_coyoteJumpTime, nameof(_coyoteJumpTime), true);
+        _jumpTimer.AddAction(_holdJumpTime, nameof(_holdJumpTime), false);
+        _jumpTimer.AddAction(_bufferingJumpTime, nameof(_bufferingJumpTime), true);
     }
 
-    public override void _PhysicsProcess(double delta) {
-        Vector2 velocity = this.Velocity;
-        if (this.IsOnFloor()) {
-            this._jumpTimer.ResetAllActions();
-            this._hasJumped = false;
-            if (Input.IsActionJustPressed("jump")) {
-                this._hasJumped = true;
-                this._jumpTimer.Start(nameof(this._holdJumpTime));
+    public override void _PhysicsProcess(double delta)
+    {
+        Vector2 velocity = Velocity;
+        if (IsOnFloor())
+        {
+            _jumpTimer.ResetAllActions();
+            _hasJumped = false;
+            if (Input.IsActionJustPressed("jump"))
+            {
+                _hasJumped = true;
+                _jumpTimer.Start(nameof(_holdJumpTime));
             }
         }
-        else {
-            this._jumpTimer.Update(delta, false);
-            velocity.Y += this.Gravity * (float)delta * 130;
-            if (Input.IsActionJustPressed("jump") && !this._jumpTimer.IsActionTimeGone(nameof(this._coyoteJumpTime))) {
-                this._hasJumped = true;
-                this._jumpTimer.Start(nameof(this._holdJumpTime));
+        else
+        {
+            _jumpTimer.Update(delta, false);
+            velocity.Y += Gravity * (float)delta * 130;
+            if (Input.IsActionJustPressed("jump") && !_jumpTimer.IsActionTimeGone(nameof(_coyoteJumpTime)))
+            {
+                _hasJumped = true;
+                _jumpTimer.Start(nameof(_holdJumpTime));
             }
         }
 
-        this.HandleHoldJump(ref velocity);
+        HandleHoldJump(ref velocity);
 
         Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 
-        if (inputDir.X > 0) {
-            this._animatedSprite.FlipH = false;
-            this._bodyDirection = false;
+        if (inputDir.X > 0)
+        {
+            _animatedSprite.FlipH = false;
+            _bodyDirection = false;
         }
-        else if (inputDir.X < 0) {
-            this._animatedSprite.FlipH = true;
-            this._bodyDirection = true;
+        else if (inputDir.X < 0)
+        {
+            _animatedSprite.FlipH = true;
+            _bodyDirection = true;
         }
-        else {
-            this._animatedSprite.FlipH = this._bodyDirection;
+        else
+        {
+            _animatedSprite.FlipH = _bodyDirection;
         }
 
         Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-        if (direction != Vector2.Zero) {
-            velocity.X = direction.X * this.MoveSpeed * 100;
+        if (direction != Vector2.Zero)
+        {
+            velocity.X = direction.X * _moveSpeed * 100;
         }
-        else if (this.IsOnFloor()) {
-            velocity.X = Mathf.MoveToward(this.Velocity.X, 0, this.MoveSpeed * 20);
+        else if (IsOnFloor())
+        {
+            velocity.X = Mathf.MoveToward(Velocity.X, 0, _moveSpeed * 20);
         }
-        else {
-            velocity.X = Mathf.MoveToward(this.Velocity.X, 0, this.MoveSpeed * 10);
-        }
-
-        if (velocity.X == 0) {
-            this._animatedSprite.Play("Idle");
-        }
-        else {
-            this._animatedSprite.Play("Run");
+        else
+        {
+            velocity.X = Mathf.MoveToward(Velocity.X, 0, _moveSpeed * 10);
         }
 
-        this.Velocity = velocity;
-        this.MoveAndSlide();
+        if (velocity.X == 0)
+        {
+            _animatedSprite.Play("Idle");
+        }
+        else
+        {
+            _animatedSprite.Play("Run");
+        }
+
+        Velocity = velocity;
+        MoveAndSlide();
     }
 }
