@@ -11,42 +11,42 @@ using GodotUtilities;
 public partial class Unit : CharacterBody2D
 {
     /// <summary lang='zh-CN'>
-    ///     基础生命值
+    ///     基础生命值.
     /// </summary>
     public double RedHeart;
 
     /// <summary lang='zh-CN'>
-    ///     额外生命值
+    ///     额外生命值.
     /// </summary>
     public double SoulHeart;
 
     /// <summary lang='zh-CN'>
-    ///     物理抗性
+    ///     物理抗性.
     /// </summary>
     public int PhysicalDefense;
 
     /// <summary lang='zh-CN'>
-    ///     魔法抗性
+    ///     魔法抗性.
     /// </summary>
     public int MagicDefense;
 
     /// <summary lang='zh-CN'>
-    ///     移动速度
+    ///     移动速度.
     /// </summary>
     public int MoveSpeed = 5;
 
     /// <summary lang='zh-CN'>
-    ///     眩晕抗性
+    ///     眩晕抗性.
     /// </summary>
     public int StunResistance;
 
     /// <summary lang='zh-CN'>
-    ///     击退抗性
+    ///     击退抗性.
     /// </summary>
     public int BounceResistance;
 
     /// <summary lang='zh-CN'>
-    ///     目前装备的卡牌编号
+    ///     目前装备的卡牌编号.
     /// </summary>
     public List<int> EquipmentBar = new List<int>();
     public float JumpVelocity = 5;
