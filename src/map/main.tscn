@@ -1,122 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://c1ygkxj83uoea"]
+[gd_scene load_steps=3 format=3 uid="uid://c1ygkxj83uoea"]
 
-[ext_resource type="Script" path="res://src/map/MainUI.cs" id="1_k422s"]
+[ext_resource type="PackedScene" uid="uid://bq443knf00wxo" path="res://src/map/main_map.tscn" id="1_l2vpp"]
+[ext_resource type="PackedScene" uid="uid://dxx60nf3y3fum" path="res://src/ui/main_ui.tscn" id="1_xjy5o"]
 
 [node name="Main" type="Node2D"]
 
-[node name="MainUI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1280.0
-offset_bottom = 720.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_k422s")
+[node name="MainUI" parent="." instance=ExtResource("1_xjy5o")]
 
-[node name="TabContainer" type="TabContainer" parent="MainUI"]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -131.0
-offset_top = -159.5
-offset_right = 131.0
-offset_bottom = 159.5
-grow_horizontal = 2
-grow_vertical = 2
-tab_alignment = 1
-
-[node name="Login" type="TabBar" parent="MainUI/TabContainer"]
-layout_mode = 2
-
-[node name="Menu" type="VBoxContainer" parent="MainUI/TabContainer/Login"]
-layout_mode = 0
-anchor_right = 1.0
-offset_bottom = 136.0
-grow_horizontal = 2
-alignment = 1
-
-[node name="UserName" type="LineEdit" parent="MainUI/TabContainer/Login/Menu"]
-layout_mode = 2
-placeholder_text = "Your Name"
-alignment = 1
-
-[node name="LoginButton" type="Button" parent="MainUI/TabContainer/Login/Menu"]
-layout_mode = 2
-text = "Login"
-
-[node name="Net" type="TabBar" parent="MainUI/TabContainer"]
+[node name="MainMap" parent="." instance=ExtResource("1_l2vpp")]
 visible = false
-layout_mode = 2
-
-[node name="Menu" type="VBoxContainer" parent="MainUI/TabContainer/Net"]
-layout_mode = 0
-anchor_right = 1.0
-offset_bottom = 287.0
-grow_horizontal = 2
-alignment = 1
-
-[node name="RoomName" type="LineEdit" parent="MainUI/TabContainer/Net/Menu"]
-layout_mode = 2
-size_flags_vertical = 0
-placeholder_text = "Room Name"
-alignment = 1
-
-[node name="Host" type="Button" parent="MainUI/TabContainer/Net/Menu"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "By name"
-
-[node name="Join" type="Button" parent="MainUI/TabContainer/Net/Menu"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "By Id
-"
-
-[node name="Room" type="TabBar" parent="MainUI/TabContainer"]
-visible = false
-layout_mode = 2
-
-[node name="Menu" type="VBoxContainer" parent="MainUI/TabContainer/Room"]
-layout_mode = 0
-anchor_right = 1.0
-offset_bottom = 136.0
-grow_horizontal = 2
-alignment = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MainUI/TabContainer/Room/Menu"]
-layout_mode = 2
-text = "	You are not in a room.
-	
-	please host one or join one in
-	Net tab.
-"
-
-[node name="NetworkInfo" type="VBoxContainer" parent="MainUI"]
-layout_mode = 0
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -52.0
-offset_right = 52.0
-offset_bottom = 91.0
-grow_horizontal = 2
-
-[node name="NetworkSideDisplay" type="Label" parent="MainUI/NetworkInfo"]
-layout_mode = 2
-text = "Network Side"
-
-[node name="UniquePeerID" type="Label" parent="MainUI/NetworkInfo"]
-layout_mode = 2
-text = "not logged in"
-
-[node name="Restart" type="Button" parent="MainUI/NetworkInfo"]
-layout_mode = 2
-text = "restart"
-
-[connection signal="pressed" from="MainUI/TabContainer/Login/Menu/LoginButton" to="MainUI" method="_on_login_button_pressed"]
-[connection signal="pressed" from="MainUI/TabContainer/Net/Menu/Host" to="MainUI" method="_on_host_pressed"]
-[connection signal="pressed" from="MainUI/TabContainer/Net/Menu/Join" to="MainUI" method="_on_join_pressed"]
-[connection signal="pressed" from="MainUI/NetworkInfo/Restart" to="MainUI" method="_on_restart_pressed"]
+position = Vector2(556, 1288)

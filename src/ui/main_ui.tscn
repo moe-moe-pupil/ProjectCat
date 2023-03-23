@@ -1,0 +1,118 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxx60nf3y3fum"]
+
+[ext_resource type="Script" path="res://src/ui/MainUI.cs" id="1_vgc73"]
+
+[node name="MainUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vgc73")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -131.0
+offset_top = -159.5
+offset_right = 131.0
+offset_bottom = 159.5
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+
+[node name="Login" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+
+[node name="Menu" type="VBoxContainer" parent="TabContainer/Login"]
+layout_mode = 0
+anchor_right = 1.0
+offset_bottom = 136.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="UserName" type="LineEdit" parent="TabContainer/Login/Menu"]
+layout_mode = 2
+placeholder_text = "Your Name"
+alignment = 1
+
+[node name="LoginButton" type="Button" parent="TabContainer/Login/Menu"]
+layout_mode = 2
+text = "Login"
+
+[node name="Net" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Menu" type="VBoxContainer" parent="TabContainer/Net"]
+layout_mode = 0
+anchor_right = 1.0
+offset_bottom = 287.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="RoomName" type="LineEdit" parent="TabContainer/Net/Menu"]
+layout_mode = 2
+size_flags_vertical = 0
+placeholder_text = "Room Name"
+alignment = 1
+
+[node name="Host" type="Button" parent="TabContainer/Net/Menu"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "By name"
+
+[node name="Join" type="Button" parent="TabContainer/Net/Menu"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "By Id
+"
+
+[node name="Room" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Menu" type="VBoxContainer" parent="TabContainer/Room"]
+layout_mode = 0
+anchor_right = 1.0
+offset_bottom = 136.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Room/Menu"]
+layout_mode = 2
+text = "	You are not in a room.
+	
+	please host one or join one in
+	Net tab.
+"
+
+[node name="NetworkInfo" type="VBoxContainer" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_right = 52.0
+offset_bottom = 91.0
+grow_horizontal = 2
+
+[node name="NetworkSideDisplay" type="Label" parent="NetworkInfo"]
+layout_mode = 2
+text = "Network Side"
+
+[node name="UniquePeerID" type="Label" parent="NetworkInfo"]
+layout_mode = 2
+text = "not logged in"
+
+[node name="Restart" type="Button" parent="NetworkInfo"]
+layout_mode = 2
+text = "restart"
+
+[connection signal="pressed" from="TabContainer/Login/Menu/LoginButton" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="TabContainer/Net/Menu/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="TabContainer/Net/Menu/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="NetworkInfo/Restart" to="." method="_on_restart_pressed"]

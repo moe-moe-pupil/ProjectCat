@@ -15,7 +15,7 @@ using PlayerStates;
 
 public partial class MainUI : Control
 {
-    static readonly string ConfigAddress = "user://uuid.cfg";
+    public static readonly string ConfigAddress = "user://uuid.cfg";
     private List<IUserPresence> _connectedOpponents = new(2);
     [Node("NetworkInfo/NetworkSideDisplay")]
     private Label _isServerText;
