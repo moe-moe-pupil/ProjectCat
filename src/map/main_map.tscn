@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cudjqjev2cstg"]
+[gd_scene load_steps=8 format=3 uid="uid://cudjqjev2cstg"]
 
 [ext_resource type="Texture2D" uid="uid://t44shlvigu8r" path="res://assets/png/demo color.png" id="1_5rj4x"]
 [ext_resource type="PackedScene" uid="uid://c7w7v4jsqq4eo" path="res://src/unit/player.tscn" id="2_j4e8u"]
@@ -30,9 +30,6 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_v8qpd")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ucng1"]
-size = Vector2(2431.5, 2130)
-
 [node name="MainMap" type="Node2D"]
 
 [node name="BackGround" type="TileMap" parent="."]
@@ -51,8 +48,7 @@ layer_0/tile_data = PackedInt32Array(1179655, 65536, 0, 1245191, 65536, 0, 13107
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_j4e8u")]
 position = Vector2(3931, 8596)
-scale = Vector2(2.5, 2.5)
-_bufferingJumpTime = 2.0
+scale = Vector2(1, 1)
 
 [node name="Label" type="Label" parent="."]
 offset_left = 2107.0
@@ -91,9 +87,3 @@ as you wish. press \"+\" and \"-\";
 go back to fxxk the tree. I hope U didn't destruct the road
 which you can go back..."
 label_settings = ExtResource("3_5cqpd")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(2584, 7694)
-shape = SubResource("RectangleShape2D_ucng1")

@@ -37,7 +37,10 @@ public partial class Player : Unit
         }
         else
         {
-            velocity.Y += Gravity * (float)delta * 130;
+            if (!IsOnFloor())
+            {
+                velocity.Y += Gravity * (float)delta * 130;
+            }
         }
 
         if (Input.IsActionJustReleased("jump"))
