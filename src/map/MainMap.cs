@@ -14,7 +14,8 @@ public partial class MainMap : Node2D
         this.WireNodes();
         _global.GameBegin += () =>
         {
-            _terrian.Visible = true;
+            Visible = true;
+            GD.Print("set visible");
         };
     }
 

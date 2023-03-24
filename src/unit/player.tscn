@@ -44,6 +44,7 @@ scale = Vector2(2, 2)
 script = ExtResource("1_hu8ke")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_0xhf0")

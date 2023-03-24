@@ -39,6 +39,8 @@ alignment = 1
 layout_mode = 2
 placeholder_text = "Your Name"
 alignment = 1
+caret_blink = true
+caret_blink_interval = 0.5
 
 [node name="LoginButton" type="Button" parent="TabContainer/Login/Menu"]
 layout_mode = 2
@@ -60,6 +62,8 @@ layout_mode = 2
 size_flags_vertical = 0
 placeholder_text = "Room Name"
 alignment = 1
+caret_blink = true
+caret_blink_interval = 0.5
 
 [node name="Host" type="Button" parent="TabContainer/Net/Menu"]
 layout_mode = 2

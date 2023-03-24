@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------
 // <copyright file="MainUI.cs" company="ProjectCat Technologies and contributors.">
-// ´ËÔ´´úÂëµÄÊ¹ÓÃÊÜ GNU AFFERO GENERAL PUBLIC LICENSE version 3 Ğí¿ÉÖ¤µÄÔ¼Êø, ¿ÉÒÔÔÚÒÔÏÂÁ´½ÓÕÒµ½¸ÃĞí¿ÉÖ¤.
+// æ­¤æºä»£ç çš„ä½¿ç”¨å— GNU AFFERO GENERAL PUBLIC LICENSE version 3 è®¸å¯è¯çš„çº¦æŸ, å¯ä»¥åœ¨ä»¥ä¸‹é“¾æ¥æ‰¾åˆ°è¯¥è®¸å¯è¯.
 // Use of this source code is governed by the GNU AGPLv3 license that can be found through the following link.
 // https://github.com/moe-moe-pupil/ProjectCat/blob/main/LICENSE
 // </copyright>
@@ -111,8 +111,9 @@ public partial class MainUI : Control
         {
             _global.Match = await _global.Socket.JoinMatchAsync(_roomName.Text);
             _isServerText.Text = "Client";
-            _menu.Hide();
+            this.Hide();
             await ToSignal(GetTree().CreateTimer(1), "timeout");
+            _global.GameStart();
             GD.Print(_global.Match.Presences.ToString());
             foreach (var presence in _global.Match.Presences)
             {
@@ -137,8 +138,9 @@ public partial class MainUI : Control
         {
             _global.Match = await _global.Socket.CreateMatchAsync(_roomName.Text);
             _isServerText.Text = _global.Match.Id;
-            _menu.Hide();
+            this.Hide();
             await ToSignal(GetTree().CreateTimer(1), "timeout");
+            _global.GameStart();
             GD.Print(_global.Match.Presences);
             foreach (var presence in _global.Match.Presences)
             {

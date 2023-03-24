@@ -1,5 +1,6 @@
 using Godot;
 using Nakama;
+using System.Reflection;
 
 public partial class GlobalScene : Node
 {
@@ -19,15 +20,20 @@ public partial class GlobalScene : Node
 
     public override void _Ready()
     {
-        Socket.Connected += () =>
-        {
-            EmitSignal(nameof(GameBeginEventHandler));
-            GD.Print("Game Begin");
-        };
     }
 
     public override void _Process(double delta)
     {
+    }
+
+    public void GameStart()
+    {
+        GameBegin += () =>
+        {
+            GD.Print("Game Begin");
+        };
+        EmitSignal(SignalName.GameBegin);
+
     }
 
     public void AddPlayer(string name)
