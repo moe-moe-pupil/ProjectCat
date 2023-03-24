@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
-/// <summary>
-///   游戏中的主要单位，可以是角色、敌人，甚至是陷阱机关
-/// </summary>
 public class Card
 {
     /// <summary>
-    ///   卡牌当前的物理攻击力
+    ///   卡牌当前的物理攻击力.
     /// </summary>
     private double PhysicalAttack;
 
@@ -17,7 +14,7 @@ public class Card
     ///   卡牌当前的魔法攻击力
     /// </summary>
     private double MagicAttack;
-    
+
     /// <summary>
     ///   卡牌效果的触发间隔 n次/秒
     /// </summary>
@@ -27,7 +24,7 @@ public class Card
     ///   卡牌效果的生效范围
     /// </summary>
     private double AttackRange;
-    
+
     /// <summary>
     ///   卡牌对单位造成的位移效果的强度
     /// </summary>

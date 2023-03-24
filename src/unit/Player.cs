@@ -16,6 +16,9 @@ using RDKitTools.Utils;
 /// </summary>
 public partial class Player : Unit
 {
+    [Export]
+    public float JumpVelocity { get; private set; } = 30;
+
     [Node("/root/GlobalScene")]
     private GlobalScene _global;
     [Node]

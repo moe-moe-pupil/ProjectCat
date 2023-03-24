@@ -47,6 +47,7 @@ public partial class MainUI : Control
             _uuid = _uuidConfig.GetValue("Player", "uuid").ToString();
             _name.Text = _uuidConfig.GetValue("Player", "name").ToString();
         }
+
         _uuid = Guid.NewGuid().ToString();
     }
 
@@ -98,11 +99,15 @@ public partial class MainUI : Control
     public void HandlePosAndAnim(string name, string content)
     {
         CharacterBody2D pc = _global.GetNode<CharacterBody2D>(name);
-        var basicState = Newtonsoft.Json.JsonConvert.DeserializeObject<SBaiscState>(content);
-        pc.Position = basicState.Pos;
-        var sprite = pc.GetNode<AnimatedSprite2D>("Sprite");
-        sprite.Animation = basicState.Anim;
-        sprite.FlipH = basicState.Flip;
+        if (IsInstanceValid(pc))
+        {
+            var basicState = Newtonsoft.Json.JsonConvert.DeserializeObject<SBaiscState>(content);
+            pc.Position = basicState.Pos;
+            var sprite = pc.GetNode<AnimatedSprite2D>("Sprite");
+            sprite.Animation = basicState.Anim;
+            sprite.FlipH = basicState.Flip;
+        }
+
     }
 
     public async void _on_join_pressed()
@@ -119,7 +124,6 @@ public partial class MainUI : Control
             {
                 _global.AddPlayer(presence.Username);
             }
-
         }
         catch (Exception ex)
         {

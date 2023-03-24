@@ -1,6 +1,5 @@
 using Godot;
 using Nakama;
-using System.Reflection;
 
 public partial class GlobalScene : Node
 {

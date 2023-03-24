@@ -19,10 +19,6 @@ config/icon="res://icon.svg"
 
 GlobalScene="*res://src/map/GlobalScene.tscn"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/size/viewport_width=1280
