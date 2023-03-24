@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bq443knf00wxo"]
+[gd_scene load_steps=5 format=3 uid="uid://bq443knf00wxo"]
 
 [ext_resource type="Texture2D" uid="uid://t44shlvigu8r" path="res://assets/png/demo color.png" id="1_5rj4x"]
+[ext_resource type="Script" path="res://src/map/MainMap.cs" id="1_ipk0a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v8qpd"]
 texture = ExtResource("1_5rj4x")
@@ -19,6 +20,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_v8qpd")
 
 [node name="MainMap" type="Node2D"]
+script = ExtResource("1_ipk0a")
 
 [node name="Terrian" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_3lmvu")

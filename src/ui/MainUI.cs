@@ -29,15 +29,13 @@ public partial class MainUI : Control
     [Node("TabContainer/Net/Menu/RoomName")]
     private LineEdit _roomName;
     private string _uuid;
-    // Called when the node enters the scene tree for the first time.
 
-    /// <inheritdoc/>
     public override void _Ready()
     {
         var isOK = _uuidConfig.Load(ConfigAddress);
         if (isOK != Error.Ok)
         {
-            _uuid = System.Guid.NewGuid().ToString();
+            _uuid = Guid.NewGuid().ToString();
             _uuidConfig.SetValue("Player", "uuid", _uuid);
             _uuidConfig.Save(ConfigAddress);
         }
@@ -47,6 +45,7 @@ public partial class MainUI : Control
             LineEdit name = GetNode<LineEdit>("TabContainer/Login/Menu/UserName");
             name.Text = _uuidConfig.GetValue("Player", "name").ToString();
         }
+
         this.WireNodes();
     }
 
@@ -65,12 +64,12 @@ public partial class MainUI : Control
                     _connectedOpponents.Remove(presence);
                     _global.RemovePlayer(presence.Username);
                 }
+
                 foreach (var presence in presenceEvent.Joins)
                 {
                     _connectedOpponents.Add(presence);
                     _global.AddPlayer(presence.Username);
                 }
-
             };
             var enc = System.Text.Encoding.UTF8;
             _global.Socket.ReceivedMatchState += newState =>
@@ -89,7 +88,6 @@ public partial class MainUI : Control
             _peerID.Text = _global.Session.Username;
             _uuidConfig.SetValue("Player", "name", _global.Session.Username);
             _uuidConfig.Save(ConfigAddress);
-
         }
         catch (Nakama.ApiResponseException ex)
         {
@@ -118,9 +116,9 @@ public partial class MainUI : Control
             GD.Print(_global.Match.Presences.ToString());
             foreach (var presence in _global.Match.Presences)
             {
-
                 _global.AddPlayer(presence.Username);
             }
+
         }
         catch (Exception ex)
         {
