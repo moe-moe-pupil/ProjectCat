@@ -28,10 +28,13 @@ public partial class MainUI : Control
     private ConfigFile _uuidConfig = new();
     [Node("TabContainer/Net/Menu/RoomName")]
     private LineEdit _roomName;
+    [Node("TabContainer/Login/Menu/UserName")]
+    private LineEdit _name;
     private string _uuid;
 
     public override void _Ready()
     {
+        this.WireNodes();
         var isOK = _uuidConfig.Load(ConfigAddress);
         if (isOK != Error.Ok)
         {
@@ -42,19 +45,16 @@ public partial class MainUI : Control
         else
         {
             _uuid = _uuidConfig.GetValue("Player", "uuid").ToString();
-            LineEdit name = GetNode<LineEdit>("TabContainer/Login/Menu/UserName");
-            name.Text = _uuidConfig.GetValue("Player", "name").ToString();
+            _name.Text = _uuidConfig.GetValue("Player", "name").ToString();
         }
-
-        this.WireNodes();
+        _uuid = Guid.NewGuid().ToString();
     }
 
     public async void _on_login_button_pressed()
     {
-        LineEdit name = GetNode<LineEdit>("TabContainer/Login/Menu/UserName");
         try
         {
-            _global.Session = await _global.NakamaClient.AuthenticateDeviceAsync(_uuid, name.Text);
+            _global.Session = await _global.NakamaClient.AuthenticateDeviceAsync(_uuid, _name.Text);
             _global.Socket = Socket.From(_global.NakamaClient);
             await _global.Socket.ConnectAsync(_global.Session, true);
             _global.Socket.ReceivedMatchPresence += presenceEvent =>
@@ -97,10 +97,10 @@ public partial class MainUI : Control
 
     public void HandlePosAndAnim(string name, string content)
     {
-        Node2D pc = GetNode<CharacterBody2D>(name);
-        var basicState = Newtonsoft.Json.JsonConvert.DeserializeObject<SPlayerState>(content);
+        CharacterBody2D pc = _global.GetNode<CharacterBody2D>(name);
+        var basicState = Newtonsoft.Json.JsonConvert.DeserializeObject<SBaiscState>(content);
         pc.Position = basicState.Pos;
-        var sprite = pc.GetNode<AnimatedSprite3D>("Sprite");
+        var sprite = pc.GetNode<AnimatedSprite2D>("Sprite");
         sprite.Animation = basicState.Anim;
         sprite.FlipH = basicState.Flip;
     }

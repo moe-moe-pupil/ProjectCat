@@ -2,7 +2,7 @@
 {
     using Godot;
 
-    public struct SPlayerState
+    public struct SBaiscState
     {
         required public string Anim { get; init; }
 

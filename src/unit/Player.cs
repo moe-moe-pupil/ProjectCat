@@ -8,6 +8,7 @@
 
 using Godot;
 using GodotUtilities;
+using PlayerStates;
 using RDKitTools.Utils;
 
 /// <summary lang='zh-CN'>
@@ -15,8 +16,12 @@ using RDKitTools.Utils;
 /// </summary>
 public partial class Player : Unit
 {
+    [Node("/root/GlobalScene")]
+    private GlobalScene _global;
     [Node]
     private AnimatedSprite2D _animatedSprite;
+    [Node]
+    private Label _label;
     private Camera2D _camera;
     [Export]
     private double _coyoteJumpTime = 0.07, _holdJumpTime = 0.15, _bufferingJumpTime = 0.2;
@@ -52,6 +57,7 @@ public partial class Player : Unit
     public override void _Ready()
     {
         this.WireNodes();
+        _label.Text = Name;
         _jumpTimers.AddAction(_coyoteJumpTime, nameof(_coyoteJumpTime), true);
         _jumpTimers.AddAction(_holdJumpTime, nameof(_holdJumpTime), true);
         _jumpTimers.AddAction(_bufferingJumpTime, nameof(_bufferingJumpTime), false);
@@ -59,77 +65,86 @@ public partial class Player : Unit
 
     public override void _PhysicsProcess(double delta)
     {
-        Vector2 velocity = Velocity;
-        if (IsOnFloor())
+        if (Name == _global.Session.Username)
         {
-            _hasJumped = false;
-            _jumpTimers.ResetAction(nameof(_holdJumpTime));
-            _jumpTimers.ResetAction(nameof(_coyoteJumpTime));
-            if (Input.IsActionJustPressed("jump") || (_jumpTimers.IsActionActive(nameof(_bufferingJumpTime))
-                && !_jumpTimers.IsActionTimeGone(nameof(_bufferingJumpTime))))
+            Vector2 velocity = Velocity;
+            if (IsOnFloor())
             {
-                _jumpTimers.ResetAction(nameof(_bufferingJumpTime));
-                _hasJumped = true;
-                _jumpTimers.Start(nameof(_holdJumpTime));
-                velocity.Y = -200 * JumpVelocity * (float)delta;
-            }
-        }
-        else
-        {
-            // only update timers after player leaving the floor.
-            _jumpTimers.Update(delta, false);
-            if (Input.IsActionJustPressed("jump"))
-            {
-                if (!_jumpTimers.IsActionTimeGone(nameof(_coyoteJumpTime)))
-                {
-                    _hasJumped = true;
-                    velocity.Y = -200 * JumpVelocity * (float)delta;
-                    _jumpTimers.Start(nameof(_holdJumpTime));
-                }
-                else if (!_jumpTimers.IsActionActive(nameof(_holdJumpTime)) || _jumpTimers.IsActionTimeGone(nameof(_holdJumpTime)))
+                _hasJumped = false;
+                _jumpTimers.ResetAction(nameof(_holdJumpTime));
+                _jumpTimers.ResetAction(nameof(_coyoteJumpTime));
+                if (Input.IsActionJustPressed("jump") || (_jumpTimers.IsActionActive(nameof(_bufferingJumpTime))
+                    && !_jumpTimers.IsActionTimeGone(nameof(_bufferingJumpTime))))
                 {
                     _jumpTimers.ResetAction(nameof(_bufferingJumpTime));
-                    _jumpTimers.Start(nameof(_bufferingJumpTime));
+                    _hasJumped = true;
+                    _jumpTimers.Start(nameof(_holdJumpTime));
+                    velocity.Y = -200 * JumpVelocity * (float)delta;
                 }
             }
-        }
-
-        HandleHoldJump(ref velocity, delta);
-
-        Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-
-        if (inputDir != Vector2.Zero)
-        {
-            velocity.X = inputDir.X * _moveSpeed * 100;
-            if (inputDir.X > 0)
+            else
             {
-                _animatedSprite.FlipH = false;
+                // only update timers after player leaving the floor.
+                _jumpTimers.Update(delta, false);
+                if (Input.IsActionJustPressed("jump"))
+                {
+                    if (!_jumpTimers.IsActionTimeGone(nameof(_coyoteJumpTime)))
+                    {
+                        _hasJumped = true;
+                        velocity.Y = -200 * JumpVelocity * (float)delta;
+                        _jumpTimers.Start(nameof(_holdJumpTime));
+                    }
+                    else if (!_jumpTimers.IsActionActive(nameof(_holdJumpTime)) || _jumpTimers.IsActionTimeGone(nameof(_holdJumpTime)))
+                    {
+                        _jumpTimers.ResetAction(nameof(_bufferingJumpTime));
+                        _jumpTimers.Start(nameof(_bufferingJumpTime));
+                    }
+                }
             }
-            else if (inputDir.X < 0)
+
+            HandleHoldJump(ref velocity, delta);
+
+            Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+
+            if (inputDir != Vector2.Zero)
             {
-                _animatedSprite.FlipH = true;
+                velocity.X = inputDir.X * _moveSpeed * 100;
+                if (inputDir.X > 0)
+                {
+                    _animatedSprite.FlipH = false;
+                }
+                else if (inputDir.X < 0)
+                {
+                    _animatedSprite.FlipH = true;
+                }
             }
-        }
-        else if (IsOnFloor())
-        {
-            velocity.X = Mathf.MoveToward(Velocity.X, 0, _moveSpeed * 20);
-        }
-        else
-        {
-            velocity.X = Mathf.MoveToward(Velocity.X, 0, _moveSpeed * 10);
-        }
+            else if (IsOnFloor())
+            {
+                velocity.X = Mathf.MoveToward(Velocity.X, 0, _moveSpeed * 20);
+            }
+            else
+            {
+                velocity.X = Mathf.MoveToward(Velocity.X, 0, _moveSpeed * 10);
+            }
 
+            if (velocity.X == 0)
+            {
+                _animatedSprite.Play("Idle");
+            }
+            else
+            {
+                _animatedSprite.Play("Run");
+            }
 
-        if (velocity.X == 0)
-        {
-            _animatedSprite.Play("Idle");
+            Velocity = velocity;
+            MoveAndSlide();
+            var basicState = new SBaiscState
+            {
+                Anim = _animatedSprite.Animation,
+                Pos = Position,
+                Flip = _animatedSprite.FlipH,
+            };
+            _global.Socket.SendMatchStateAsync(_global.Match.Id, 1, Newtonsoft.Json.JsonConvert.SerializeObject(basicState));
         }
-        else
-        {
-            _animatedSprite.Play("Run");
-        }
-
-        Velocity = velocity;
-        MoveAndSlide();
     }
 }
