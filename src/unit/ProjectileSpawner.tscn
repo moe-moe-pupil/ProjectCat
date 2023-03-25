@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://g00b6fvud46q"]
+
+[ext_resource type="Script" path="res://src/unit/ProjectileSpawner.cs" id="1_660f5"]
+
+[node name="ProjectileSpawner" type="Node2D"]
+script = ExtResource("1_660f5")
+
+[node name="SharedArea" type="Area2D" parent="."]

@@ -8,13 +8,21 @@
 
 using Godot;
 
-public partial class Projectile : Node2D
+public class Projectile
 {
-    public override void _Ready()
-    {
-    }
+    public Rid ShapeId { get; set; }
 
-    public override void _PhysicsProcess(double delta)
-    {
-    }
+    public Vector2 VectorMove { get; set; }
+
+    public Vector2 CurrentPos { get; set; }
+
+    public double Lifetime { get; set; } = 0;
+
+    public double AnimationLifetime { get; set; }
+
+    public int ImageOffset { get; set; } = 0;
+
+    public string Layer { get; set; } = "front";
+
+    public double Speed { get; set; }
 }

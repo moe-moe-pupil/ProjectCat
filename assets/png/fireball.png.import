@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://c8gx21cx71vco"
+path="res://.godot/imported/fireball.png-2959d503071f09ac9538ebe6b2313a16.image"
+
+[deps]
+
+source_file="res://assets/png/fireball.png"
+dest_files=["res://.godot/imported/fireball.png-2959d503071f09ac9538ebe6b2313a16.image"]
+
+[params]
+

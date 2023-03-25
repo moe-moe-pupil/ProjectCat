@@ -48,7 +48,6 @@ public partial class MainUI : Control
             _name.Text = _uuidConfig.GetValue("Player", "name").ToString();
         }
 
-        _uuid = Guid.NewGuid().ToString();
     }
 
     public async void _on_login_button_pressed()

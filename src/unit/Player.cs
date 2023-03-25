@@ -25,7 +25,8 @@ public partial class Player : Unit
     private AnimatedSprite2D _animatedSprite;
     [Node]
     private Label _label;
-    private Camera2D _camera;
+    [Node("/root/GlobalScene/ProjectileSpawner")]
+    private ProjectileSpawner _projectileSpawner;
     [Export]
     private double _coyoteJumpTime = 0.07, _holdJumpTime = 0.15, _bufferingJumpTime = 0.2;
     [Export]
@@ -147,6 +148,12 @@ public partial class Player : Unit
                 Pos = Position,
                 Flip = _animatedSprite.FlipH,
             };
+
+            if (Input.IsActionPressed("normalAttack"))
+            {
+                _projectileSpawner.SpawnBullet(GetGlobalMousePosition() - GlobalPosition, 10, GlobalPosition);
+            }
+
             _global.Socket.SendMatchStateAsync(_global.Match.Id, 1, Newtonsoft.Json.JsonConvert.SerializeObject(basicState));
         }
     }
