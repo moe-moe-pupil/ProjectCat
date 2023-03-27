@@ -17,7 +17,7 @@ public partial class ProjectileSpawner : Node2D
 
     public List<Projectile> Projectiles { get; set; } = new();
 
-    public Rect2 Boundary { get; set; } = new(Vector2.Zero, BoundarySize, BoundarySize);
+    public Rect2 Boundary { get; set; } = new(new Vector2(-BoundarySize, -BoundarySize), 2 * BoundarySize, 2 * BoundarySize);
 
     [Export]
     private float imageChangeOffset = 0.2f;
@@ -61,7 +61,7 @@ public partial class ProjectileSpawner : Node2D
         {
             Vector2 offset = item.projectile.VectorMove.Normalized() * (float)item.projectile.Speed * (float)delta;
             item.projectile.CurrentPos += offset;
-            var usedTransform = new Transform2D(0, item.projectile.CurrentPos);            
+            var usedTransform = new Transform2D(0, item.projectile.CurrentPos);
             PhysicsServer2D.AreaSetShapeTransform(_sharedArea.GetRid(), item.index, usedTransform);
             item.projectile.Lifetime -= delta;
             item.projectile.AnimationLifetime += delta;
@@ -102,7 +102,9 @@ public partial class ProjectileSpawner : Node2D
     {
         var usedTransform = new Transform2D(0, proj.CurrentPos);
         var circleShape = PhysicsServer2D.CircleShapeCreate();
-        PhysicsServer2D.ShapeSetData(circleShape, 8);
+        PhysicsServer2D.ShapeSetData(circleShape, 8f);
+        PhysicsServer2D.AreaSetMonitorable(circleShape, false);
+        PhysicsServer2D.AreaSetCollisionLayer(circleShape, 0);
         PhysicsServer2D.AreaAddShape(_sharedArea.GetRid(), circleShape, usedTransform);
         proj.ShapeId = circleShape;
     }
