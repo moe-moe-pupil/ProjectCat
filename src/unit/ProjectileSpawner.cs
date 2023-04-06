@@ -103,8 +103,6 @@ public partial class ProjectileSpawner : Node2D
         var usedTransform = new Transform2D(0, proj.CurrentPos);
         var circleShape = PhysicsServer2D.CircleShapeCreate();
         PhysicsServer2D.ShapeSetData(circleShape, 8f);
-        PhysicsServer2D.AreaSetMonitorable(circleShape, false);
-        PhysicsServer2D.AreaSetCollisionLayer(circleShape, 0);
         PhysicsServer2D.AreaAddShape(_sharedArea.GetRid(), circleShape, usedTransform);
         proj.ShapeId = circleShape;
     }
